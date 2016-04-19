@@ -193,11 +193,10 @@ namespace CSharpFastPFOR
             return answer;
         }
 
-        private static /* final */ int S16_NUMSIZE = 16;
-        private static /* final */ int S16_BITSSIZE = 28;
+        private const int S16_NUMSIZE = 16;
+        private const int S16_BITSSIZE = 28;
         // the possible number of bits used to represent one integer
-        private static /* final */ int[] S16_NUM = { 28, 21, 21, 21, 14, 9, 8, 7, 6,
-            6, 5, 5, 4, 3, 2, 1 };
+        private static /* final */ int[] S16_NUM = { 28, 21, 21, 21, 14, 9, 8, 7, 6, 6, 5, 5, 4, 3, 2, 1 };
         // the corresponding number of elements for each value of the number of
         // bits
         private static /* final */ int[][] S16_BITS = {
@@ -211,6 +210,5 @@ namespace CSharpFastPFOR
             new[]{ 4, 4, 5, 5, 5, 5 }, new[]{ 6, 6, 6, 5, 5 }, new[]{ 5, 5, 6, 6, 6 },
             new[]{ 7, 7, 7, 7 }, new[]{ 10, 9, 9, }, new[]{ 14, 14 }, new[]{ 28 } };
         private static /* final */ int[][] SHIFTED_S16_BITS = shiftme(S16_BITS);
-
     }
 }

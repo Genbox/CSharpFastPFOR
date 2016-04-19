@@ -66,7 +66,7 @@ namespace CSharpFastPFOR.Tests
         [TestMethod]
         public void varyingLengthTest()
         {
-            int N = 4096;
+            const int N = 4096;
             int[] data = new int[N];
             for (int k = 0; k < N; ++k)
                 data[k] = k;
@@ -99,7 +99,7 @@ namespace CSharpFastPFOR.Tests
         [TestMethod]
         public void varyingLengthTest2()
         {
-            int N = 128;
+            const int N = 128;
             int[] data = new int[N];
             data[127] = -1;
             foreach (IntegerCODEC c in codecs)
@@ -201,9 +201,8 @@ namespace CSharpFastPFOR.Tests
         [TestMethod]
         public void verifyBitPacking()
         {
-            int N = 32;
-
-            int TIMES = 1000;
+            const int N = 32;
+            const int TIMES = 1000;
             Random r = new Random();
             int[] data = new int[N];
             int[] compressed = new int[N];
@@ -230,8 +229,7 @@ namespace CSharpFastPFOR.Tests
         public void verifyWithoutMask()
         {
             const int N = 32;
-
-            int TIMES = 1000;
+            const int TIMES = 1000;
             Random r = new Random();
             int[] data = new int[N];
             int[] compressed = new int[N];
@@ -272,8 +270,7 @@ namespace CSharpFastPFOR.Tests
         public void verifyWithExceptions()
         {
             const int N = 32;
-
-            int TIMES = 1000;
+            const int TIMES = 1000;
             Random r = new Random();
             int[] data = new int[N];
             int[] compressed = new int[N];
@@ -604,7 +601,7 @@ namespace CSharpFastPFOR.Tests
             // proposed by Stefan Ackermann (https://github.com/Stivo)
             FastPFOR codec1 = new FastPFOR();
             FastPFOR codec2 = new FastPFOR();
-            int N = FastPFOR.BLOCK_SIZE;
+            const int N = FastPFOR.BLOCK_SIZE;
             int[] data = new int[N];
             for (int i = 0; i < N; i++)
                 data[i] = 0;
@@ -623,7 +620,7 @@ namespace CSharpFastPFOR.Tests
             // proposed by Stefan Ackermann (https://github.com/Stivo)
             FastPFOR128 codec1 = new FastPFOR128();
             FastPFOR128 codec2 = new FastPFOR128();
-            int N = FastPFOR128.BLOCK_SIZE;
+            const int N = FastPFOR128.BLOCK_SIZE;
             int[] data = new int[N];
             for (int i = 0; i < N; i++)
                 data[i] = 0;

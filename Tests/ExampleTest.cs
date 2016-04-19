@@ -148,8 +148,7 @@ namespace CSharpFastPFOR.Tests
         [TestMethod]
         public void unsortedExample()
         {
-
-            int N = 1333333;
+            const int N = 1333333;
             int[] data = new int[N];
             // initialize the data (most will be small
             for (int k = 0; k < N; k += 1)
@@ -190,8 +189,8 @@ namespace CSharpFastPFOR.Tests
         [TestMethod]
         public void advancedExample()
         {
-            int TotalSize = 2342351; // some arbitrary number
-            int ChunkSize = 16384; // size of each chunk, choose a multiple of 128
+            const int TotalSize = 2342351; // some arbitrary number
+            const int ChunkSize = 16384; // size of each chunk, choose a multiple of 128
             Console.WriteLine("Compressing " + TotalSize + " integers using chunks of " + ChunkSize + " integers ("
                               + ChunkSize * 4 / 1024 + "KB)");
             Console.WriteLine("(It is often better for applications to work in chunks fitting in CPU cache.)");

@@ -33,7 +33,7 @@
 namespace CSharpFastPFOR
 {
     public /* final */ class OptPFD : IntegerCODEC,SkippableIntegerCODEC {
-        /* final */ static int BLOCK_SIZE = 128;
+        const int BLOCK_SIZE = 128;
 
         int[] exceptbuffer = new int[2 * BLOCK_SIZE];
         

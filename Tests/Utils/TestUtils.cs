@@ -54,7 +54,7 @@ namespace CSharpFastPFOR.Tests.Utils
             //  - VariableByte compresses an array like [ -1 ].
             //  - Composition compresses a short array.
         
-            int EXTEND = 1;
+            const int EXTEND = 1;
 
             int[] compressed = new int[orig.Length + EXTEND];
             IntWrapper c_inpos = new IntWrapper(0);

@@ -185,8 +185,8 @@ namespace CSharpFastPFOR
         //        return this.getClass().getSimpleName();
         //}
 
-        private static /* final */ int S16_NUMSIZE = 16;
-        private static /* final */ int S16_BITSSIZE = 28;
+        private const int S16_NUMSIZE = 16;
+        private const int S16_BITSSIZE = 28;
         // the possible number of bits used to represent one integer
         private static /* final */ int[] S16_NUM = { 28, 21, 21, 21, 14, 9, 8, 7, 6, 6,
             5, 5, 4, 3, 2, 1 };

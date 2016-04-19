@@ -20,7 +20,7 @@ namespace CSharpFastPFOR
 {
     public /* final */ class DeltaZigzagBinaryPacking : IntegerCODEC {
 
-        private static /* final */ int BLOCK_LENGTH = 128;
+        private const int BLOCK_LENGTH = 128;
 
         /*@Override*/
         public void compress(int[] inBuf, IntWrapper inPos, int inLen,

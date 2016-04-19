@@ -18,7 +18,7 @@ namespace CSharpFastPFOR.Differential
 {
     public  class XorBinaryPacking : IntegratedIntegerCODEC {
 
-        private static  int BLOCK_LENGTH = 128;
+        private const int BLOCK_LENGTH = 128;
 
         /*@Override*/
         public void compress( int[] inBuf,  IntWrapper inPos,

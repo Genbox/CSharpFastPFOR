@@ -143,13 +143,13 @@ namespace CSharpFastPFOR.Benchmarks
             int[] decompressBuffer = new int[maxLength + 1024];
             int[] metadataBuffer = new int[maxLength];
 
-            int blocksize = 1024;
+            const int blocksize = 1024;
 
             // These variables hold time in microseconds (10^-6).
             double compressTime = 0;
             double decompressTime = 0;
 
-            int times = 5;
+            const int times = 5;
 
             int size = 0;
 

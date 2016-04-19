@@ -25,15 +25,9 @@ namespace CSharpFastPFOR
     public /* final */ class FastPFOR128 : IntegerCODEC, SkippableIntegerCODEC
     {
         /* final */
-        static int OVERHEAD_OF_EACH_EXCEPT = 8;
-        /**
-     * 
-     */
-        public /* final */ static int DEFAULT_PAGE_SIZE = 65536;
-        /**
-     * 
-     */
-        public /* final */ static int BLOCK_SIZE = 128;
+        private const int OVERHEAD_OF_EACH_EXCEPT = 8;
+        private const int DEFAULT_PAGE_SIZE = 65536;
+        public const int BLOCK_SIZE = 128;
 
         /* final */
         int pageSize;

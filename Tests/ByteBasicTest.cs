@@ -53,7 +53,7 @@ namespace CSharpFastPFOR.Tests
         [TestMethod]
         public void varyingLengthTest()
         {
-            int N = 4096;
+            const int N = 4096;
             int[] data = new int[N];
             for (int k = 0; k < N; ++k)
                 data[k] = k;
@@ -81,7 +81,7 @@ namespace CSharpFastPFOR.Tests
         [TestMethod]
         public void varyingLengthTest2()
         {
-            int N = 128;
+            const int N = 128;
             int[] data = new int[N];
             data[127] = -1;
             foreach (ByteIntegerCODEC c in codecs)

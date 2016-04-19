@@ -53,7 +53,7 @@ namespace CSharpFastPFOR
                     goto outer;
                 }
 
-                /* final */ int selector2 = 8;
+                const int selector2 = 8;
                 if (@in[currentPos] >= 1 << bitLength[selector2])
                     throw new Exception("Too big a number");
                 @out[tmpoutpos++] = @in[currentPos++] | (selector2 << 28);
@@ -90,7 +90,7 @@ namespace CSharpFastPFOR
                     goto outer2;
                 }
 
-                /* final */ int selector4 = 8;
+                const int selector4 = 8;
                 if (@in[currentPos] >= 1 << bitLength[selector4])
                     throw new Exception("Too big a number");
                 @out[tmpoutpos++] = @in[currentPos++] | (selector4 << 28);
