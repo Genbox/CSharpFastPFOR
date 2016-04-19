@@ -48,10 +48,10 @@ namespace CSharpFastPFOR.Tests
             // allocating more memory
 
             /**
-		 *
-		 * compressing
-		 *
-		 */
+		     *
+		     * compressing
+		     *
+		     */
             IntWrapper inputoffset = new IntWrapper(0);
             IntWrapper outputoffset = new IntWrapper(0);
             codec.compress(data, inputoffset, data.Length, compressed, outputoffset);
@@ -64,12 +64,12 @@ namespace CSharpFastPFOR.Tests
             compressed = Arrays.copyOf(compressed, outputoffset.intValue());
 
             /**
-		 *
-		 * now uncompressing
-		 *
-		 * This assumes that we otherwise know how many integers have been
-		 * compressed. See basicExampleHeadless for a more general case.
-		 */
+		     *
+		     * now uncompressing
+		     *
+		     * This assumes that we otherwise know how many integers have been
+		     * compressed. See basicExampleHeadless for a more general case.
+		     */
             int[] recovered = new int[data.Length];
             IntWrapper recoffset = new IntWrapper(0);
             codec.uncompress(compressed, new IntWrapper(0), compressed.Length, recovered, recoffset);
@@ -81,8 +81,8 @@ namespace CSharpFastPFOR.Tests
         }
 
         /**
-	 * Like the basicExample, but we store the input array size manually.
-	 */
+	     * Like the basicExample, but we store the input array size manually.
+	     */
         [TestMethod]
         public void basicExampleHeadless()
         {
@@ -108,10 +108,10 @@ namespace CSharpFastPFOR.Tests
             // allocating more memory
 
             /**
-		 *
-		 * compressing
-		 *
-		 */
+		     *
+		     * compressing
+		     *
+		     */
             IntWrapper inputoffset = new IntWrapper(0);
             IntWrapper outputoffset = new IntWrapper(1);
             compressed[0] = data.Length; // we manually store how many integers we
@@ -125,10 +125,10 @@ namespace CSharpFastPFOR.Tests
             compressed = Arrays.copyOf(compressed, outputoffset.intValue());
 
             /**
-		 *
-		 * now uncompressing
-		 *
-		 */
+		     *
+		     * now uncompressing
+		     *
+		     */
             int howmany = compressed[0];// we manually stored the number of
             // compressed integers
             int[] recovered = new int[howmany];
@@ -142,9 +142,9 @@ namespace CSharpFastPFOR.Tests
         }
 
         /**
-	 * This is an example to show you can compress unsorted integers as long as
-	 * most are small.
-	 */
+	     * This is an example to show you can compress unsorted integers as long as
+	     * most are small.
+	     */
         [TestMethod]
         public void unsortedExample()
         {
@@ -181,11 +181,11 @@ namespace CSharpFastPFOR.Tests
         }
 
         /**
-	 * This is like the basic example, but we show how to process larger arrays
-	 * in chunks.
-	 *
-	 * Some of this code was written by Pavel Klinov.
-	 */
+	     * This is like the basic example, but we show how to process larger arrays
+	     * in chunks.
+	     *
+	     * Some of this code was written by Pavel Klinov.
+	     */
         [TestMethod]
         public void advancedExample()
         {
@@ -210,10 +210,10 @@ namespace CSharpFastPFOR.Tests
             int[] compressed = new int[TotalSize + 1024];
 
             /**
-		 *
-		 * compressing
-		 *
-		 */
+		     *
+		     * compressing
+		     *
+		     */
             IntWrapper inputoffset = new IntWrapper(0);
             IntWrapper outputoffset = new IntWrapper(0);
             for (int k = 0; k < TotalSize / ChunkSize; ++k)
@@ -228,13 +228,13 @@ namespace CSharpFastPFOR.Tests
             compressed = Arrays.copyOf(compressed, outputoffset.intValue());
 
             /**
-		 *
-		 * now uncompressing
-		 *
-		 * We are *not* assuming that the original array length is known,
-		 * however we assume that the chunk size (ChunkSize) is known.
-		 *
-		 */
+		     *
+		     * now uncompressing
+		     *
+		     * We are *not* assuming that the original array length is known,
+		     * however we assume that the chunk size (ChunkSize) is known.
+		     *
+		     */
             int[] recovered = new int[ChunkSize];
             IntWrapper compoff = new IntWrapper(0);
             IntWrapper recoffset;
@@ -261,8 +261,8 @@ namespace CSharpFastPFOR.Tests
         }
 
         /**
-	 * Demo of the headless approach where we must supply the array length
-	 */
+	     * Demo of the headless approach where we must supply the array length
+	     */
         [TestMethod]
         public void headlessDemo()
         {

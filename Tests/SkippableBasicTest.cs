@@ -14,7 +14,7 @@ namespace CSharpFastPFOR.Tests
     [TestClass]
     public class SkippableBasicTest
     {
-        private SkippableIntegerCODEC[] codecs = {
+        private readonly SkippableIntegerCODEC[] codecs = {
             new JustCopy(),
             new VariableByte(),
             new SkippableComposition(new BinaryPacking(), new VariableByte()),
@@ -39,8 +39,7 @@ namespace CSharpFastPFOR.Tests
                 data[k] = k % 128;
             foreach (SkippableIntegerCODEC c in codecs)
             {
-                Console.WriteLine("[SkippeableBasicTest.consistentTest] codec = "
-                                  + c);
+                Console.WriteLine("[SkippeableBasicTest.consistentTest] codec = " + c);
                 int[] outBuf = new int[N + 1024];
                 for (int n = 0; n <= N; ++n)
                 {
@@ -85,7 +84,7 @@ namespace CSharpFastPFOR.Tests
                     int[] answer = TestUtils.uncompressHeadless(c, comp, L);
                     for (int k = 0; k < L; ++k)
                         if (answer[k] != data[k])
-                            throw new Exception("bug " + c  + " " + k + " " + answer[k] + " " + data[k]);
+                            throw new Exception("bug " + c + " " + k + " " + answer[k] + " " + data[k]);
                 }
                 for (int L = 128; L <= N; L *= 2)
                 {

@@ -14,17 +14,13 @@ namespace CSharpFastPFOR.Tests
     [TestClass]
     public class IntCompressorTest
     {
-        private IntegratedIntCompressor[] iic = {
+        private readonly IntegratedIntCompressor[] iic = {
             new IntegratedIntCompressor(new IntegratedVariableByte()),
-            new IntegratedIntCompressor(
-                new SkippableIntegratedComposition(
-                    new IntegratedBinaryPacking(),
-                    new IntegratedVariableByte())) };
+            new IntegratedIntCompressor(new SkippableIntegratedComposition(new IntegratedBinaryPacking(),new IntegratedVariableByte())) };
 
-        private IntCompressor[] ic = {
+        private readonly IntCompressor[] ic = {
             new IntCompressor(new VariableByte()),
-            new IntCompressor(new SkippableComposition(new BinaryPacking(),
-                new VariableByte())) };
+            new IntCompressor(new SkippableComposition(new BinaryPacking(), new VariableByte())) };
 
         [TestMethod]
         public void basicTest()
@@ -46,13 +42,13 @@ namespace CSharpFastPFOR.Tests
         [TestMethod]
         public void superSimpleExample()
         {
-            IntegratedIntCompressor iic = new IntegratedIntCompressor();
+            IntegratedIntCompressor iic2 = new IntegratedIntCompressor();
             int[] data = new int[2342351];
             for (int k = 0; k < data.Length; ++k)
                 data[k] = k;
             Console.WriteLine("Compressing " + data.Length + " integers using friendly interface");
-            int[] compressed = iic.compress(data);
-            int[] recov = iic.uncompress(compressed);
+            int[] compressed = iic2.compress(data);
+            int[] recov = iic2.uncompress(compressed);
             Console.WriteLine("compressed from " + data.Length * 4 / 1024 + "KB to " + compressed.Length * 4 / 1024 + "KB");
             if (!Arrays.equals(recov, data)) throw new Exception("bug");
         }

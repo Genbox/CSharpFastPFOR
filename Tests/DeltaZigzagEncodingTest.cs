@@ -11,19 +11,19 @@ namespace CSharpFastPFOR.Tests
     [TestClass]
     public class DeltaZigzagEncodingTest
     {
-        protected static int zigzagEncode(DeltaZigzagEncoding.Encoder e, int value)
+        private static int zigzagEncode(DeltaZigzagEncoding.Encoder e, int value)
         {
             e.setContextValue(0);
             return e.encodeInt(value);
         }
 
-        protected static int zigzagDecode(DeltaZigzagEncoding.Decoder d, int value)
+        private static int zigzagDecode(DeltaZigzagEncoding.Decoder d, int value)
         {
             d.setContextValue(0);
             return d.decodeInt(value);
         }
 
-        protected static void checkEncode(
+        private static void checkEncode(
             DeltaZigzagEncoding.Encoder e,
             int[] data,
             int[] expected)
@@ -32,7 +32,7 @@ namespace CSharpFastPFOR.Tests
             Assert2.assertEquals(data[data.Length - 1], e.getContextValue());
         }
 
-        protected static void checkDecode(
+        private static void checkDecode(
             DeltaZigzagEncoding.Decoder d,
             int[] data,
             int[] expected)
@@ -85,14 +85,11 @@ namespace CSharpFastPFOR.Tests
                 new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
         }
 
-        protected class SpotChecker
+        private class SpotChecker
         {
 
-            private  static DeltaZigzagEncoding.Encoder encoder =
-                new DeltaZigzagEncoding.Encoder(0);
-
-            private  static DeltaZigzagEncoding.Decoder decoder =
-                new DeltaZigzagEncoding.Decoder(0);
+            private static readonly DeltaZigzagEncoding.Encoder encoder = new DeltaZigzagEncoding.Encoder(0);
+            private static readonly DeltaZigzagEncoding.Decoder decoder = new DeltaZigzagEncoding.Decoder(0);
 
             public void check(int value)
             {

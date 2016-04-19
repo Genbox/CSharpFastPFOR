@@ -17,7 +17,7 @@ namespace CSharpFastPFOR.Tests
     [TestClass]
     public class BasicTest
     {
-        private IntegerCODEC[] codecs = {
+        private readonly IntegerCODEC[] codecs = {
             new IntegratedComposition(new IntegratedBinaryPacking(), new IntegratedVariableByte()),
             new JustCopy(),
             new VariableByte(),
@@ -186,18 +186,13 @@ namespace CSharpFastPFOR.Tests
         [TestMethod]
         public void checkXorBinaryPacking3()
         {
-            IntegerCODEC c = new IntegratedComposition(new XorBinaryPacking(),
-                new IntegratedVariableByte());
-            IntegerCODEC co = new IntegratedComposition(new XorBinaryPacking(),
-                new IntegratedVariableByte());
+            IntegerCODEC c = new IntegratedComposition(new XorBinaryPacking(), new IntegratedVariableByte());
+            IntegerCODEC co = new IntegratedComposition(new XorBinaryPacking(), new IntegratedVariableByte());
             test(c, co, 5, 10);
             test(c, co, 5, 14);
             test(c, co, 2, 18);
         }
 
-        /**
-     * Verify bitpacking.
-     */
         [TestMethod]
         public void verifyBitPacking()
         {
@@ -222,9 +217,6 @@ namespace CSharpFastPFOR.Tests
             }
         }
 
-        /**
-     * Verify bitpacking without mask.
-     */
         [TestMethod]
         public void verifyWithoutMask()
         {
@@ -250,12 +242,13 @@ namespace CSharpFastPFOR.Tests
         }
 
         /**
-     * @param array
-     *            some array
-     * @param mask
-     *            provided mask
-     */
-        public static void maskArray(int[] array, int mask)
+         * @param array
+         *            some array
+         * @param mask
+         *            provided mask
+         */
+
+        private static void maskArray(int[] array, int mask)
         {
             for (int i = 0, end = array.Length; i < end; ++i)
             {
@@ -264,8 +257,8 @@ namespace CSharpFastPFOR.Tests
         }
 
         /**
-     * Verify bitpacking with exception.
-     */
+         * Verify bitpacking with exception.
+         */
         [TestMethod]
         public void verifyWithExceptions()
         {
@@ -294,8 +287,8 @@ namespace CSharpFastPFOR.Tests
         }
 
         /**
-     * check that the codecs can be inverted.
-     */
+         * check that the codecs can be inverted.
+         */
         [TestMethod]
         public void basictest()
         {
@@ -305,8 +298,8 @@ namespace CSharpFastPFOR.Tests
         }
 
         /**
-     * check that there is no spurious output.
-     */
+         * check that there is no spurious output.
+         */
         [TestMethod]
         public void spuriousouttest()
         {
@@ -323,8 +316,8 @@ namespace CSharpFastPFOR.Tests
         }
 
         /**
-     * check that an empty array generates an empty array after compression.
-     */
+         * check that an empty array generates an empty array after compression.
+         */
         [TestMethod]
         public void zeroinzerouttest()
         {
@@ -472,8 +465,8 @@ namespace CSharpFastPFOR.Tests
         }
 
         /**
-     * Test for unsorted array.
-     */
+         * Test for unsorted array.
+         */
         [TestMethod]
         public void testUnsortedExample()
         {
@@ -523,10 +516,6 @@ namespace CSharpFastPFOR.Tests
 
         }
 
-        /**
-     * @param codec
-     *            provided codec
-     */
         public void testUnsorted(IntegerCODEC codec)
         {
             int[] lengths = { 133, 1026, 1333333 };
