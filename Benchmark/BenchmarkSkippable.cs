@@ -258,7 +258,7 @@ namespace CSharpFastPFOR.Benchmarks
             return data;
         }
 
-        static object[] codecs = {
+        private static object[] codecs = {
 
             new SkippableIntegratedComposition(new IntegratedBinaryPacking(),
                 new IntegratedVariableByte()), new JustCopy(), new VariableByte(),

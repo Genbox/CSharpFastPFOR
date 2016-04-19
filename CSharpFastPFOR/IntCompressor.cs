@@ -13,9 +13,7 @@ using CSharpFastPFOR.Port;
 namespace CSharpFastPFOR
 {
     public class IntCompressor {
-
-
-        SkippableIntegerCODEC codec;
+        private SkippableIntegerCODEC codec;
         /**
      * Constructor wrapping a codec.
      * 

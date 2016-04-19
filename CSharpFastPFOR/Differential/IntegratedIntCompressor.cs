@@ -15,7 +15,7 @@ using CSharpFastPFOR.Port;
 namespace CSharpFastPFOR.Differential
 {
     public class IntegratedIntCompressor {
-        SkippableIntegratedIntegerCODEC codec;
+        private SkippableIntegratedIntegerCODEC codec;
         /**
      * Constructor wrapping a codec.
      * 

@@ -17,7 +17,7 @@ namespace CSharpFastPFOR.Tests
     [TestClass]
     public class BasicTest
     {
-        IntegerCODEC[] codecs = {
+        private IntegerCODEC[] codecs = {
             new IntegratedComposition(new IntegratedBinaryPacking(), new IntegratedVariableByte()),
             new JustCopy(),
             new VariableByte(),

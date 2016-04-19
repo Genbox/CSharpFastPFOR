@@ -15,7 +15,8 @@ namespace CSharpFastPFOR
 {
     public class SkippableComposition : SkippableIntegerCODEC
     {
-        SkippableIntegerCODEC F1, F2;
+        private SkippableIntegerCODEC F1;
+        private SkippableIntegerCODEC F2;
 
         /**
      * Compose a scheme from a first one (f1) and a second one (f2). The first

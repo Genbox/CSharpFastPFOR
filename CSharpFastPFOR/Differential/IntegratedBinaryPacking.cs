@@ -45,8 +45,7 @@ namespace CSharpFastPFOR.Differential
 {
     public class IntegratedBinaryPacking : IntegratedIntegerCODEC,
         SkippableIntegratedIntegerCODEC {
-
-        const  int BLOCK_SIZE = 32;
+        private const  int BLOCK_SIZE = 32;
 
         //@Override
         public void compress(int[] @in, IntWrapper inpos, int inlength, int[] @out,

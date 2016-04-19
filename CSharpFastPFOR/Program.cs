@@ -1,8 +1,8 @@
 ﻿namespace CSharpFastPFOR
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             IntCompressor c = new IntCompressor(new SkippableComposition(new BinaryPacking(), new VariableByte()));
 

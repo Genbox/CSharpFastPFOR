@@ -15,7 +15,8 @@ namespace CSharpFastPFOR.Differential
 {
     public class IntegratedComposition : IntegratedIntegerCODEC
     {
-        IntegratedIntegerCODEC F1, F2;
+        private IntegratedIntegerCODEC F1;
+        private IntegratedIntegerCODEC F2;
 
         /**
      * Compose a scheme from a first one (f1) and a second one (f2). The

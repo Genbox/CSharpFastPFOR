@@ -30,19 +30,19 @@ namespace CSharpFastPFOR
         public const int BLOCK_SIZE = 128;
 
         /* final */
-        int pageSize;
+        private int pageSize;
         /* final */
-        int[][] dataTobePacked = new int[33][];
+        private int[][] dataTobePacked = new int[33][];
         /* final */
-        ByteBuffer byteContainer;
+        private ByteBuffer byteContainer;
 
         // Working area for compress and uncompress.
         /* final */
-        int[] dataPointers = new int[33];
+        private int[] dataPointers = new int[33];
         /* final */
-        int[] freqs = new int[33];
+        private int[] freqs = new int[33];
         /* final */
-        int[] bestbbestcexceptmaxb = new int[3];
+        private int[] bestbbestcexceptmaxb = new int[3];
 
         /**
      * Construct the FastPFOR CODEC.

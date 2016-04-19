@@ -36,7 +36,8 @@ namespace CSharpFastPFOR.Synth
         /**
          * generates randomly N distinct integers from 0 to Max.
          */
-        int[] generateUniformHash(int N, int Max) {
+
+        private int[] generateUniformHash(int N, int Max) {
             if (N > Max)
                 throw new Exception("not possible");
 
@@ -61,7 +62,8 @@ namespace CSharpFastPFOR.Synth
         /**
          * output all integers from the range [0,Max) that are not in the array
          */
-        static int[] negate(int[] x, int Max) {
+
+        private static int[] negate(int[] x, int Max) {
             int[] ans = new int[Max - x.Length];
             int i = 0;
             int c = 0;
@@ -97,7 +99,8 @@ namespace CSharpFastPFOR.Synth
         /**
          * generates randomly N distinct integers from 0 to Max.
          */
-        int[] generateUniformBitmap(int N, int Max) {
+
+        private int[] generateUniformBitmap(int N, int Max) {
             if (N > Max)
                 throw new Exception("not possible");
             int[] ans = new int[N];

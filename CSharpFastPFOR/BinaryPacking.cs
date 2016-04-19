@@ -39,7 +39,7 @@
     {
         public /* final */ class BinaryPacking : IntegerCODEC, SkippableIntegerCODEC
         {
-            const int BLOCK_SIZE = 32;
+            private const int BLOCK_SIZE = 32;
 
             /*@Override*/
             public void compress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)

@@ -21,8 +21,7 @@ using System;
 namespace CSharpFastPFOR.Synth
 {
     public class ClusteredDataGenerator {
-
-        UniformDataGenerator unidg = new UniformDataGenerator();
+        private UniformDataGenerator unidg = new UniformDataGenerator();
 
         /**
          * Creating random array generator.
@@ -30,13 +29,13 @@ namespace CSharpFastPFOR.Synth
         public ClusteredDataGenerator() {
         }
 
-        void fillUniform(int[] array, int offset, int length, int Min, int Max) {
+        private void fillUniform(int[] array, int offset, int length, int Min, int Max) {
             int[] v = this.unidg.generateUniform(length, Max - Min);
             for (int k = 0; k < v.Length; ++k)
                 array[k + offset] = Min + v[k];
         }
 
-        void fillClustered(int[] array, int offset, int length, int Min, int Max) {
+        private void fillClustered(int[] array, int offset, int length, int Min, int Max) {
             int range = Max - Min;
             if ((range == length) || (length <= 10)) {
                 fillUniform(array, offset, length, Min, Max);

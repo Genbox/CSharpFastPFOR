@@ -14,13 +14,14 @@ namespace CSharpFastPFOR.Tests
     [TestClass]
     public class IntCompressorTest
     {
-        IntegratedIntCompressor[] iic = {
+        private IntegratedIntCompressor[] iic = {
             new IntegratedIntCompressor(new IntegratedVariableByte()),
             new IntegratedIntCompressor(
                 new SkippableIntegratedComposition(
                     new IntegratedBinaryPacking(),
                     new IntegratedVariableByte())) };
-        IntCompressor[] ic = {
+
+        private IntCompressor[] ic = {
             new IntCompressor(new VariableByte()),
             new IntCompressor(new SkippableComposition(new BinaryPacking(),
                 new VariableByte())) };

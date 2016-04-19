@@ -5,9 +5,9 @@ using CSharpFastPFOR.Port;
 
 namespace CSharpFastPFOR.Benchmarks
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //BenchmarkMethod();
             //BenchmarkBitPackingMethod();

@@ -17,7 +17,7 @@ namespace CSharpFastPFOR.Tests
     [TestClass]
     public class ByteBasicTest
     {
-        ByteIntegerCODEC[] codecs = {
+        private ByteIntegerCODEC[] codecs = {
             new VariableByte(),
             new IntegratedVariableByte(),
         };

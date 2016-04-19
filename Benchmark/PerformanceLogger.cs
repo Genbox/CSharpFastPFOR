@@ -53,12 +53,12 @@ namespace CSharpFastPFOR.Benchmarks
             return this.compressedSize += value;
         }
 
-        long getOriginalSize()
+        private long getOriginalSize()
         {
             return this.originalSize;
         }
 
-        long getCompressedSize()
+        private long getCompressedSize()
         {
             return this.compressedSize;
         }

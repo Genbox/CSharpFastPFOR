@@ -14,7 +14,7 @@ namespace CSharpFastPFOR.Tests
     [TestClass]
     public class SkippableBasicTest
     {
-        SkippableIntegerCODEC[] codecs = {
+        private SkippableIntegerCODEC[] codecs = {
             new JustCopy(),
             new VariableByte(),
             new SkippableComposition(new BinaryPacking(), new VariableByte()),

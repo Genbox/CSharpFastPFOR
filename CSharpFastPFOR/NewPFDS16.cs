@@ -33,9 +33,9 @@
 namespace CSharpFastPFOR
 {
     public /* final */ class NewPFDS16 : IntegerCODEC,SkippableIntegerCODEC {
-        const int BLOCK_SIZE= 128;
+        private const int BLOCK_SIZE= 128;
 
-        int[] exceptbuffer = new int[2 * BLOCK_SIZE];
+        private int[] exceptbuffer = new int[2 * BLOCK_SIZE];
 
         /**
          * Constructor for the NewPFDS16 CODEC.

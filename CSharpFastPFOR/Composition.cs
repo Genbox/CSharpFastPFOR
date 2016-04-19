@@ -14,7 +14,8 @@ namespace CSharpFastPFOR
 {
     public class Composition : IntegerCODEC
     {
-        IntegerCODEC F1, F2;
+        private IntegerCODEC F1;
+        private IntegerCODEC F2;
 
         /**
      * Compose a scheme from a first one (f1) and a second one (f2). The
