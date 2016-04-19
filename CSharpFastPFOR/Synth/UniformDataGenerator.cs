@@ -17,11 +17,13 @@ using CSharpFastPFOR.Port;
 
 namespace CSharpFastPFOR.Synth
 {
-    public class UniformDataGenerator {
+    public class UniformDataGenerator
+    {
         /**
          * construct generator of random arrays.
          */
-        public UniformDataGenerator() {
+        public UniformDataGenerator()
+        {
             this.rand = new Random();
         }
 
@@ -29,7 +31,8 @@ namespace CSharpFastPFOR.Synth
          * @param seed
          *                random seed
          */
-        public UniformDataGenerator( int seed) {
+        public UniformDataGenerator(int seed)
+        {
             this.rand = new Random(seed);
         }
 
@@ -37,7 +40,8 @@ namespace CSharpFastPFOR.Synth
          * generates randomly N distinct integers from 0 to Max.
          */
 
-        private int[] generateUniformHash(int N, int Max) {
+        private int[] generateUniformHash(int N, int Max)
+        {
             if (N > Max)
                 throw new Exception("not possible");
 
@@ -45,7 +49,7 @@ namespace CSharpFastPFOR.Synth
             HashSet<int> s = new HashSet<int>();
             while (s.Count < N)
                 s.Add(rand.Next(Max));
-                
+
             //Iterator<Integer> i = s.iterator();
             HashSet<int>.Enumerator i = s.GetEnumerator();
 
@@ -62,12 +66,13 @@ namespace CSharpFastPFOR.Synth
         /**
          * output all integers from the range [0,Max) that are not in the array
          */
-
-        private static int[] negate(int[] x, int Max) {
+        private static int[] negate(int[] x, int Max)
+        {
             int[] ans = new int[Max - x.Length];
             int i = 0;
             int c = 0;
-            for (int j = 0; j < x.Length; ++j) {
+            for (int j = 0; j < x.Length; ++j)
+            {
                 int v = x[j];
                 for (; i < v; ++i)
                     ans[c++] = i;
@@ -87,8 +92,10 @@ namespace CSharpFastPFOR.Synth
          *                bound on the value of integers
          * @return an array containing randomly selected integers
          */
-        public int[] generateUniform(int N, int Max) {
-            if (N * 2 > Max) {
+        public int[] generateUniform(int N, int Max)
+        {
+            if (N * 2 > Max)
+            {
                 return negate(generateUniform(Max - N, Max), Max);
             }
             if (2048 * N > Max)
@@ -99,28 +106,30 @@ namespace CSharpFastPFOR.Synth
         /**
          * generates randomly N distinct integers from 0 to Max.
          */
-
-        private int[] generateUniformBitmap(int N, int Max) {
+        private int[] generateUniformBitmap(int N, int Max)
+        {
             if (N > Max)
                 throw new Exception("not possible");
             int[] ans = new int[N];
             BitSet bs = new BitSet(Max);
             int cardinality = 0;
-            while (cardinality < N) {
+            while (cardinality < N)
+            {
                 int v = rand.Next(Max);
-                if (!bs.get(v)) {
+                if (!bs.get(v))
+                {
                     bs.set(v);
                     cardinality++;
                 }
             }
             int pos = 0;
-            for (int i = bs.nextSetBit(0); i >= 0; i = bs.nextSetBit(i + 1)) {
+            for (int i = bs.nextSetBit(0); i >= 0; i = bs.nextSetBit(i + 1))
+            {
                 ans[pos++] = i;
             }
             return ans;
         }
 
-        public Random rand = new Random();
-
+        public readonly Random rand = new Random();
     }
 }

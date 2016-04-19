@@ -39,35 +39,28 @@ using CSharpFastPFOR.Port;
 
 namespace CSharpFastPFOR
 {
-    public /* final */ class FastPFOR : IntegerCODEC, SkippableIntegerCODEC
+    public class FastPFOR : IntegerCODEC, SkippableIntegerCODEC
     {
-        /* final */
         private const int OVERHEAD_OF_EACH_EXCEPT = 8;
         private const int DEFAULT_PAGE_SIZE = 65536;
         public const int BLOCK_SIZE = 256;
 
-        /* final */
+
         private int pageSize;
-        /* final */
         private int[][] dataTobePacked = new int[33][];
-        /* final */
         private ByteBuffer byteContainer;
 
         // Working area for compress and uncompress.
-        /* final */
         private int[] dataPointers = new int[33];
-        /* final */
         private int[] freqs = new int[33];
-        /* final */
         private int[] bestbbestcexceptmaxb = new int[3];
 
-
         /**
-     * Construct the FastPFOR CODEC.
-     * 
-     * @param pagesize
-     *                the desired page size (recommended value is FastPFOR.DEFAULT_PAGE_SIZE)
-     */
+         * Construct the FastPFOR CODEC.
+         * 
+         * @param pagesize
+         *                the desired page size (recommended value is FastPFOR.DEFAULT_PAGE_SIZE)
+         */
         private FastPFOR(int pagesize)
         {
             pageSize = pagesize;
@@ -79,26 +72,22 @@ namespace CSharpFastPFOR
         }
 
         /**
-     * Construct the fastPFOR CODEC with default parameters.
-     */
+         * Construct the fastPFOR CODEC with default parameters.
+         */
         public FastPFOR() : this(DEFAULT_PAGE_SIZE)
         {
         }
 
         /**
-     * Compress data in blocks of BLOCK_SIZE integers (if fewer than BLOCK_SIZE integers
-     * are provided, nothing is done).
-     * 
-     * @see IntegerCODEC#compress(int[], IntWrapper, int, int[], IntWrapper)
-     */
-        /*@Override*/
-        public void headlessCompress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos)
+         * Compress data in blocks of BLOCK_SIZE integers (if fewer than BLOCK_SIZE integers
+         * are provided, nothing is done).
+         * 
+         * @see IntegerCODEC#compress(int[], IntWrapper, int, int[], IntWrapper)
+         */
+        public void headlessCompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
         {
             inlength = Util.greatestMultiple(inlength, BLOCK_SIZE);
             // Allocate memory for working area.
-
-            /* final */
             int finalinpos = inpos.get() + inlength;
             while (inpos.get() != finalinpos)
             {
@@ -106,8 +95,6 @@ namespace CSharpFastPFOR
                     finalinpos - inpos.get());
                 encodePage(@in, inpos, thissize, @out, outpos);
             }
-
-
         }
 
         private void getBestBFromData(int[] @in, int pos)
@@ -143,10 +130,8 @@ namespace CSharpFastPFOR
             }
         }
 
-        private void encodePage(int[] @in, IntWrapper inpos, int thissize,
-            int[] @out, IntWrapper outpos)
+        private void encodePage(int[] @in, IntWrapper inpos, int thissize, int[] @out, IntWrapper outpos)
         {
-            /* final */
             int headerpos = outpos.get();
             outpos.increment();
             int tmpoutpos = outpos.get();
@@ -156,17 +141,17 @@ namespace CSharpFastPFOR
             byteContainer.clear();
 
             int tmpinpos = inpos.get();
-            for (/* final */ int finalinpos = tmpinpos + thissize - BLOCK_SIZE; tmpinpos <= finalinpos; tmpinpos += BLOCK_SIZE)
+            for (int finalinpos = tmpinpos + thissize - BLOCK_SIZE; tmpinpos <= finalinpos; tmpinpos += BLOCK_SIZE)
             {
                 getBestBFromData(@in, tmpinpos);
-                /* final */
+
                 int tmpbestb = bestbbestcexceptmaxb[0];
                 byteContainer.put((sbyte)bestbbestcexceptmaxb[0]);
                 byteContainer.put((sbyte)bestbbestcexceptmaxb[1]);
                 if (bestbbestcexceptmaxb[1] > 0)
                 {
                     byteContainer.put((sbyte)bestbbestcexceptmaxb[2]);
-                    /* final */
+
                     int index = bestbbestcexceptmaxb[2]
                                 - bestbbestcexceptmaxb[0];
                     if (dataPointers[index]
@@ -174,10 +159,8 @@ namespace CSharpFastPFOR
                     {
                         int newsize = 2 * (dataPointers[index] + bestbbestcexceptmaxb[1]);
                         // make sure it is a multiple of 32
-                        newsize = Util
-                            .greatestMultiple(newsize + 31, 32);
-                        dataTobePacked[index] = Arrays.copyOf(
-                            dataTobePacked[index], newsize);
+                        newsize = Util.greatestMultiple(newsize + 31, 32);
+                        dataTobePacked[index] = Arrays.copyOf(dataTobePacked[index], newsize);
                     }
                     for (int k = 0; k < BLOCK_SIZE; ++k)
                     {
@@ -188,7 +171,6 @@ namespace CSharpFastPFOR
                             dataTobePacked[index][dataPointers[index]++] = (int)((uint)@in[k + tmpinpos] >> tmpbestb);
                         }
                     }
-
                 }
                 for (int k = 0; k < BLOCK_SIZE; k += 32)
                 {
@@ -199,12 +181,12 @@ namespace CSharpFastPFOR
             }
             inpos.set(tmpinpos);
             @out[headerpos] = tmpoutpos - headerpos;
-            /* final */
+
             int bytesize = byteContainer.position();
             while ((byteContainer.position() & 3) != 0)
                 byteContainer.put((sbyte)0);
             @out[tmpoutpos++] = bytesize;
-            /* final */
+
             int howmanyints = byteContainer.position() / 4;
             byteContainer.flip();
             byteContainer.asIntBuffer().get(@out, tmpoutpos, howmanyints);
@@ -237,15 +219,13 @@ namespace CSharpFastPFOR
         }
 
         /**
-     * Uncompress data in blocks of integers. In this particular case,
-     * the inlength parameter is ignored: it is deduced from the compressed
-     * data.
-     * 
-     * @see IntegerCODEC#compress(int[], IntWrapper, int, int[], IntWrapper)
-     */
-        /*@Override*/
-        public void headlessUncompress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos, int mynvalue)
+         * Uncompress data in blocks of integers. In this particular case,
+         * the inlength parameter is ignored: it is deduced from the compressed
+         * data.
+         * 
+         * @see IntegerCODEC#compress(int[], IntWrapper, int, int[], IntWrapper)
+         */
+        public void headlessUncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos, int mynvalue)
         {
             mynvalue = Util.greatestMultiple(mynvalue, BLOCK_SIZE);
             int finalout = outpos.get() + mynvalue;
@@ -257,24 +237,21 @@ namespace CSharpFastPFOR
             }
         }
 
-        private void decodePage(int[] @in, IntWrapper inpos, int[] @out,
-            IntWrapper outpos, int thissize)
+        private void decodePage(int[] @in, IntWrapper inpos, int[] @out, IntWrapper outpos, int thissize)
         {
-            /* final */
             int initpos = inpos.get();
-            /* final */
+
             int wheremeta = @in[inpos.get()];
             inpos.increment();
             int inexcept = initpos + wheremeta;
-            /* final */
+
             int bytesize = @in[inexcept++];
             byteContainer.clear();
-            //byteContainer.asIntBuffer().put(@in, inexcept, (bytesize + 3) / 4);
+            //byteContainer.asIntBuffer().put(@in, inexcept, (bytesize + 3) / 4); //Port note: I've collapsed the code here
             byteContainer.put(@in, inexcept, (bytesize + 3) / 4);
             byteContainer._ms.Position = 0;
             inexcept += (bytesize + 3) / 4;
 
-            /* final */
             int bitmap = @in[inexcept++];
             for (int k = 2; k <= 32; ++k)
             {
@@ -297,7 +274,8 @@ namespace CSharpFastPFOR
                         int overflow = j - size;
                         inexcept -= overflow * k / 32;
                     }
-                    else {
+                    else
+                    {
                         int j = 0;
                         int[] buf = new int[roundedup / 32 * k];
                         int initinexcept = inexcept;
@@ -319,9 +297,9 @@ namespace CSharpFastPFOR
 
             for (int run = 0, run_end = thissize / BLOCK_SIZE; run < run_end; ++run, tmpoutpos += BLOCK_SIZE)
             {
-                /* final */
+
                 int b = byteContainer.get();
-                /* final */
+
                 int cexcept = byteContainer.get() & 0xFF;
                 for (int k = 0; k < BLOCK_SIZE; k += 32)
                 {
@@ -331,25 +309,26 @@ namespace CSharpFastPFOR
                 }
                 if (cexcept > 0)
                 {
-                    /* final */
+
                     int maxbits = byteContainer.get();
-                    /* final */
+
                     int index = maxbits - b;
                     if (index == 1)
                     {
                         for (int k = 0; k < cexcept; ++k)
                         {
-                            /* final */
+
                             int pos = byteContainer.get() & 0xFF;
                             @out[pos + tmpoutpos] |= 1 << b;
                         }
                     }
-                    else {
+                    else
+                    {
                         for (int k = 0; k < cexcept; ++k)
                         {
-                            /* final */
+
                             int pos = byteContainer.get() & 0xFF;
-                            /* final */
+
                             int exceptvalue = dataTobePacked[index][dataPointers[index]++];
                             @out[pos + tmpoutpos] |= exceptvalue << b;
                         }
@@ -359,9 +338,8 @@ namespace CSharpFastPFOR
             outpos.set(tmpoutpos);
             inpos.set(inexcept);
         }
-        /*@Override*/
-        public void compress(int[] @in, IntWrapper inpos, int inlength, int[] @out,
-            IntWrapper outpos)
+
+        public void compress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
         {
             inlength = Util.greatestMultiple(inlength, BLOCK_SIZE);
             if (inlength == 0)
@@ -371,20 +349,15 @@ namespace CSharpFastPFOR
             headlessCompress(@in, inpos, inlength, @out, outpos);
         }
 
-        /*@Override*/
-        public void uncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out,
-            IntWrapper outpos)
+
+        public void uncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
         {
             if (inlength == 0)
                 return;
-            /* final */
+
             int outlength = @in[inpos.get()];
             inpos.increment();
             headlessUncompress(@in, inpos, inlength, @out, outpos, outlength);
         }
-        /*@Override*/
-        //public String toString() {
-        //        return this.getClass().getSimpleName();
-        //}
     }
 }

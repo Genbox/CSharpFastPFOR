@@ -5,8 +5,6 @@
  * (c) Daniel Lemire, http://lemire.me/en/
  */
 
-
-
 /**
  * Version of Simple16 for NewPFD and OptPFD.
  * <p>
@@ -18,8 +16,8 @@ using System;
 
 namespace CSharpFastPFOR
 {
-    public /* final */ class S16 {
-
+    public class S16
+    {
         /**
          * Compress an integer array using Simple16
          *
@@ -34,11 +32,12 @@ namespace CSharpFastPFOR
          * @param tmpoutpos location in the output array
          * @return the number of 32-bit words written (in compressed form)
          */
-        public static int compress(/* final */ int[] @in, int currentPos,
-            int inlength, /* final */ int[] @out, /* final */ int tmpoutpos) {
+        public static int compress(int[] @in, int currentPos, int inlength, int[] @out, int tmpoutpos)
+        {
             int outpos = tmpoutpos;
-            /* final */ int finalin = currentPos + inlength;
-            while (currentPos < finalin) {
+            int finalin = currentPos + inlength;
+            while (currentPos < finalin)
+            {
                 int inoffset = compressblock(@out, outpos++, @in,
                     currentPos, inlength);
                 if (inoffset == -1)
@@ -47,7 +46,7 @@ namespace CSharpFastPFOR
                 inlength -= inoffset;
             }
             return outpos - tmpoutpos;
-            }
+        }
 
         /**
          * Estimate size of the compressed output.
@@ -60,11 +59,12 @@ namespace CSharpFastPFOR
          *                how many integers to read
          * @return estimated size of the output (in 32-bit integers)
          */
-        public static int estimatecompress(/* final */ int[] @in, int currentPos,
-            int inlength) {
-            /* final */ int finalin = currentPos + inlength;
+        public static int estimatecompress(int[] @in, int currentPos, int inlength)
+        {
+            int finalin = currentPos + inlength;
             int counter = 0;
-            while (currentPos < finalin) {
+            while (currentPos < finalin)
+            {
                 int inoffset = fakecompressblock(@in, currentPos,
                     inlength);
                 if (inoffset == -1)
@@ -74,7 +74,7 @@ namespace CSharpFastPFOR
                 ++counter;
             }
             return counter;
-            }
+        }
 
         /**
          * Compress an integer array using Simple16
@@ -92,39 +92,46 @@ namespace CSharpFastPFOR
          * @return the size of the outputs in 32-bit integers
          * 
          */
-        public static /* final */ int compressblock(int[] @out, int outOffset,
-            int[] @in, int inOffset, int n) {
+        public static int compressblock(int[] @out, int outOffset, int[] @in, int inOffset, int n)
+        {
             int numIdx, j, num, bits;
-            for (numIdx = 0; numIdx < S16_NUMSIZE; numIdx++) {
+            for (numIdx = 0; numIdx < S16_NUMSIZE; numIdx++)
+            {
                 @out[outOffset] = numIdx << S16_BITSSIZE;
                 num = (S16_NUM[numIdx] < n) ? S16_NUM[numIdx] : n;
 
                 for (j = 0, bits = 0; (j < num)
-                                      && (@in[inOffset + j] < SHIFTED_S16_BITS[numIdx][j]);) {
-                                          @out[outOffset] |= (@in[inOffset + j] << bits);
-                                          bits += S16_BITS[numIdx][j];
-                                          j++;
-                                      }
+                                      && (@in[inOffset + j] < SHIFTED_S16_BITS[numIdx][j]);)
+                {
+                    @out[outOffset] |= (@in[inOffset + j] << bits);
+                    bits += S16_BITS[numIdx][j];
+                    j++;
+                }
 
-                if (j == num) {
+                if (j == num)
+                {
                     return num;
                 }
             }
 
             return -1;
-            }
+        }
 
-        private static /* final */ int fakecompressblock(int[] @in, int inOffset, int n) {
+        private static int fakecompressblock(int[] @in, int inOffset, int n)
+        {
             int numIdx, j, num;
-            for (numIdx = 0; numIdx < S16_NUMSIZE; numIdx++) {
+            for (numIdx = 0; numIdx < S16_NUMSIZE; numIdx++)
+            {
                 num = (S16_NUM[numIdx] < n) ? S16_NUM[numIdx] : n;
 
                 for (j = 0; (j < num)
-                            && (@in[inOffset + j] < SHIFTED_S16_BITS[numIdx][j]);) {
-                                j++;
-                            }
+                            && (@in[inOffset + j] < SHIFTED_S16_BITS[numIdx][j]);)
+                {
+                    j++;
+                }
 
-                if (j == num) {
+                if (j == num)
+                {
                     return num;
                 }
             }
@@ -147,17 +154,18 @@ namespace CSharpFastPFOR
          *                the number of elements to be compressed
          * @return the number of processed integers
          */
-        public static /* final */ int decompressblock(int[] @out, int outOffset,
-            int[] @in, int inOffset, int n) {
+        public static int decompressblock(int[] @out, int outOffset, int[] @in, int inOffset, int n)
+        {
             int numIdx, j = 0, bits = 0;
             numIdx = (int)((uint)@in[inOffset] >> S16_BITSSIZE);
             int num = S16_NUM[numIdx] < n ? S16_NUM[numIdx] : n;
-            for (j = 0, bits = 0; j < num; j++) {
+            for (j = 0, bits = 0; j < num; j++)
+            {
                 @out[outOffset + j] = (int)((uint)@in[inOffset] >> bits) & (int)((uint)0xffffffff >> (32 - S16_BITS[numIdx][j]));
                 bits += S16_BITS[numIdx][j];
             }
             return num;
-            }
+        }
 
         /**
          * Uncompressed data from an input array into an output array
@@ -169,23 +177,24 @@ namespace CSharpFastPFOR
          * @param currentPos    current position in the output array
          * @param outlength     available data in the output array
          */
-        public static void uncompress(/* final */ int[] @in, int tmpinpos,
-            /* final */ int inlength, /* final */ int[] @out, int currentPos,
-            int outlength) {
-            /* final */ int /* final */pos = tmpinpos + inlength;
-            while (tmpinpos < /* final */pos) {
-                /* final */ int howmany = decompressblock(@out, currentPos,
-                    @in, tmpinpos, outlength);
+        public static void uncompress(int[] @in, int tmpinpos, int inlength, int[] @out, int currentPos, int outlength)
+        {
+            int pos = tmpinpos + inlength;
+            while (tmpinpos < pos)
+            {
+                int howmany = decompressblock(@out, currentPos,
+                   @in, tmpinpos, outlength);
                 outlength -= howmany;
                 currentPos += howmany;
                 tmpinpos += 1;
             }
+        }
 
-            }
-
-        private static int[][] shiftme(int[][] x) {
+        private static int[][] shiftme(int[][] x)
+        {
             int[][] answer = new int[x.Length][];
-            for (int k = 0; k < x.Length; ++k) {
+            for (int k = 0; k < x.Length; ++k)
+            {
                 answer[k] = new int[x[k].Length];
                 for (int z = 0; z < answer[k].Length; ++z)
                     answer[k][z] = 1 << x[k][z];
@@ -196,10 +205,10 @@ namespace CSharpFastPFOR
         private const int S16_NUMSIZE = 16;
         private const int S16_BITSSIZE = 28;
         // the possible number of bits used to represent one integer
-        private static /* final */ int[] S16_NUM = { 28, 21, 21, 21, 14, 9, 8, 7, 6, 6, 5, 5, 4, 3, 2, 1 };
+        private static int[] S16_NUM = { 28, 21, 21, 21, 14, 9, 8, 7, 6, 6, 5, 5, 4, 3, 2, 1 };
         // the corresponding number of elements for each value of the number of
         // bits
-        private static /* final */ int[][] S16_BITS = {
+        private static int[][] S16_BITS = {
             new[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
             new[]{ 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
             new[]{ 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1 },
@@ -209,6 +218,6 @@ namespace CSharpFastPFOR
             new[]{ 4, 4, 4, 4, 4, 4, 4 }, new[]{ 5, 5, 5, 5, 4, 4 },
             new[]{ 4, 4, 5, 5, 5, 5 }, new[]{ 6, 6, 6, 5, 5 }, new[]{ 5, 5, 6, 6, 6 },
             new[]{ 7, 7, 7, 7 }, new[]{ 10, 9, 9, }, new[]{ 14, 14 }, new[]{ 28 } };
-        private static /* final */ int[][] SHIFTED_S16_BITS = shiftme(S16_BITS);
+        private static int[][] SHIFTED_S16_BITS = shiftme(S16_BITS);
     }
 }

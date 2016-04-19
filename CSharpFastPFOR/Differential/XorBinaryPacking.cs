@@ -16,13 +16,12 @@ using CSharpFastPFOR.Port;
 
 namespace CSharpFastPFOR.Differential
 {
-    public  class XorBinaryPacking : IntegratedIntegerCODEC {
-
+    public class XorBinaryPacking : IntegratedIntegerCODEC
+    {
         private const int BLOCK_LENGTH = 128;
 
-        /*@Override*/
-        public void compress( int[] inBuf,  IntWrapper inPos,
-            int inLen,  int[] outBuf,  IntWrapper outPos) {
+        public void compress(int[] inBuf, IntWrapper inPos, int inLen, int[] outBuf, IntWrapper outPos)
+        {
             inLen = inLen - inLen % BLOCK_LENGTH;
             if (inLen == 0)
                 return;
@@ -36,7 +35,8 @@ namespace CSharpFastPFOR.Differential
             int op = outPos.get();
             int ip = inPos.get();
             int inPosLast = ip + inLen;
-            for (; ip < inPosLast; ip += BLOCK_LENGTH) {
+            for (; ip < inPosLast; ip += BLOCK_LENGTH)
+            {
                 int bits1 = xorMaxBits(inBuf, ip + 0, 32, context);
                 int bits2 = xorMaxBits(inBuf, ip + 32, 32,
                     inBuf[ip + 31]);
@@ -59,11 +59,10 @@ namespace CSharpFastPFOR.Differential
 
             inPos.add(inLen);
             outPos.set(op);
-            }
+        }
 
-        /*@Override*/
-        public void uncompress(int[] inBuf, IntWrapper inPos, int inLen,
-            int[] outBuf, IntWrapper outPos) {
+        public void uncompress(int[] inBuf, IntWrapper inPos, int inLen, int[] outBuf, IntWrapper outPos)
+        {
             if (inLen == 0)
                 return;
 
@@ -76,7 +75,8 @@ namespace CSharpFastPFOR.Differential
             int ip = inPos.get();
             int op = outPos.get();
             int outPosLast = op + outLen;
-            for (; op < outPosLast; op += BLOCK_LENGTH) {
+            for (; op < outPosLast; op += BLOCK_LENGTH)
+            {
                 int bits1 = (int)((uint)inBuf[ip] >> 24);
                 int bits2 = (int)((uint)inBuf[ip] >> 16) & 0xFF;
                 int bits3 = (int)((uint)inBuf[ip] >> 8) & 0xFF;
@@ -95,47 +95,42 @@ namespace CSharpFastPFOR.Differential
 
             outPos.add(outLen);
             inPos.set(ip);
-            }
+        }
 
-        /*@Override*/
-        //public String toString() {
-        //        return this.getClass().getSimpleName();
-        //}
-
-        private static int xorMaxBits( int[] buf,  int offset,
-            int length,  int context) {
+        private static int xorMaxBits(int[] buf, int offset, int length, int context)
+        {
             int mask = buf[offset] ^ context;
             int M = offset + length;
-            for (int i = offset + 1, prev = offset; i < M; ++i, ++prev) {
+            for (int i = offset + 1, prev = offset; i < M; ++i, ++prev)
+            {
                 mask |= buf[i] ^ buf[prev];
             }
 
             return 32 - Integer.numberOfLeadingZeros(mask);
-            }
+        }
 
-        private static int xorPack( int[] inBuf,  int inOff,
-            int[] outBuf,  int outOff,  int validBits,
-            int context,  int[] work) {
+        private static int xorPack(int[] inBuf, int inOff, int[] outBuf, int outOff, int validBits, int context, int[] work)
+        {
             work[0] = inBuf[inOff] ^ context;
-            for (int i = 1, p = inOff + 1; i < 32; ++i, ++p) {
+            for (int i = 1, p = inOff + 1; i < 32; ++i, ++p)
+            {
                 work[i] = inBuf[p] ^ inBuf[p - 1];
             }
             BitPacking.fastpackwithoutmask(work, 0, outBuf, outOff,
                 validBits);
 
             return validBits;
-            }
+        }
 
-        private static int xorUnpack( int[] inBuf,  int inOff,
-            int[] outBuf,  int outOff,  int validBits,
-            int context,  int[] work) {
-
+        private static int xorUnpack(int[] inBuf, int inOff, int[] outBuf, int outOff, int validBits, int context, int[] work)
+        {
             BitPacking.fastunpack(inBuf, inOff, work, 0, validBits);
             outBuf[outOff] = context = work[0] ^ context;
-            for (int i = 1, p = outOff + 1; i < 32; ++i, ++p) {
+            for (int i = 1, p = outOff + 1; i < 32; ++i, ++p)
+            {
                 outBuf[p] = context = work[i] ^ context;
             }
             return validBits;
-            }
+        }
     }
 }

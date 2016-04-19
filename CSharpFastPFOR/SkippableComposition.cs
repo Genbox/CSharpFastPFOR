@@ -19,27 +19,25 @@ namespace CSharpFastPFOR
         private SkippableIntegerCODEC F2;
 
         /**
-     * Compose a scheme from a first one (f1) and a second one (f2). The first
-     * one is called first and then the second one tries to compress whatever
-     * remains from the first run.
-     * 
-     * By convention, the first scheme should be such that if, during decoding,
-     * a 32-bit zero is first encountered, then there is no output.
-     * 
-     * @param f1
-     *            first codec
-     * @param f2
-     *            second codec
-     */
-        public SkippableComposition(SkippableIntegerCODEC f1,
-            SkippableIntegerCODEC f2)
+         * Compose a scheme from a first one (f1) and a second one (f2). The first
+         * one is called first and then the second one tries to compress whatever
+         * remains from the first run.
+         * 
+         * By convention, the first scheme should be such that if, during decoding,
+         * a 32-bit zero is first encountered, then there is no output.
+         * 
+         * @param f1
+         *            first codec
+         * @param f2
+         *            second codec
+         */
+        public SkippableComposition(SkippableIntegerCODEC f1, SkippableIntegerCODEC f2)
         {
             F1 = f1;
             F2 = f2;
         }
 
-        public void headlessCompress(int[] @in, IntWrapper inpos, int inlength, int[] @out,
-            IntWrapper outpos)
+        public void headlessCompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
         {
             int init = inpos.get();
             F1.headlessCompress(@in, inpos, inlength, @out, outpos);
@@ -47,8 +45,7 @@ namespace CSharpFastPFOR
             F2.headlessCompress(@in, inpos, inlength, @out, outpos);
         }
 
-        public void headlessUncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out,
-            IntWrapper outpos, int num)
+        public void headlessUncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos, int num)
         {
             int init = inpos.get();
             F1.headlessUncompress(@in, inpos, inlength, @out, outpos, num);

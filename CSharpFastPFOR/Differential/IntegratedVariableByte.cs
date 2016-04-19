@@ -19,20 +19,20 @@ using CSharpFastPFOR.Port;
 
 namespace CSharpFastPFOR.Differential
 {
-    public class IntegratedVariableByte : IntegratedIntegerCODEC, IntegratedByteIntegerCODEC,
-        SkippableIntegratedIntegerCODEC  {
-
-        private static sbyte extract7bits(int i, long val) {
+    public class IntegratedVariableByte : IntegratedIntegerCODEC, IntegratedByteIntegerCODEC, SkippableIntegratedIntegerCODEC
+    {
+        private static sbyte extract7bits(int i, long val)
+        {
             return (sbyte)((val >> (7 * i)) & ((1 << 7) - 1));
         }
 
-        private static sbyte extract7bitsmaskless(int i, long val) {
+        private static sbyte extract7bitsmaskless(int i, long val)
+        {
             return (sbyte)((val >> (7 * i)));
         }
 
-        /*@Override*/
-        public void compress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos) {
+        public void compress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
+        {
             if (inlength == 0)
                 return;
             int initoffset = 0;
@@ -40,24 +40,34 @@ namespace CSharpFastPFOR.Differential
             ByteBuffer buf = ByteBuffer.allocateDirect(inlength * 8);
             buf.order(ByteOrder.LITTLE_ENDIAN);
 
-            for (int k = inpos.get(); k < inpos.get() + inlength; ++k) {
+            for (int k = inpos.get(); k < inpos.get() + inlength; ++k)
+            {
                 long val = (@in[k] - initoffset) & 0xFFFFFFFFL; // To be consistent with unsigned integers in C/C++
                 initoffset = @in[k];
-                if (val < (1 << 7)) {
+                if (val < (1 << 7))
+                {
                     buf.put((sbyte)(val | (1 << 7)));
-                } else if (val < (1 << 14)) {
+                }
+                else if (val < (1 << 14))
+                {
                     buf.put((sbyte)extract7bits(0, val));
                     buf.put((sbyte)(extract7bitsmaskless(1, (val)) | (1 << 7)));
-                } else if (val < (1 << 21)) {
+                }
+                else if (val < (1 << 21))
+                {
                     buf.put((sbyte)extract7bits(0, val));
                     buf.put((sbyte)extract7bits(1, val));
                     buf.put((sbyte)(extract7bitsmaskless(2, (val)) | (1 << 7)));
-                } else if (val < (1 << 28)) {
+                }
+                else if (val < (1 << 28))
+                {
                     buf.put((sbyte)extract7bits(0, val));
                     buf.put((sbyte)extract7bits(1, val));
                     buf.put((sbyte)extract7bits(2, val));
                     buf.put((sbyte)(extract7bitsmaskless(3, (val)) | (1 << 7)));
-                } else {
+                }
+                else
+                {
                     buf.put((sbyte)extract7bits(0, val));
                     buf.put((sbyte)extract7bits(1, val));
                     buf.put((sbyte)extract7bits(2, val));
@@ -66,7 +76,7 @@ namespace CSharpFastPFOR.Differential
                 }
             }
             while (buf.position() % 4 != 0)
-                buf.put((sbyte) 0);
+                buf.put((sbyte)0);
             int length = buf.position();
             buf.flip();
             IntBuffer ibuf = buf.asIntBuffer();
@@ -74,33 +84,42 @@ namespace CSharpFastPFOR.Differential
 
             outpos.add(length / 4);
             inpos.add(inlength);
-            }
+        }
 
-        /*@Override*/
-        public void compress(int[] @in, IntWrapper inpos, int inlength,
-            sbyte[] @out, IntWrapper outpos) {
+        public void compress(int[] @in, IntWrapper inpos, int inlength, sbyte[] @out, IntWrapper outpos)
+        {
             if (inlength == 0)
                 return;
             int initoffset = 0;
             int outpostmp = outpos.get();
-            for (int k = inpos.get(); k < inpos.get() + inlength; ++k) {
+            for (int k = inpos.get(); k < inpos.get() + inlength; ++k)
+            {
                 long val = (@in[k] - initoffset) & 0xFFFFFFFFL;  // To be consistent with unsigned integers in C/C++
                 initoffset = @in[k];
-                if (val < (1 << 7)) {
+                if (val < (1 << 7))
+                {
                     @out[outpostmp++] = (sbyte)(val | (1 << 7));
-                } else if (val < (1 << 14)) {
+                }
+                else if (val < (1 << 14))
+                {
                     @out[outpostmp++] = (sbyte)extract7bits(0, val);
                     @out[outpostmp++] = (sbyte)(extract7bitsmaskless(1, (val)) | (1 << 7));
-                } else if (val < (1 << 21)) {
+                }
+                else if (val < (1 << 21))
+                {
                     @out[outpostmp++] = (sbyte)extract7bits(0, val);
                     @out[outpostmp++] = (sbyte)extract7bits(1, val);
                     @out[outpostmp++] = (sbyte)(extract7bitsmaskless(2, (val)) | (1 << 7));
-                } else if (val < (1 << 28)) {
+                }
+                else if (val < (1 << 28))
+                {
                     @out[outpostmp++] = (sbyte)extract7bits(0, val);
                     @out[outpostmp++] = (sbyte)extract7bits(1, val);
                     @out[outpostmp++] = (sbyte)extract7bits(2, val);
                     @out[outpostmp++] = (sbyte)(extract7bitsmaskless(3, (val)) | (1 << 7));
-                } else {
+                }
+                else
+                {
                     @out[outpostmp++] = (sbyte)extract7bits(0, val);
                     @out[outpostmp++] = (sbyte)extract7bits(1, val);
                     @out[outpostmp++] = (sbyte)extract7bits(2, val);
@@ -110,114 +129,124 @@ namespace CSharpFastPFOR.Differential
             }
             outpos.set(outpostmp);
             inpos.add(inlength);
-            }
+        }
 
-        /*@Override*/
-        public void uncompress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos) {
+        public void uncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
+        {
             int s = 0;
             int val = 0;
             int p = inpos.get();
             int finalp = inpos.get() + inlength;
-            int tmpoutpos = outpos.get();                
+            int tmpoutpos = outpos.get();
             int initoffset = 0;
-            for (int v = 0, shift =0; p < finalp;) {
+            for (int v = 0, shift = 0; p < finalp;)
+            {
                 val = @in[p];
-                int c = (sbyte) (int)((uint)val >> s);
+                int c = (sbyte)(int)((uint)val >> s);
                 s += 8;
-                p += s>>5;
+                p += s >> 5;
                 s = s & 31;
                 v += ((c & 127) << shift);
-                if ((c & 128) == 128) {
+                if ((c & 128) == 128)
+                {
                     @out[tmpoutpos] = v + initoffset;
                     initoffset = @out[tmpoutpos];
                     tmpoutpos++;
                     v = 0;
                     shift = 0;
-                } else 
-                    shift +=7;
+                }
+                else
+                    shift += 7;
             }
             outpos.set(tmpoutpos);
             inpos.add(inlength);
-            }
+        }
 
-        /*@Override*/
-        public void uncompress(sbyte[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos) {
+        public void uncompress(sbyte[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
+        {
             int p = inpos.get();
             int initoffset = 0;
             int finalp = inpos.get() + inlength;
             int tmpoutpos = outpos.get();
-            for (int v = 0;p < finalp; @out[tmpoutpos++] = (initoffset = initoffset + v)) {
+            for (int v = 0; p < finalp; @out[tmpoutpos++] = (initoffset = initoffset + v))
+            {
                 v = @in[p] & 0x7F;
-                if (@in[p] < 0 ) {
-                    p+= 1;
+                if (@in[p] < 0)
+                {
+                    p += 1;
                     continue;
                 }
-                v = ((@in[p+1] & 0x7F)<<7) | v; 
-                if (@in[p+1] < 0) {
-                    p+= 2;
+                v = ((@in[p + 1] & 0x7F) << 7) | v;
+                if (@in[p + 1] < 0)
+                {
+                    p += 2;
                     continue;
                 }
-                v = ((@in[p+2] & 0x7F)<<14) | v;
-                if (@in[p+2] < 0) {
-                    p+= 3;
+                v = ((@in[p + 2] & 0x7F) << 14) | v;
+                if (@in[p + 2] < 0)
+                {
+                    p += 3;
                     continue;
                 }
-                v = ((@in[p+3] & 0x7F)<<21) | v;
-                if (@in[p+3] < 0) {
-                    p+= 4;
+                v = ((@in[p + 3] & 0x7F) << 21) | v;
+                if (@in[p + 3] < 0)
+                {
+                    p += 4;
                     continue;
                 }
-                v = ((@in[p+4] & 0x7F)<<28) | v;
-                p+= 5;                
+                v = ((@in[p + 4] & 0x7F) << 28) | v;
+                p += 5;
             }
             outpos.set(tmpoutpos);
             inpos.add(p);
-            }
+        }
 
-        /*@Override*/
-        //public String toString() {
-        //    return this.getClass().getSimpleName();
-        //}
-
-        /*@Override*/
-        public void headlessCompress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos, IntWrapper initvalue) {
+        public void headlessCompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos, IntWrapper initvalue)
+        {
             if (inlength == 0)
                 return;
             int initoffset = initvalue.get();
-            initvalue.set(@in[inpos.get()+inlength -1]);
+            initvalue.set(@in[inpos.get() + inlength - 1]);
             ByteBuffer buf = ByteBuffer.allocateDirect(inlength * 8);
             buf.order(ByteOrder.LITTLE_ENDIAN);
 
-            for (int k = inpos.get(); k < inpos.get() + inlength; ++k) {
+            for (int k = inpos.get(); k < inpos.get() + inlength; ++k)
+            {
                 long val = (@in[k] - initoffset) & 0xFFFFFFFFL;  // To be consistent with unsigned integers in C/C++
                 initoffset = @in[k];
-                if (val < (1 << 7)) {
-                    buf.put((sbyte) (val | (1 << 7)));
-                } else if (val < (1 << 14)) {
-                    buf.put((sbyte) extract7bits(0, val));
-                    buf.put((sbyte) (extract7bitsmaskless(1, (val)) | (1 << 7)));
-                } else if (val < (1 << 21)) {
-                    buf.put((sbyte) extract7bits(0, val));
-                    buf.put((sbyte) extract7bits(1, val));
-                    buf.put((sbyte) (extract7bitsmaskless(2, (val)) | (1 << 7)));
-                } else if (val < (1 << 28)) {
-                    buf.put((sbyte) extract7bits(0, val));
-                    buf.put((sbyte) extract7bits(1, val));
-                    buf.put((sbyte) extract7bits(2, val));
-                    buf.put((sbyte) (extract7bitsmaskless(3, (val)) | (1 << 7)));
-                } else {
-                    buf.put((sbyte) extract7bits(0, val));
-                    buf.put((sbyte) extract7bits(1, val));
-                    buf.put((sbyte) extract7bits(2, val));
-                    buf.put((sbyte) extract7bits(3, val));
-                    buf.put((sbyte) (extract7bitsmaskless(4, (val)) | (1 << 7)));
+                if (val < (1 << 7))
+                {
+                    buf.put((sbyte)(val | (1 << 7)));
+                }
+                else if (val < (1 << 14))
+                {
+                    buf.put((sbyte)extract7bits(0, val));
+                    buf.put((sbyte)(extract7bitsmaskless(1, (val)) | (1 << 7)));
+                }
+                else if (val < (1 << 21))
+                {
+                    buf.put((sbyte)extract7bits(0, val));
+                    buf.put((sbyte)extract7bits(1, val));
+                    buf.put((sbyte)(extract7bitsmaskless(2, (val)) | (1 << 7)));
+                }
+                else if (val < (1 << 28))
+                {
+                    buf.put((sbyte)extract7bits(0, val));
+                    buf.put((sbyte)extract7bits(1, val));
+                    buf.put((sbyte)extract7bits(2, val));
+                    buf.put((sbyte)(extract7bitsmaskless(3, (val)) | (1 << 7)));
+                }
+                else
+                {
+                    buf.put((sbyte)extract7bits(0, val));
+                    buf.put((sbyte)extract7bits(1, val));
+                    buf.put((sbyte)extract7bits(2, val));
+                    buf.put((sbyte)extract7bits(3, val));
+                    buf.put((sbyte)(extract7bitsmaskless(4, (val)) | (1 << 7)));
                 }
             }
             while (buf.position() % 4 != 0)
-                buf.put((sbyte) 0);
+                buf.put((sbyte)0);
 
             int length = buf.position();
             buf.flip();
@@ -225,36 +254,38 @@ namespace CSharpFastPFOR.Differential
             ibuf.get(@out, outpos.get(), length / 4);
 
             outpos.add(length / 4);
-            inpos.add(inlength);        
-            }
+            inpos.add(inlength);
+        }
 
-        /*@Override*/
-        public void headlessUncompress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos, int num, IntWrapper initvalue) {
+        public void headlessUncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos, int num, IntWrapper initvalue)
+        {
             int s = 0;
             int val = 0;
             int p = inpos.get();
             int initoffset = initvalue.get();
             int tmpoutpos = outpos.get();
             int finaloutpos = num + tmpoutpos;
-            for (int v = 0, shift = 0; tmpoutpos < finaloutpos;) {
+            for (int v = 0, shift = 0; tmpoutpos < finaloutpos;)
+            {
                 val = @in[p];
                 int c = (int)((uint)val >> s);
                 s += 8;
-                p += s>>5;
+                p += s >> 5;
                 s = s & 31;
                 v += ((c & 127) << shift);
-                if ((c & 128) == 128) {
+                if ((c & 128) == 128)
+                {
                     @out[tmpoutpos++] = (initoffset = initoffset + v);
                     v = 0;
                     shift = 0;
-                } else
+                }
+                else
                     shift += 7;
             }
-            initvalue.set(@out[tmpoutpos-1]);
+            initvalue.set(@out[tmpoutpos - 1]);
             outpos.set(tmpoutpos);
 
-            inpos.set(p + (s!=0 ? 1 : 0));        
-            }
+            inpos.set(p + (s != 0 ? 1 : 0));
         }
+    }
 }

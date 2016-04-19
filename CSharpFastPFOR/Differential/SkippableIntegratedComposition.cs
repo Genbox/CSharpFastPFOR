@@ -12,27 +12,25 @@
  */
 namespace CSharpFastPFOR.Differential
 {
-    public class SkippableIntegratedComposition :
-        SkippableIntegratedIntegerCODEC
+    public class SkippableIntegratedComposition : SkippableIntegratedIntegerCODEC
     {
         private SkippableIntegratedIntegerCODEC F1;
         private SkippableIntegratedIntegerCODEC F2;
 
         /**
-     * Compose a scheme from a first one (f1) and a second one (f2). The first
-     * one is called first and then the second one tries to compress whatever
-     * remains from the first run.
-     * 
-     * By convention, the first scheme should be such that if, during decoding,
-     * a 32-bit zero is first encountered, then there is no output.
-     * 
-     * @param f1
-     *            first codec
-     * @param f2
-     *            second codec
-     */
-        public SkippableIntegratedComposition(SkippableIntegratedIntegerCODEC f1,
-            SkippableIntegratedIntegerCODEC f2)
+         * Compose a scheme from a first one (f1) and a second one (f2). The first
+         * one is called first and then the second one tries to compress whatever
+         * remains from the first run.
+         * 
+         * By convention, the first scheme should be such that if, during decoding,
+         * a 32-bit zero is first encountered, then there is no output.
+         * 
+         * @param f1
+         *            first codec
+         * @param f2
+         *            second codec
+         */
+        public SkippableIntegratedComposition(SkippableIntegratedIntegerCODEC f1, SkippableIntegratedIntegerCODEC f2)
         {
             F1 = f1;
             F2 = f2;
@@ -43,8 +41,7 @@ namespace CSharpFastPFOR.Differential
             return F1 + " + " + F2;
         }
 
-        public void headlessCompress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos, IntWrapper initvalue)
+        public void headlessCompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos, IntWrapper initvalue)
         {
             if (inlength == 0)
                 return;
@@ -59,8 +56,7 @@ namespace CSharpFastPFOR.Differential
             F2.headlessCompress(@in, inpos, inlength, @out, outpos, initvalue);
         }
 
-        public void headlessUncompress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos, int num, IntWrapper initvalue)
+        public void headlessUncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos, int num, IntWrapper initvalue)
         {
             if (inlength == 0)
                 return;

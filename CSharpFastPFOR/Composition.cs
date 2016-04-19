@@ -37,8 +37,7 @@ namespace CSharpFastPFOR
             F2 = f2;
         }
 
-        public void compress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos)
+        public void compress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
         {
             if (inlength == 0)
             {
@@ -56,12 +55,11 @@ namespace CSharpFastPFOR
             F2.compress(@in, inpos, inlength, @out, outpos);
         }
 
-        public void uncompress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos)
+        public void uncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
         {
             if (inlength == 0)
                 return;
-            /* final */
+
             int init = inpos.get();
             F1.uncompress(@in, inpos, inlength, @out, outpos);
             inlength -= inpos.get() - init;

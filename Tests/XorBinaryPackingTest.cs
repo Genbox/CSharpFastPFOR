@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CSharpFastPFOR.Tests
 {
     [TestClass]
-    public  class XorBinaryPackingTest
+    public class XorBinaryPackingTest
     {
         private static void checkCompressAndUncompress(string label, int[] data)
         {

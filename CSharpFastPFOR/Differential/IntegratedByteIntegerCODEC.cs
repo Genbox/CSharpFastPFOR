@@ -15,6 +15,7 @@
  */
 namespace CSharpFastPFOR.Differential
 {
-    public interface IntegratedByteIntegerCODEC : ByteIntegerCODEC {
+    public interface IntegratedByteIntegerCODEC : ByteIntegerCODEC
+    {
     }
 }

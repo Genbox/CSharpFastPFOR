@@ -25,7 +25,8 @@ using CSharpFastPFOR.Port;
 
 namespace CSharpFastPFOR
 {
-    public /* final */ class BitPacking {
+    public class BitPacking
+    {
 
         /**
          * Pack 32 integers
@@ -41,9 +42,10 @@ namespace CSharpFastPFOR
          * @param bit
          *                number of bits to use per integer
          */
-        public static void fastpack(/* final */ int[] @in, /* final */ int inpos,
-            /* final */ int[] @out, /* final */ int outpos, /* final */ int bit) {
-            switch (bit) {
+        public static void fastpack(int[] @in, int inpos, int[] @out, int outpos, int bit)
+        {
+            switch (bit)
+            {
                 case 0:
                     fastpack0(@in, inpos, @out, outpos);
                     break;
@@ -144,18 +146,17 @@ namespace CSharpFastPFOR
                     fastpack32(@in, inpos, @out, outpos);
                     break;
                 default:
-                    throw new ArgumentException(
-                        "Unsupported bit width.");
+                    throw new ArgumentException("Unsupported bit width.");
             }
-            }
+        }
 
-        protected static void fastpack0(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack0(int[] @in, int inpos, int[] @out, int outpos)
+        {
             // nothing
-            }
+        }
 
-        protected static void fastpack1(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack1(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 1)
                                | ((@in[1 + inpos] & 1) << 1)
                                | ((@in[2 + inpos] & 1) << 2)
@@ -188,10 +189,10 @@ namespace CSharpFastPFOR
                                | ((@in[29 + inpos] & 1) << 29)
                                | ((@in[30 + inpos] & 1) << 30)
                                | ((@in[31 + inpos]) << 31);
-            }
+        }
 
-        protected static void fastpack10(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack10(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 1023)
                                | ((@in[1 + inpos] & 1023) << 10)
                                | ((@in[2 + inpos] & 1023) << 20)
@@ -232,10 +233,10 @@ namespace CSharpFastPFOR
                                | ((@in[29 + inpos] & 1023) << 2)
                                | ((@in[30 + inpos] & 1023) << 12)
                                | ((@in[31 + inpos]) << 22);
-            }
+        }
 
-        protected static void fastpack11(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack11(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 2047)
                                | ((@in[1 + inpos] & 2047) << 11)
                                | ((@in[2 + inpos]) << 22);
@@ -278,10 +279,10 @@ namespace CSharpFastPFOR
             @out[10 + outpos] = (int)(((uint)@in[29 + inpos] & 2047) >> (11 - 10))
                                 | ((@in[30 + inpos] & 2047) << 10)
                                 | ((@in[31 + inpos]) << 21);
-            }
+        }
 
-        protected static void fastpack12(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack12(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 4095)
                                | ((@in[1 + inpos] & 4095) << 12)
                                | ((@in[2 + inpos]) << 24);
@@ -322,10 +323,10 @@ namespace CSharpFastPFOR
             @out[11 + outpos] = (int)(((uint)@in[29 + inpos] & 4095) >> (12 - 8))
                                 | ((@in[30 + inpos] & 4095) << 8)
                                 | ((@in[31 + inpos]) << 20);
-            }
+        }
 
-        protected static void fastpack13(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack13(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 8191)
                                | ((@in[1 + inpos] & 8191) << 13)
                                | ((@in[2 + inpos]) << 26);
@@ -370,10 +371,10 @@ namespace CSharpFastPFOR
             @out[12 + outpos] = (int)(((uint)@in[29 + inpos] & 8191) >> (13 - 6))
                                 | ((@in[30 + inpos] & 8191) << 6)
                                 | ((@in[31 + inpos]) << 19);
-            }
+        }
 
-        protected static void fastpack14(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack14(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 16383)
                                | ((@in[1 + inpos] & 16383) << 14)
                                | ((@in[2 + inpos]) << 28);
@@ -418,10 +419,10 @@ namespace CSharpFastPFOR
             @out[13 + outpos] = (int)(((uint)@in[29 + inpos] & 16383) >> (14 - 4))
                                 | ((@in[30 + inpos] & 16383) << 4)
                                 | ((@in[31 + inpos]) << 18);
-            }
+        }
 
-        protected static void fastpack15(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack15(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 32767)
                                | ((@in[1 + inpos] & 32767) << 15)
                                | ((@in[2 + inpos]) << 30);
@@ -468,10 +469,10 @@ namespace CSharpFastPFOR
             @out[14 + outpos] = (int)(((uint)@in[29 + inpos] & 32767) >> (15 - 2))
                                 | ((@in[30 + inpos] & 32767) << 2)
                                 | ((@in[31 + inpos]) << 17);
-            }
+        }
 
-        protected static void fastpack16(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack16(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 65535)
                                | ((@in[1 + inpos]) << 16);
             @out[1 + outpos] = (@in[2 + inpos] & 65535)
@@ -504,10 +505,10 @@ namespace CSharpFastPFOR
                                 | ((@in[29 + inpos]) << 16);
             @out[15 + outpos] = (@in[30 + inpos] & 65535)
                                 | ((@in[31 + inpos]) << 16);
-            }
+        }
 
-        protected static void fastpack17(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack17(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 131071)
                                | ((@in[1 + inpos]) << 17);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 131071) >> (17 - 2))
@@ -556,10 +557,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 30);
             @out[16 + outpos] = (int)(((uint)@in[30 + inpos] & 131071) >> (17 - 15))
                                 | ((@in[31 + inpos]) << 15);
-            }
+        }
 
-        protected static void fastpack18(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack18(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 262143)
                                | ((@in[1 + inpos]) << 18);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 262143) >> (18 - 4))
@@ -608,10 +609,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 28);
             @out[17 + outpos] = (int)(((uint)@in[30 + inpos] & 262143) >> (18 - 14))
                                 | ((@in[31 + inpos]) << 14);
-            }
+        }
 
-        protected static void fastpack19(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack19(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 524287)
                                | ((@in[1 + inpos]) << 19);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 524287) >> (19 - 6))
@@ -662,10 +663,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 26);
             @out[18 + outpos] = (int)(((uint)@in[30 + inpos] & 524287) >> (19 - 13))
                                 | ((@in[31 + inpos]) << 13);
-            }
+        }
 
-        protected static void fastpack2(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack2(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 3)
                                | ((@in[1 + inpos] & 3) << 2)
                                | ((@in[2 + inpos] & 3) << 4)
@@ -698,10 +699,10 @@ namespace CSharpFastPFOR
                                | ((@in[29 + inpos] & 3) << 26)
                                | ((@in[30 + inpos] & 3) << 28)
                                | ((@in[31 + inpos]) << 30);
-            }
+        }
 
-        protected static void fastpack20(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack20(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 1048575)
                                | ((@in[1 + inpos]) << 20);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 1048575) >> (20 - 8))
@@ -750,10 +751,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 24);
             @out[19 + outpos] = (int)(((uint)@in[30 + inpos] & 1048575) >> (20 - 12))
                                 | ((@in[31 + inpos]) << 12);
-            }
+        }
 
-        protected static void fastpack21(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack21(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 2097151)
                                | ((@in[1 + inpos]) << 21);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 2097151) >> (21 - 10))
@@ -806,10 +807,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 22);
             @out[20 + outpos] = (int)(((uint)@in[30 + inpos] & 2097151) >> (21 - 11))
                                 | ((@in[31 + inpos]) << 11);
-            }
+        }
 
-        protected static void fastpack22(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack22(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 4194303)
                                | ((@in[1 + inpos]) << 22);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 4194303) >> (22 - 12))
@@ -862,10 +863,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 20);
             @out[21 + outpos] = (int)(((uint)@in[30 + inpos] & 4194303) >> (22 - 10))
                                 | ((@in[31 + inpos]) << 10);
-            }
+        }
 
-        protected static void fastpack23(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack23(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 8388607)
                                | ((@in[1 + inpos]) << 23);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 8388607) >> (23 - 14))
@@ -920,10 +921,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 18);
             @out[22 + outpos] = (int)(((uint)@in[30 + inpos] & 8388607) >> (23 - 9))
                                 | ((@in[31 + inpos]) << 9);
-            }
+        }
 
-        protected static void fastpack24(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack24(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 16777215)
                                | ((@in[1 + inpos]) << 24);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 16777215) >> (24 - 16))
@@ -972,10 +973,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 16);
             @out[23 + outpos] = (int)(((uint)@in[30 + inpos] & 16777215) >> (24 - 8))
                                 | ((@in[31 + inpos]) << 8);
-            }
+        }
 
-        protected static void fastpack25(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack25(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 33554431)
                                | ((@in[1 + inpos]) << 25);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 33554431) >> (25 - 18))
@@ -1032,10 +1033,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 14);
             @out[24 + outpos] = (int)(((uint)@in[30 + inpos] & 33554431) >> (25 - 7))
                                 | ((@in[31 + inpos]) << 7);
-            }
+        }
 
-        protected static void fastpack26(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack26(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 67108863)
                                | ((@in[1 + inpos]) << 26);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 67108863) >> (26 - 20))
@@ -1092,10 +1093,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 12);
             @out[25 + outpos] = (int)(((uint)@in[30 + inpos] & 67108863) >> (26 - 6))
                                 | ((@in[31 + inpos]) << 6);
-            }
+        }
 
-        protected static void fastpack27(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack27(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 134217727)
                                | ((@in[1 + inpos]) << 27);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 134217727) >> (27 - 22))
@@ -1154,10 +1155,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 10);
             @out[26 + outpos] = (int)(((uint)@in[30 + inpos] & 134217727) >> (27 - 5))
                                 | ((@in[31 + inpos]) << 5);
-            }
+        }
 
-        protected static void fastpack28(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack28(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 268435455)
                                | ((@in[1 + inpos]) << 28);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 268435455) >> (28 - 24))
@@ -1214,10 +1215,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 8);
             @out[27 + outpos] = (int)(((uint)@in[30 + inpos] & 268435455) >> (28 - 4))
                                 | ((@in[31 + inpos]) << 4);
-            }
+        }
 
-        protected static void fastpack29(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack29(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 536870911)
                                | ((@in[1 + inpos]) << 29);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 536870911) >> (29 - 26))
@@ -1278,10 +1279,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 6);
             @out[28 + outpos] = (int)(((uint)@in[30 + inpos] & 536870911) >> (29 - 3))
                                 | ((@in[31 + inpos]) << 3);
-            }
+        }
 
-        protected static void fastpack3(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack3(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 7)
                                | ((@in[1 + inpos] & 7) << 3)
                                | ((@in[2 + inpos] & 7) << 6)
@@ -1316,10 +1317,10 @@ namespace CSharpFastPFOR
                                | ((@in[29 + inpos] & 7) << 23)
                                | ((@in[30 + inpos] & 7) << 26)
                                | ((@in[31 + inpos]) << 29);
-            }
+        }
 
-        protected static void fastpack30(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack30(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 1073741823)
                                | ((@in[1 + inpos]) << 30);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 1073741823) >> (30 - 28))
@@ -1380,10 +1381,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 4);
             @out[29 + outpos] = (int)(((uint)@in[30 + inpos] & 1073741823) >> (30 - 2))
                                 | ((@in[31 + inpos]) << 2);
-            }
+        }
 
-        protected static void fastpack31(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack31(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 2147483647)
                                | ((@in[1 + inpos]) << 31);
             @out[1 + outpos] = (int)(((uint)@in[1 + inpos] & 2147483647) >> (31 - 30))
@@ -1446,15 +1447,15 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 2);
             @out[30 + outpos] = (int)(((uint)@in[30 + inpos] & 2147483647) >> (31 - 1))
                                 | ((@in[31 + inpos]) << 1);
-            }
+        }
 
-        protected static void fastpack32(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack32(int[] @in, int inpos, int[] @out, int outpos)
+        {
             Array.Copy(@in, inpos, @out, outpos, 32);
-            }
+        }
 
-        protected static void fastpack4(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack4(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 15)
                                | ((@in[1 + inpos] & 15) << 4)
                                | ((@in[2 + inpos] & 15) << 8)
@@ -1487,10 +1488,10 @@ namespace CSharpFastPFOR
                                | ((@in[29 + inpos] & 15) << 20)
                                | ((@in[30 + inpos] & 15) << 24)
                                | ((@in[31 + inpos]) << 28);
-            }
+        }
 
-        protected static void fastpack5(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack5(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 31)
                                | ((@in[1 + inpos] & 31) << 5)
                                | ((@in[2 + inpos] & 31) << 10)
@@ -1527,10 +1528,10 @@ namespace CSharpFastPFOR
                                | ((@in[29 + inpos] & 31) << 17)
                                | ((@in[30 + inpos] & 31) << 22)
                                | ((@in[31 + inpos]) << 27);
-            }
+        }
 
-        protected static void fastpack6(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack6(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 63)
                                | ((@in[1 + inpos] & 63) << 6)
                                | ((@in[2 + inpos] & 63) << 12)
@@ -1567,10 +1568,10 @@ namespace CSharpFastPFOR
                                | ((@in[29 + inpos] & 63) << 14)
                                | ((@in[30 + inpos] & 63) << 20)
                                | ((@in[31 + inpos]) << 26);
-            }
+        }
 
-        protected static void fastpack7(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack7(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 127)
                                | ((@in[1 + inpos] & 127) << 7)
                                | ((@in[2 + inpos] & 127) << 14)
@@ -1609,10 +1610,10 @@ namespace CSharpFastPFOR
                                | ((@in[29 + inpos] & 127) << 11)
                                | ((@in[30 + inpos] & 127) << 18)
                                | ((@in[31 + inpos]) << 25);
-            }
+        }
 
-        protected static void fastpack8(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack8(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 255)
                                | ((@in[1 + inpos] & 255) << 8)
                                | ((@in[2 + inpos] & 255) << 16)
@@ -1645,10 +1646,10 @@ namespace CSharpFastPFOR
                                | ((@in[29 + inpos] & 255) << 8)
                                | ((@in[30 + inpos] & 255) << 16)
                                | ((@in[31 + inpos]) << 24);
-            }
+        }
 
-        protected static void fastpack9(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpack9(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] & 511)
                                | ((@in[1 + inpos] & 511) << 9)
                                | ((@in[2 + inpos] & 511) << 18)
@@ -1689,7 +1690,7 @@ namespace CSharpFastPFOR
                                | ((@in[29 + inpos] & 511) << 5)
                                | ((@in[30 + inpos] & 511) << 14)
                                | ((@in[31 + inpos]) << 23);
-            }
+        }
 
         /**
          * Unpack 32 integers
@@ -1705,9 +1706,10 @@ namespace CSharpFastPFOR
          * @param bit
          *                number of bits to use per integer
          */
-        public static void fastpackwithoutmask(/* final */ int[] @in, /* final */ int inpos,
-            /* final */ int[] @out, /* final */ int outpos, /* final */ int bit) {
-            switch (bit) {
+        public static void fastpackwithoutmask(int[] @in, int inpos, int[] @out, int outpos, int bit)
+        {
+            switch (bit)
+            {
                 case 0:
                     fastpackwithoutmask0(@in, inpos, @out, outpos);
                     break;
@@ -1811,15 +1813,15 @@ namespace CSharpFastPFOR
                     throw new ArgumentException(
                         "Unsupported bit width.");
             }
-            }
+        }
 
-        protected static void fastpackwithoutmask0(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask0(int[] @in, int inpos, int[] @out, int outpos)
+        {
             // nothing
-            }
+        }
 
-        protected static void fastpackwithoutmask1(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask1(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 1)
                                | ((@in[2 + inpos]) << 2) | ((@in[3 + inpos]) << 3)
                                | ((@in[4 + inpos]) << 4) | ((@in[5 + inpos]) << 5)
@@ -1836,10 +1838,10 @@ namespace CSharpFastPFOR
                                | ((@in[26 + inpos]) << 26) | ((@in[27 + inpos]) << 27)
                                | ((@in[28 + inpos]) << 28) | ((@in[29 + inpos]) << 29)
                                | ((@in[30 + inpos]) << 30) | ((@in[31 + inpos]) << 31);
-            }
+        }
 
-        protected static void fastpackwithoutmask10(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask10(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 10)
                                | ((@in[2 + inpos]) << 20) | ((@in[3 + inpos]) << 30);
             @out[1 + outpos] = (int)((uint)(@in[3 + inpos]) >> (10 - 8))
@@ -1868,10 +1870,10 @@ namespace CSharpFastPFOR
             @out[9 + outpos] = (int)((uint)(@in[28 + inpos]) >> (10 - 2))
                                | ((@in[29 + inpos]) << 2) | ((@in[30 + inpos]) << 12)
                                | ((@in[31 + inpos]) << 22);
-            }
+        }
 
-        protected static void fastpackwithoutmask11(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask11(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 11)
                                | ((@in[2 + inpos]) << 22);
             @out[1 + outpos] = (int)((uint)(@in[2 + inpos]) >> (11 - 1))
@@ -1903,10 +1905,10 @@ namespace CSharpFastPFOR
                                | ((@in[29 + inpos]) << 31);
             @out[10 + outpos] = (int)((uint)(@in[29 + inpos]) >> (11 - 10))
                                 | ((@in[30 + inpos]) << 10) | ((@in[31 + inpos]) << 21);
-            }
+        }
 
-        protected static void fastpackwithoutmask12(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask12(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 12)
                                | ((@in[2 + inpos]) << 24);
             @out[1 + outpos] = (int)((uint)(@in[2 + inpos]) >> (12 - 4))
@@ -1935,10 +1937,10 @@ namespace CSharpFastPFOR
                                 | ((@in[29 + inpos]) << 28);
             @out[11 + outpos] = (int)((uint)(@in[29 + inpos]) >> (12 - 8))
                                 | ((@in[30 + inpos]) << 8) | ((@in[31 + inpos]) << 20);
-            }
+        }
 
-        protected static void fastpackwithoutmask13(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask13(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 13)
                                | ((@in[2 + inpos]) << 26);
             @out[1 + outpos] = (int)((uint)(@in[2 + inpos]) >> (13 - 7))
@@ -1970,10 +1972,10 @@ namespace CSharpFastPFOR
                                 | ((@in[28 + inpos]) << 12) | ((@in[29 + inpos]) << 25);
             @out[12 + outpos] = (int)((uint)(@in[29 + inpos]) >> (13 - 6))
                                 | ((@in[30 + inpos]) << 6) | ((@in[31 + inpos]) << 19);
-            }
+        }
 
-        protected static void fastpackwithoutmask14(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask14(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 14)
                                | ((@in[2 + inpos]) << 28);
             @out[1 + outpos] = (int)((uint)(@in[2 + inpos]) >> (14 - 10))
@@ -2004,10 +2006,10 @@ namespace CSharpFastPFOR
                                 | ((@in[28 + inpos]) << 8) | ((@in[29 + inpos]) << 22);
             @out[13 + outpos] = (int)((uint)(@in[29 + inpos]) >> (14 - 4))
                                 | ((@in[30 + inpos]) << 4) | ((@in[31 + inpos]) << 18);
-            }
+        }
 
-        protected static void fastpackwithoutmask15(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask15(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 15)
                                | ((@in[2 + inpos]) << 30);
             @out[1 + outpos] = (int)((uint)(@in[2 + inpos]) >> (15 - 13))
@@ -2039,10 +2041,10 @@ namespace CSharpFastPFOR
                                 | ((@in[28 + inpos]) << 4) | ((@in[29 + inpos]) << 19);
             @out[14 + outpos] = (int)((uint)(@in[29 + inpos]) >> (15 - 2))
                                 | ((@in[30 + inpos]) << 2) | ((@in[31 + inpos]) << 17);
-            }
+        }
 
-        protected static void fastpackwithoutmask16(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask16(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 16);
             @out[1 + outpos] = @in[2 + inpos] | ((@in[3 + inpos]) << 16);
             @out[2 + outpos] = @in[4 + inpos] | ((@in[5 + inpos]) << 16);
@@ -2059,10 +2061,10 @@ namespace CSharpFastPFOR
             @out[13 + outpos] = @in[26 + inpos] | ((@in[27 + inpos]) << 16);
             @out[14 + outpos] = @in[28 + inpos] | ((@in[29 + inpos]) << 16);
             @out[15 + outpos] = @in[30 + inpos] | ((@in[31 + inpos]) << 16);
-            }
+        }
 
-        protected static void fastpackwithoutmask17(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask17(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 17);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (17 - 2))
                                | ((@in[2 + inpos]) << 2) | ((@in[3 + inpos]) << 19);
@@ -2096,10 +2098,10 @@ namespace CSharpFastPFOR
                                 | ((@in[29 + inpos]) << 13) | ((@in[30 + inpos]) << 30);
             @out[16 + outpos] = (int)((uint)(@in[30 + inpos]) >> (17 - 15))
                                 | ((@in[31 + inpos]) << 15);
-            }
+        }
 
-        protected static void fastpackwithoutmask18(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask18(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 18);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (18 - 4))
                                | ((@in[2 + inpos]) << 4) | ((@in[3 + inpos]) << 22);
@@ -2134,10 +2136,10 @@ namespace CSharpFastPFOR
                                 | ((@in[29 + inpos]) << 10) | ((@in[30 + inpos]) << 28);
             @out[17 + outpos] = (int)((uint)(@in[30 + inpos]) >> (18 - 14))
                                 | ((@in[31 + inpos]) << 14);
-            }
+        }
 
-        protected static void fastpackwithoutmask19(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask19(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 19);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (19 - 6))
                                | ((@in[2 + inpos]) << 6) | ((@in[3 + inpos]) << 25);
@@ -2175,10 +2177,10 @@ namespace CSharpFastPFOR
                                 | ((@in[29 + inpos]) << 7) | ((@in[30 + inpos]) << 26);
             @out[18 + outpos] = (int)((uint)(@in[30 + inpos]) >> (19 - 13))
                                 | ((@in[31 + inpos]) << 13);
-            }
+        }
 
-        protected static void fastpackwithoutmask2(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask2(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 2)
                                | ((@in[2 + inpos]) << 4) | ((@in[3 + inpos]) << 6)
                                | ((@in[4 + inpos]) << 8) | ((@in[5 + inpos]) << 10)
@@ -2195,10 +2197,10 @@ namespace CSharpFastPFOR
                                | ((@in[26 + inpos]) << 20) | ((@in[27 + inpos]) << 22)
                                | ((@in[28 + inpos]) << 24) | ((@in[29 + inpos]) << 26)
                                | ((@in[30 + inpos]) << 28) | ((@in[31 + inpos]) << 30);
-            }
+        }
 
-        protected static void fastpackwithoutmask20(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask20(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 20);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (20 - 8))
                                | ((@in[2 + inpos]) << 8) | ((@in[3 + inpos]) << 28);
@@ -2235,10 +2237,10 @@ namespace CSharpFastPFOR
                                 | ((@in[29 + inpos]) << 4) | ((@in[30 + inpos]) << 24);
             @out[19 + outpos] = (int)((uint)(@in[30 + inpos]) >> (20 - 12))
                                 | ((@in[31 + inpos]) << 12);
-            }
+        }
 
-        protected static void fastpackwithoutmask21(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask21(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 21);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (21 - 10))
                                | ((@in[2 + inpos]) << 10) | ((@in[3 + inpos]) << 31);
@@ -2280,10 +2282,10 @@ namespace CSharpFastPFOR
                                 | ((@in[29 + inpos]) << 1) | ((@in[30 + inpos]) << 22);
             @out[20 + outpos] = (int)((uint)(@in[30 + inpos]) >> (21 - 11))
                                 | ((@in[31 + inpos]) << 11);
-            }
+        }
 
-        protected static void fastpackwithoutmask22(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask22(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 22);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (22 - 12))
                                | ((@in[2 + inpos]) << 12);
@@ -2326,10 +2328,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 20);
             @out[21 + outpos] = (int)((uint)(@in[30 + inpos]) >> (22 - 10))
                                 | ((@in[31 + inpos]) << 10);
-            }
+        }
 
-        protected static void fastpackwithoutmask23(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask23(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 23);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (23 - 14))
                                | ((@in[2 + inpos]) << 14);
@@ -2375,10 +2377,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 18);
             @out[22 + outpos] = (int)((uint)(@in[30 + inpos]) >> (23 - 9))
                                 | ((@in[31 + inpos]) << 9);
-            }
+        }
 
-        protected static void fastpackwithoutmask24(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask24(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 24);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (24 - 16))
                                | ((@in[2 + inpos]) << 16);
@@ -2419,10 +2421,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 16);
             @out[23 + outpos] = (int)((uint)(@in[30 + inpos]) >> (24 - 8))
                                 | ((@in[31 + inpos]) << 8);
-            }
+        }
 
-        protected static void fastpackwithoutmask25(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask25(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 25);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (25 - 18))
                                | ((@in[2 + inpos]) << 18);
@@ -2472,10 +2474,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 14);
             @out[24 + outpos] = (int)((uint)(@in[30 + inpos]) >> (25 - 7))
                                 | ((@in[31 + inpos]) << 7);
-            }
+        }
 
-        protected static void fastpackwithoutmask26(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask26(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 26);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (26 - 20))
                                | ((@in[2 + inpos]) << 20);
@@ -2526,10 +2528,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 12);
             @out[25 + outpos] = (int)((uint)(@in[30 + inpos]) >> (26 - 6))
                                 | ((@in[31 + inpos]) << 6);
-            }
+        }
 
-        protected static void fastpackwithoutmask27(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask27(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 27);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (27 - 22))
                                | ((@in[2 + inpos]) << 22);
@@ -2583,10 +2585,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 10);
             @out[26 + outpos] = (int)((uint)(@in[30 + inpos]) >> (27 - 5))
                                 | ((@in[31 + inpos]) << 5);
-            }
+        }
 
-        protected static void fastpackwithoutmask28(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask28(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 28);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (28 - 24))
                                | ((@in[2 + inpos]) << 24);
@@ -2639,10 +2641,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 8);
             @out[27 + outpos] = (int)((uint)(@in[30 + inpos]) >> (28 - 4))
                                 | ((@in[31 + inpos]) << 4);
-            }
+        }
 
-        protected static void fastpackwithoutmask29(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask29(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 29);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (29 - 26))
                                | ((@in[2 + inpos]) << 26);
@@ -2700,10 +2702,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 6);
             @out[28 + outpos] = (int)((uint)(@in[30 + inpos]) >> (29 - 3))
                                 | ((@in[31 + inpos]) << 3);
-            }
+        }
 
-        protected static void fastpackwithoutmask3(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask3(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 3)
                                | ((@in[2 + inpos]) << 6) | ((@in[3 + inpos]) << 9)
                                | ((@in[4 + inpos]) << 12) | ((@in[5 + inpos]) << 15)
@@ -2723,10 +2725,10 @@ namespace CSharpFastPFOR
                                | ((@in[26 + inpos]) << 14) | ((@in[27 + inpos]) << 17)
                                | ((@in[28 + inpos]) << 20) | ((@in[29 + inpos]) << 23)
                                | ((@in[30 + inpos]) << 26) | ((@in[31 + inpos]) << 29);
-            }
+        }
 
-        protected static void fastpackwithoutmask30(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask30(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 30);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (30 - 28))
                                | ((@in[2 + inpos]) << 28);
@@ -2785,10 +2787,10 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 4);
             @out[29 + outpos] = (int)((uint)(@in[30 + inpos]) >> (30 - 2))
                                 | ((@in[31 + inpos]) << 2);
-            }
+        }
 
-        protected static void fastpackwithoutmask31(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask31(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 31);
             @out[1 + outpos] = (int)((uint)(@in[1 + inpos]) >> (31 - 30))
                                | ((@in[2 + inpos]) << 30);
@@ -2850,15 +2852,15 @@ namespace CSharpFastPFOR
                                 | ((@in[30 + inpos]) << 2);
             @out[30 + outpos] = (int)((uint)(@in[30 + inpos]) >> (31 - 1))
                                 | ((@in[31 + inpos]) << 1);
-            }
+        }
 
-        protected static void fastpackwithoutmask32(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask32(int[] @in, int inpos, int[] @out, int outpos)
+        {
             Array.Copy(@in, inpos, @out, outpos, 32);
-            }
+        }
 
-        protected static void fastpackwithoutmask4(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask4(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 4)
                                | ((@in[2 + inpos]) << 8) | ((@in[3 + inpos]) << 12)
                                | ((@in[4 + inpos]) << 16) | ((@in[5 + inpos]) << 20)
@@ -2875,10 +2877,10 @@ namespace CSharpFastPFOR
                                | ((@in[26 + inpos]) << 8) | ((@in[27 + inpos]) << 12)
                                | ((@in[28 + inpos]) << 16) | ((@in[29 + inpos]) << 20)
                                | ((@in[30 + inpos]) << 24) | ((@in[31 + inpos]) << 28);
-            }
+        }
 
-        protected static void fastpackwithoutmask5(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask5(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 5)
                                | ((@in[2 + inpos]) << 10) | ((@in[3 + inpos]) << 15)
                                | ((@in[4 + inpos]) << 20) | ((@in[5 + inpos]) << 25)
@@ -2900,10 +2902,10 @@ namespace CSharpFastPFOR
                                | ((@in[26 + inpos]) << 2) | ((@in[27 + inpos]) << 7)
                                | ((@in[28 + inpos]) << 12) | ((@in[29 + inpos]) << 17)
                                | ((@in[30 + inpos]) << 22) | ((@in[31 + inpos]) << 27);
-            }
+        }
 
-        protected static void fastpackwithoutmask6(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask6(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 6)
                                | ((@in[2 + inpos]) << 12) | ((@in[3 + inpos]) << 18)
                                | ((@in[4 + inpos]) << 24) | ((@in[5 + inpos]) << 30);
@@ -2926,10 +2928,10 @@ namespace CSharpFastPFOR
                                | ((@in[27 + inpos]) << 2) | ((@in[28 + inpos]) << 8)
                                | ((@in[29 + inpos]) << 14) | ((@in[30 + inpos]) << 20)
                                | ((@in[31 + inpos]) << 26);
-            }
+        }
 
-        protected static void fastpackwithoutmask7(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask7(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 7)
                                | ((@in[2 + inpos]) << 14) | ((@in[3 + inpos]) << 21)
                                | ((@in[4 + inpos]) << 28);
@@ -2954,10 +2956,10 @@ namespace CSharpFastPFOR
             @out[6 + outpos] = (int)((uint)(@in[27 + inpos]) >> (7 - 4))
                                | ((@in[28 + inpos]) << 4) | ((@in[29 + inpos]) << 11)
                                | ((@in[30 + inpos]) << 18) | ((@in[31 + inpos]) << 25);
-            }
+        }
 
-        protected static void fastpackwithoutmask8(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask8(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 8)
                                | ((@in[2 + inpos]) << 16) | ((@in[3 + inpos]) << 24);
             @out[1 + outpos] = @in[4 + inpos] | ((@in[5 + inpos]) << 8)
@@ -2974,10 +2976,10 @@ namespace CSharpFastPFOR
                                | ((@in[26 + inpos]) << 16) | ((@in[27 + inpos]) << 24);
             @out[7 + outpos] = @in[28 + inpos] | ((@in[29 + inpos]) << 8)
                                | ((@in[30 + inpos]) << 16) | ((@in[31 + inpos]) << 24);
-            }
+        }
 
-        protected static void fastpackwithoutmask9(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastpackwithoutmask9(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = @in[0 + inpos] | ((@in[1 + inpos]) << 9)
                                | ((@in[2 + inpos]) << 18) | ((@in[3 + inpos]) << 27);
             @out[1 + outpos] = (int)((uint)(@in[3 + inpos]) >> (9 - 4))
@@ -3004,7 +3006,7 @@ namespace CSharpFastPFOR
             @out[8 + outpos] = (int)((uint)(@in[28 + inpos]) >> (9 - 5))
                                | ((@in[29 + inpos]) << 5) | ((@in[30 + inpos]) << 14)
                                | ((@in[31 + inpos]) << 23);
-            }
+        }
 
         /**
          * Pack the 32 integers
@@ -3020,9 +3022,10 @@ namespace CSharpFastPFOR
          * @param bit
          *                how many bits to use per integer
          */
-        public static void fastunpack(/* final */ int[] @in, /* final */ int inpos,
-            /* final */ int[] @out, /* final */ int outpos, /* final */ int bit) {
-            switch (bit) {
+        public static void fastunpack(int[] @in, int inpos, int[] @out, int outpos, int bit)
+        {
+            switch (bit)
+            {
                 case 0:
                     fastunpack0(@in, inpos, @out, outpos);
                     break;
@@ -3126,15 +3129,15 @@ namespace CSharpFastPFOR
                     throw new ArgumentException(
                         "Unsupported bit width.");
             }
-            }
+        }
 
-        protected static void fastunpack0(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack0(int[] @in, int inpos, int[] @out, int outpos)
+        {
             Arrays.fill(@out, outpos, outpos + 32, 0);
-            }
+        }
 
-        protected static void fastunpack1(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack1(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 1);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 1) & 1);
             @out[2 + outpos] = (int)(((uint)@in[0 + inpos] >> 2) & 1);
@@ -3167,10 +3170,10 @@ namespace CSharpFastPFOR
             @out[29 + outpos] = (int)(((uint)@in[0 + inpos] >> 29) & 1);
             @out[30 + outpos] = (int)(((uint)@in[0 + inpos] >> 30) & 1);
             @out[31 + outpos] = (int)((uint)@in[0 + inpos] >> 31);
-            }
+        }
 
-        protected static void fastunpack10(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack10(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 1023);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 10) & 1023);
             @out[2 + outpos] = (int)(((uint)@in[0 + inpos] >> 20) & 1023);
@@ -3211,10 +3214,10 @@ namespace CSharpFastPFOR
             @out[29 + outpos] = (int)(((uint)@in[9 + inpos] >> 2) & 1023);
             @out[30 + outpos] = (int)(((uint)@in[9 + inpos] >> 12) & 1023);
             @out[31 + outpos] = (int)((uint)@in[9 + inpos] >> 22);
-            }
+        }
 
-        protected static void fastunpack11(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack11(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 2047);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 11) & 2047);
             @out[2 + outpos] = (int)((uint)@in[0 + inpos] >> 22)
@@ -3257,10 +3260,10 @@ namespace CSharpFastPFOR
                                 | ((@in[10 + inpos] & 1023) << (11 - 10));
             @out[30 + outpos] = (int)(((uint)@in[10 + inpos] >> 10) & 2047);
             @out[31 + outpos] = (int)((uint)@in[10 + inpos] >> 21);
-            }
+        }
 
-        protected static void fastunpack12(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack12(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 4095);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 12) & 4095);
             @out[2 + outpos] = (int)((uint)@in[0 + inpos] >> 24)
@@ -3301,10 +3304,10 @@ namespace CSharpFastPFOR
                                 | ((@in[11 + inpos] & 255) << (12 - 8));
             @out[30 + outpos] = (int)(((uint)@in[11 + inpos] >> 8) & 4095);
             @out[31 + outpos] = (int)((uint)@in[11 + inpos] >> 20);
-            }
+        }
 
-        protected static void fastunpack13(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack13(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 8191);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 13) & 8191);
             @out[2 + outpos] = (int)((uint)@in[0 + inpos] >> 26)
@@ -3349,10 +3352,10 @@ namespace CSharpFastPFOR
                                 | ((@in[12 + inpos] & 63) << (13 - 6));
             @out[30 + outpos] = (int)(((uint)@in[12 + inpos] >> 6) & 8191);
             @out[31 + outpos] = (int)((uint)@in[12 + inpos] >> 19);
-            }
+        }
 
-        protected static void fastunpack14(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack14(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 16383);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 14) & 16383);
             @out[2 + outpos] = (int)((uint)@in[0 + inpos] >> 28)
@@ -3397,10 +3400,10 @@ namespace CSharpFastPFOR
                                 | ((@in[13 + inpos] & 15) << (14 - 4));
             @out[30 + outpos] = (int)(((uint)@in[13 + inpos] >> 4) & 16383);
             @out[31 + outpos] = (int)((uint)@in[13 + inpos] >> 18);
-            }
+        }
 
-        protected static void fastunpack15(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack15(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 32767);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 15) & 32767);
             @out[2 + outpos] = (int)((uint)@in[0 + inpos] >> 30)
@@ -3447,10 +3450,10 @@ namespace CSharpFastPFOR
                                 | ((@in[14 + inpos] & 3) << (15 - 2));
             @out[30 + outpos] = (int)(((uint)@in[14 + inpos] >> 2) & 32767);
             @out[31 + outpos] = (int)((uint)@in[14 + inpos] >> 17);
-            }
+        }
 
-        protected static void fastunpack16(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack16(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 65535);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 16);
             @out[2 + outpos] = (int)(((uint)@in[1 + inpos] >> 0) & 65535);
@@ -3483,10 +3486,10 @@ namespace CSharpFastPFOR
             @out[29 + outpos] = (int)((uint)@in[14 + inpos] >> 16);
             @out[30 + outpos] = (int)(((uint)@in[15 + inpos] >> 0) & 65535);
             @out[31 + outpos] = (int)((uint)@in[15 + inpos] >> 16);
-            }
+        }
 
-        protected static void fastunpack17(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack17(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 131071);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 17)
                                | ((@in[1 + inpos] & 3) << (17 - 2));
@@ -3535,10 +3538,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[15 + inpos] >> 30)
                                 | ((@in[16 + inpos] & 32767) << (17 - 15));
             @out[31 + outpos] = (int)((uint)@in[16 + inpos] >> 15);
-            }
+        }
 
-        protected static void fastunpack18(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack18(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 262143);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 18)
                                | ((@in[1 + inpos] & 15) << (18 - 4));
@@ -3587,10 +3590,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[16 + inpos] >> 28)
                                 | ((@in[17 + inpos] & 16383) << (18 - 14));
             @out[31 + outpos] = (int)((uint)@in[17 + inpos] >> 14);
-            }
+        }
 
-        protected static void fastunpack19(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack19(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 524287);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 19)
                                | ((@in[1 + inpos] & 63) << (19 - 6));
@@ -3641,10 +3644,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[17 + inpos] >> 26)
                                 | ((@in[18 + inpos] & 8191) << (19 - 13));
             @out[31 + outpos] = (int)((uint)@in[18 + inpos] >> 13);
-            }
+        }
 
-        protected static void fastunpack2(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack2(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 3);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 2) & 3);
             @out[2 + outpos] = (int)(((uint)@in[0 + inpos] >> 4) & 3);
@@ -3677,10 +3680,10 @@ namespace CSharpFastPFOR
             @out[29 + outpos] = (int)(((uint)@in[1 + inpos] >> 26) & 3);
             @out[30 + outpos] = (int)(((uint)@in[1 + inpos] >> 28) & 3);
             @out[31 + outpos] = (int)((uint)@in[1 + inpos] >> 30);
-            }
+        }
 
-        protected static void fastunpack20(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack20(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 1048575);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 20)
                                | ((@in[1 + inpos] & 255) << (20 - 8));
@@ -3729,10 +3732,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[18 + inpos] >> 24)
                                 | ((@in[19 + inpos] & 4095) << (20 - 12));
             @out[31 + outpos] = (int)((uint)@in[19 + inpos] >> 12);
-            }
+        }
 
-        protected static void fastunpack21(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack21(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 2097151);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 21)
                                | ((@in[1 + inpos] & 1023) << (21 - 10));
@@ -3785,10 +3788,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[19 + inpos] >> 22)
                                 | ((@in[20 + inpos] & 2047) << (21 - 11));
             @out[31 + outpos] = (int)((uint)@in[20 + inpos] >> 11);
-            }
+        }
 
-        protected static void fastunpack22(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack22(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 4194303);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 22)
                                | ((@in[1 + inpos] & 4095) << (22 - 12));
@@ -3841,10 +3844,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[20 + inpos] >> 20)
                                 | ((@in[21 + inpos] & 1023) << (22 - 10));
             @out[31 + outpos] = (int)((uint)@in[21 + inpos] >> 10);
-            }
+        }
 
-        protected static void fastunpack23(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack23(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 8388607);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 23)
                                | ((@in[1 + inpos] & 16383) << (23 - 14));
@@ -3899,10 +3902,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[21 + inpos] >> 18)
                                 | ((@in[22 + inpos] & 511) << (23 - 9));
             @out[31 + outpos] = (int)((uint)@in[22 + inpos] >> 9);
-            }
+        }
 
-        protected static void fastunpack24(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack24(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 16777215);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 24)
                                | ((@in[1 + inpos] & 65535) << (24 - 16));
@@ -3951,10 +3954,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[22 + inpos] >> 16)
                                 | ((@in[23 + inpos] & 255) << (24 - 8));
             @out[31 + outpos] = (int)((uint)@in[23 + inpos] >> 8);
-            }
+        }
 
-        protected static void fastunpack25(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack25(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 33554431);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 25)
                                | ((@in[1 + inpos] & 262143) << (25 - 18));
@@ -4011,10 +4014,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[23 + inpos] >> 14)
                                 | ((@in[24 + inpos] & 127) << (25 - 7));
             @out[31 + outpos] = (int)((uint)@in[24 + inpos] >> 7);
-            }
+        }
 
-        protected static void fastunpack26(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack26(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 67108863);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 26)
                                | ((@in[1 + inpos] & 1048575) << (26 - 20));
@@ -4071,10 +4074,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[24 + inpos] >> 12)
                                 | ((@in[25 + inpos] & 63) << (26 - 6));
             @out[31 + outpos] = (int)((uint)@in[25 + inpos] >> 6);
-            }
+        }
 
-        protected static void fastunpack27(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack27(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 134217727);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 27)
                                | ((@in[1 + inpos] & 4194303) << (27 - 22));
@@ -4133,10 +4136,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[25 + inpos] >> 10)
                                 | ((@in[26 + inpos] & 31) << (27 - 5));
             @out[31 + outpos] = (int)((uint)@in[26 + inpos] >> 5);
-            }
+        }
 
-        protected static void fastunpack28(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack28(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 268435455);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 28)
                                | ((@in[1 + inpos] & 16777215) << (28 - 24));
@@ -4193,10 +4196,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[26 + inpos] >> 8)
                                 | ((@in[27 + inpos] & 15) << (28 - 4));
             @out[31 + outpos] = (int)((uint)@in[27 + inpos] >> 4);
-            }
+        }
 
-        protected static void fastunpack29(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack29(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 536870911);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 29)
                                | ((@in[1 + inpos] & 67108863) << (29 - 26));
@@ -4257,10 +4260,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[27 + inpos] >> 6)
                                 | ((@in[28 + inpos] & 7) << (29 - 3));
             @out[31 + outpos] = (int)((uint)@in[28 + inpos] >> 3);
-            }
+        }
 
-        protected static void fastunpack3(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack3(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 7);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 3) & 7);
             @out[2 + outpos] = (int)(((uint)@in[0 + inpos] >> 6) & 7);
@@ -4295,10 +4298,10 @@ namespace CSharpFastPFOR
             @out[29 + outpos] = (int)(((uint)@in[2 + inpos] >> 23) & 7);
             @out[30 + outpos] = (int)(((uint)@in[2 + inpos] >> 26) & 7);
             @out[31 + outpos] = (int)((uint)@in[2 + inpos] >> 29);
-            }
+        }
 
-        protected static void fastunpack30(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack30(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 1073741823);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 30)
                                | ((@in[1 + inpos] & 268435455) << (30 - 28));
@@ -4359,10 +4362,10 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[28 + inpos] >> 4)
                                 | ((@in[29 + inpos] & 3) << (30 - 2));
             @out[31 + outpos] = (int)((uint)@in[29 + inpos] >> 2);
-            }
+        }
 
-        protected static void fastunpack31(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack31(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 2147483647);
             @out[1 + outpos] = (int)((uint)@in[0 + inpos] >> 31)
                                | ((@in[1 + inpos] & 1073741823) << (31 - 30));
@@ -4425,15 +4428,15 @@ namespace CSharpFastPFOR
             @out[30 + outpos] = (int)((uint)@in[29 + inpos] >> 2)
                                 | ((@in[30 + inpos] & 1) << (31 - 1));
             @out[31 + outpos] = (int)((uint)@in[30 + inpos] >> 1);
-            }
+        }
 
-        protected static void fastunpack32(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack32(int[] @in, int inpos, int[] @out, int outpos)
+        {
             Array.Copy(@in, inpos, @out, outpos, 32);
-            }
+        }
 
-        protected static void fastunpack4(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack4(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 15);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 4) & 15);
             @out[2 + outpos] = (int)(((uint)@in[0 + inpos] >> 8) & 15);
@@ -4466,10 +4469,10 @@ namespace CSharpFastPFOR
             @out[29 + outpos] = (int)(((uint)@in[3 + inpos] >> 20) & 15);
             @out[30 + outpos] = (int)(((uint)@in[3 + inpos] >> 24) & 15);
             @out[31 + outpos] = (int)((uint)@in[3 + inpos] >> 28);
-            }
+        }
 
-        protected static void fastunpack5(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack5(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 31);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 5) & 31);
             @out[2 + outpos] = (int)(((uint)@in[0 + inpos] >> 10) & 31);
@@ -4506,10 +4509,10 @@ namespace CSharpFastPFOR
             @out[29 + outpos] = (int)(((uint)@in[4 + inpos] >> 17) & 31);
             @out[30 + outpos] = (int)(((uint)@in[4 + inpos] >> 22) & 31);
             @out[31 + outpos] = (int)((uint)@in[4 + inpos] >> 27);
-            }
+        }
 
-        protected static void fastunpack6(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack6(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 63);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 6) & 63);
             @out[2 + outpos] = (int)(((uint)@in[0 + inpos] >> 12) & 63);
@@ -4546,10 +4549,10 @@ namespace CSharpFastPFOR
             @out[29 + outpos] = (int)(((uint)@in[5 + inpos] >> 14) & 63);
             @out[30 + outpos] = (int)(((uint)@in[5 + inpos] >> 20) & 63);
             @out[31 + outpos] = (int)((uint)@in[5 + inpos] >> 26);
-            }
+        }
 
-        protected static void fastunpack7(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack7(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 127);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 7) & 127);
             @out[2 + outpos] = (int)(((uint)@in[0 + inpos] >> 14) & 127);
@@ -4588,10 +4591,10 @@ namespace CSharpFastPFOR
             @out[29 + outpos] = (int)(((uint)@in[6 + inpos] >> 11) & 127);
             @out[30 + outpos] = (int)(((uint)@in[6 + inpos] >> 18) & 127);
             @out[31 + outpos] = (int)((uint)@in[6 + inpos] >> 25);
-            }
+        }
 
-        protected static void fastunpack8(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack8(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 255);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 8) & 255);
             @out[2 + outpos] = (int)(((uint)@in[0 + inpos] >> 16) & 255);
@@ -4624,10 +4627,10 @@ namespace CSharpFastPFOR
             @out[29 + outpos] = (int)(((uint)@in[7 + inpos] >> 8) & 255);
             @out[30 + outpos] = (int)(((uint)@in[7 + inpos] >> 16) & 255);
             @out[31 + outpos] = (int)((uint)@in[7 + inpos] >> 24);
-            }
+        }
 
-        protected static void fastunpack9(/* final */ int[] @in, int inpos,
-            /* final */ int[] @out, int outpos) {
+        protected static void fastunpack9(int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (int)(((uint)@in[0 + inpos] >> 0) & 511);
             @out[1 + outpos] = (int)(((uint)@in[0 + inpos] >> 9) & 511);
             @out[2 + outpos] = (int)(((uint)@in[0 + inpos] >> 18) & 511);
@@ -4668,7 +4671,7 @@ namespace CSharpFastPFOR
             @out[29 + outpos] = (int)(((uint)@in[8 + inpos] >> 5) & 511);
             @out[30 + outpos] = (int)(((uint)@in[8 + inpos] >> 14) & 511);
             @out[31 + outpos] = (int)((uint)@in[8 + inpos] >> 23);
-            }
+        }
 
     }
 }

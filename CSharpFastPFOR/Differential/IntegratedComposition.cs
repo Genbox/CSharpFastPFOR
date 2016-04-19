@@ -32,15 +32,13 @@ namespace CSharpFastPFOR.Differential
      * @param f2
      *                second codec
      */
-        public IntegratedComposition(IntegratedIntegerCODEC f1,
-            IntegratedIntegerCODEC f2)
+        public IntegratedComposition(IntegratedIntegerCODEC f1, IntegratedIntegerCODEC f2)
         {
             F1 = f1;
             F2 = f2;
         }
 
-        public void compress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos)
+        public void compress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
         {
             if (inlength == 0)
             {
@@ -58,8 +56,7 @@ namespace CSharpFastPFOR.Differential
             F2.compress(@in, inpos, inlength, @out, outpos);
         }
 
-        public void uncompress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos)
+        public void uncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
         {
             if (inlength == 0)
                 return;

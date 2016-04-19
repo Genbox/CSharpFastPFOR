@@ -43,47 +43,40 @@
 
 namespace CSharpFastPFOR.Differential
 {
-    public class IntegratedBinaryPacking : IntegratedIntegerCODEC,
-        SkippableIntegratedIntegerCODEC {
-        private const  int BLOCK_SIZE = 32;
+    public class IntegratedBinaryPacking : IntegratedIntegerCODEC, SkippableIntegratedIntegerCODEC
+    {
+        private const int BLOCK_SIZE = 32;
 
-        //@Override
-        public void compress(int[] @in, IntWrapper inpos, int inlength, int[] @out,
-            IntWrapper outpos) {
+        public void compress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
+        {
             inlength = Util.greatestMultiple(inlength, BLOCK_SIZE);
             if (inlength == 0)
                 return;
             @out[outpos.get()] = inlength;
             outpos.increment();
             headlessCompress(@in, inpos, inlength, @out, outpos, new IntWrapper(0));
-            }
+        }
 
-        //@Override
-        public void uncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out,
-            IntWrapper outpos) {
+        public void uncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
+        {
             if (inlength == 0)
                 return;
             int outlength = @in[inpos.get()];
             inpos.increment();
-            headlessUncompress(@in,inpos,inlength, @out, outpos,outlength, new IntWrapper(0));
-            }
+            headlessUncompress(@in, inpos, inlength, @out, outpos, outlength, new IntWrapper(0));
+        }
 
-        //@Override
-        //public String toString() {
-        //    return this.getClass().getSimpleName();
-        //}
-
-        //@Override
-        public void headlessCompress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos, IntWrapper initvalue) {
+        public void headlessCompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos, IntWrapper initvalue)
+        {
             inlength = Util.greatestMultiple(inlength, BLOCK_SIZE);
             if (inlength == 0)
                 return;
             int tmpoutpos = outpos.get();
             int initoffset = initvalue.get();
-            initvalue.set(@in[inpos.get()+inlength -1]);
+            initvalue.set(@in[inpos.get() + inlength - 1]);
             int s = inpos.get();
-            for (; s + BLOCK_SIZE * 4 - 1 < inpos.get() + inlength; s += BLOCK_SIZE * 4) {
+            for (; s + BLOCK_SIZE * 4 - 1 < inpos.get() + inlength; s += BLOCK_SIZE * 4)
+            {
                 int mbits1 = Util.maxdiffbits(initoffset, @in, s, BLOCK_SIZE);
                 int initoffset2 = @in[s + 31];
                 int mbits2 = Util.maxdiffbits(initoffset2, @in, s + BLOCK_SIZE, BLOCK_SIZE);
@@ -109,7 +102,8 @@ namespace CSharpFastPFOR.Differential
                 tmpoutpos += mbits4;
                 initoffset = @in[s + 3 * BLOCK_SIZE + 31];
             }
-            for (; s < inpos.get() + inlength; s += BLOCK_SIZE ) {
+            for (; s < inpos.get() + inlength; s += BLOCK_SIZE)
+            {
                 int mbits = Util.maxdiffbits(initoffset, @in, s, BLOCK_SIZE);
                 @out[tmpoutpos++] = mbits;
                 IntegratedBitPacking.integratedpack(initoffset, @in, s, @out,
@@ -119,16 +113,16 @@ namespace CSharpFastPFOR.Differential
             }
             inpos.add(inlength);
             outpos.set(tmpoutpos);
-            }
+        }
 
-        //@Override
-        public void headlessUncompress(int[] @in, IntWrapper inpos, int inlength,
-            int[] @out, IntWrapper outpos, int num, IntWrapper initvalue) {
+        public void headlessUncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos, int num, IntWrapper initvalue)
+        {
             int outlength = Util.greatestMultiple(num, BLOCK_SIZE);
             int tmpinpos = inpos.get();
             int initoffset = initvalue.get();
             int s = outpos.get();
-            for (; s + BLOCK_SIZE * 4 - 1 < outpos.get() + outlength; s += BLOCK_SIZE * 4) {
+            for (; s + BLOCK_SIZE * 4 - 1 < outpos.get() + outlength; s += BLOCK_SIZE * 4)
+            {
                 int mbits1 = (int)((uint)@in[tmpinpos] >> 24);
                 int mbits2 = (int)((uint)@in[tmpinpos] >> 16) & 0xFF;
                 int mbits3 = (int)((uint)@in[tmpinpos] >> 8) & 0xFF;
@@ -152,7 +146,8 @@ namespace CSharpFastPFOR.Differential
                 tmpinpos += mbits4;
                 initoffset = @out[s + 3 * BLOCK_SIZE + 31];
             }
-            for (; s < outpos.get() + outlength; s += BLOCK_SIZE) {
+            for (; s < outpos.get() + outlength; s += BLOCK_SIZE)
+            {
                 int mbits = @in[tmpinpos];
                 ++tmpinpos;
                 IntegratedBitPacking.integratedunpack(initoffset, @in, tmpinpos,
@@ -164,6 +159,6 @@ namespace CSharpFastPFOR.Differential
             outpos.add(outlength);
             initvalue.set(initoffset);
             inpos.set(tmpinpos);
-            }
         }
+    }
 }

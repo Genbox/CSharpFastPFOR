@@ -35,122 +35,115 @@
  * @author Daniel Lemire
  */
 
-    namespace CSharpFastPFOR
+namespace CSharpFastPFOR
+{
+    public class BinaryPacking : IntegerCODEC, SkippableIntegerCODEC
     {
-        public /* final */ class BinaryPacking : IntegerCODEC, SkippableIntegerCODEC
+        private const int BLOCK_SIZE = 32;
+
+        public void compress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
         {
-            private const int BLOCK_SIZE = 32;
+            inlength = Util.greatestMultiple(inlength, BLOCK_SIZE);
+            if (inlength == 0)
+                return;
+            @out[outpos.get()] = inlength;
+            outpos.increment();
+            headlessCompress(@in, inpos, inlength, @out, outpos);
+        }
 
-            /*@Override*/
-            public void compress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
+        public void headlessCompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
+        {
+            inlength = Util.greatestMultiple(inlength, BLOCK_SIZE);
+            int tmpoutpos = outpos.get();
+            int s = inpos.get();
+            for (; s + BLOCK_SIZE * 4 - 1 < inpos.get() + inlength; s += BLOCK_SIZE * 4)
             {
-                inlength = Util.greatestMultiple(inlength, BLOCK_SIZE);
-                if (inlength == 0)
-                    return;
-                @out[outpos.get()] = inlength;
-                outpos.increment();
-                headlessCompress(@in, inpos, inlength, @out, outpos);
-            }
 
-            /*@Override*/
-            public void headlessCompress(int[] @in, IntWrapper inpos, int inlength,
-                int[] @out, IntWrapper outpos)
+                int mbits1 = Util.maxbits(@in, s, BLOCK_SIZE);
+
+                int mbits2 = Util.maxbits(@in, s + BLOCK_SIZE, BLOCK_SIZE);
+
+                int mbits3 = Util.maxbits(@in, s + 2 * BLOCK_SIZE, BLOCK_SIZE);
+
+                int mbits4 = Util.maxbits(@in, s + 3 * BLOCK_SIZE, BLOCK_SIZE);
+                @out[tmpoutpos++] = (mbits1 << 24) | (mbits2 << 16)
+                                    | (mbits3 << 8) | (mbits4);
+                BitPacking.fastpackwithoutmask(@in, s, @out, tmpoutpos,
+                    mbits1);
+                tmpoutpos += mbits1;
+                BitPacking.fastpackwithoutmask(@in, s + BLOCK_SIZE, @out,
+                    tmpoutpos, mbits2);
+                tmpoutpos += mbits2;
+                BitPacking.fastpackwithoutmask(@in, s + 2 * BLOCK_SIZE, @out,
+                    tmpoutpos, mbits3);
+                tmpoutpos += mbits3;
+                BitPacking.fastpackwithoutmask(@in, s + 3 * BLOCK_SIZE, @out,
+                    tmpoutpos, mbits4);
+                tmpoutpos += mbits4;
+            }
+            for (; s < inpos.get() + inlength; s += BLOCK_SIZE)
             {
-                inlength = Util.greatestMultiple(inlength, BLOCK_SIZE);
-                int tmpoutpos = outpos.get();
-                int s = inpos.get();
-                for (; s + BLOCK_SIZE * 4 - 1 < inpos.get() + inlength; s += BLOCK_SIZE * 4)
-                {
-                    /* final */
-                    int mbits1 = Util.maxbits(@in, s, BLOCK_SIZE);
-                    /* final */
-                    int mbits2 = Util.maxbits(@in, s + BLOCK_SIZE, BLOCK_SIZE);
-                    /* final */
-                    int mbits3 = Util.maxbits(@in, s + 2 * BLOCK_SIZE, BLOCK_SIZE);
-                    /* final */
-                    int mbits4 = Util.maxbits(@in, s + 3 * BLOCK_SIZE, BLOCK_SIZE);
-                    @out[tmpoutpos++] = (mbits1 << 24) | (mbits2 << 16)
-                                        | (mbits3 << 8) | (mbits4);
-                    BitPacking.fastpackwithoutmask(@in, s, @out, tmpoutpos,
-                        mbits1);
-                    tmpoutpos += mbits1;
-                    BitPacking.fastpackwithoutmask(@in, s + BLOCK_SIZE, @out,
-                        tmpoutpos, mbits2);
-                    tmpoutpos += mbits2;
-                    BitPacking.fastpackwithoutmask(@in, s + 2 * BLOCK_SIZE, @out,
-                        tmpoutpos, mbits3);
-                    tmpoutpos += mbits3;
-                    BitPacking.fastpackwithoutmask(@in, s + 3 * BLOCK_SIZE, @out,
-                        tmpoutpos, mbits4);
-                    tmpoutpos += mbits4;
-                }
-                for (; s < inpos.get() + inlength; s += BLOCK_SIZE)
-                {
-                    /* final */
-                    int mbits = Util.maxbits(@in, s, BLOCK_SIZE);
-                    @out[tmpoutpos++] = mbits;
-                    BitPacking.fastpackwithoutmask(@in, s, @out, tmpoutpos,
-                        mbits);
-                    tmpoutpos += mbits;
 
-                }
-                inpos.add(inlength);
-                outpos.set(tmpoutpos);
+                int mbits = Util.maxbits(@in, s, BLOCK_SIZE);
+                @out[tmpoutpos++] = mbits;
+                BitPacking.fastpackwithoutmask(@in, s, @out, tmpoutpos,
+                    mbits);
+                tmpoutpos += mbits;
+
             }
+            inpos.add(inlength);
+            outpos.set(tmpoutpos);
+        }
 
-            /*@Override*/
-            public void uncompress(int[] @in, IntWrapper inpos, int inlength,
-                int[] @out, IntWrapper outpos)
+        public void uncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos)
+        {
+            if (inlength == 0)
+                return;
+
+            int outlength = @in[inpos.get()];
+            inpos.increment();
+            headlessUncompress(@in, inpos, inlength, @out, outpos, outlength);
+        }
+
+        public void headlessUncompress(int[] @in, IntWrapper inpos, int inlength, int[] @out, IntWrapper outpos, int num)
+        {
+
+            int outlength = Util.greatestMultiple(num, BLOCK_SIZE);
+            int tmpinpos = inpos.get();
+            int s = outpos.get();
+            for (; s + BLOCK_SIZE * 4 - 1 < outpos.get() + outlength; s += BLOCK_SIZE * 4)
             {
-                if (inlength == 0)
-                    return;
-                /* final */
-                int outlength = @in[inpos.get()];
-                inpos.increment();
-                headlessUncompress(@in, inpos, inlength, @out, outpos, outlength);
-            }
 
-            /*@Override*/
-            public void headlessUncompress(int[] @in, IntWrapper inpos, int inlength,
-                int[] @out, IntWrapper outpos, int num)
-            {
-                /* final */
-                int outlength = Util.greatestMultiple(num, BLOCK_SIZE);
-                int tmpinpos = inpos.get();
-                int s = outpos.get();
-                for (; s + BLOCK_SIZE * 4 - 1 < outpos.get() + outlength; s += BLOCK_SIZE * 4)
-                {
-                    /* final */
-                    int mbits1 = (int)((uint)@in[tmpinpos] >> 24);
-                    /* final */
-                    int mbits2 = (int)((uint)@in[tmpinpos] >> 16) & 0xFF;
-                    /* final */
-                    int mbits3 = (int)((uint)@in[tmpinpos] >> 8) & 0xFF;
-                    /* final */
-                    int mbits4 = (int)((uint)@in[tmpinpos]) & 0xFF;
-                    ++tmpinpos;
-                    BitPacking.fastunpack(@in, tmpinpos, @out, s, mbits1);
-                    tmpinpos += mbits1;
-                    BitPacking
-                        .fastunpack(@in, tmpinpos, @out, s + BLOCK_SIZE, mbits2);
-                    tmpinpos += mbits2;
-                    BitPacking.fastunpack(@in, tmpinpos, @out, s + 2 * BLOCK_SIZE,
-                        mbits3);
-                    tmpinpos += mbits3;
-                    BitPacking.fastunpack(@in, tmpinpos, @out, s + 3 * BLOCK_SIZE,
-                        mbits4);
-                    tmpinpos += mbits4;
-                }
-                for (; s < outpos.get() + outlength; s += BLOCK_SIZE)
-                {
-                    /* final */
-                    int mbits = @in[tmpinpos];
-                    ++tmpinpos;
-                    BitPacking.fastunpack(@in, tmpinpos, @out, s, mbits);
-                    tmpinpos += mbits;
-                }
-                outpos.add(outlength);
-                inpos.set(tmpinpos);
+                int mbits1 = (int)((uint)@in[tmpinpos] >> 24);
+
+                int mbits2 = (int)((uint)@in[tmpinpos] >> 16) & 0xFF;
+
+                int mbits3 = (int)((uint)@in[tmpinpos] >> 8) & 0xFF;
+
+                int mbits4 = (int)((uint)@in[tmpinpos]) & 0xFF;
+                ++tmpinpos;
+                BitPacking.fastunpack(@in, tmpinpos, @out, s, mbits1);
+                tmpinpos += mbits1;
+                BitPacking
+                    .fastunpack(@in, tmpinpos, @out, s + BLOCK_SIZE, mbits2);
+                tmpinpos += mbits2;
+                BitPacking.fastunpack(@in, tmpinpos, @out, s + 2 * BLOCK_SIZE,
+                    mbits3);
+                tmpinpos += mbits3;
+                BitPacking.fastunpack(@in, tmpinpos, @out, s + 3 * BLOCK_SIZE,
+                    mbits4);
+                tmpinpos += mbits4;
             }
+            for (; s < outpos.get() + outlength; s += BLOCK_SIZE)
+            {
+
+                int mbits = @in[tmpinpos];
+                ++tmpinpos;
+                BitPacking.fastunpack(@in, tmpinpos, @out, s, mbits);
+                tmpinpos += mbits;
+            }
+            outpos.add(outlength);
+            inpos.set(tmpinpos);
         }
     }
+}

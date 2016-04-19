@@ -13,17 +13,9 @@ using CSharpFastPFOR.Port;
 
 namespace CSharpFastPFOR
 {
-    public /* final */ class DeltaZigzagVariableByte : IntegerCODEC
+    public class DeltaZigzagVariableByte : IntegerCODEC
     {
-
-        /*@Override*/
-        //public String toString() {
-        //        return DeltaZigzagVariableByte.class.getSimpleName();
-        //}
-
-        /*@Override*/
-        public void compress(int[] inBuf, IntWrapper inPos, int inLen,
-            int[] outBuf, IntWrapper outPos)
+        public void compress(int[] inBuf, IntWrapper inPos, int inLen, int[] outBuf, IntWrapper outPos)
         {
             if (inLen == 0)
             {
@@ -35,7 +27,7 @@ namespace CSharpFastPFOR
 
             // Delta+Zigzag+VariableByte encoding.
             int ip = inPos.get();
-            /* final */
+
             int inPosLast = ip + inLen;
             for (; ip < inPosLast; ++ip)
             {
@@ -91,16 +83,14 @@ namespace CSharpFastPFOR
             outPos.add(outLen);
         }
 
-        /*@Override*/
-        public void uncompress(int[] inBuf, IntWrapper inPos, int inLen,
-            int[] outBuf, IntWrapper outPos)
+        public void uncompress(int[] inBuf, IntWrapper inPos, int inLen, int[] outBuf, IntWrapper outPos)
         {
             DeltaZigzagEncoding.Decoder ctx = new DeltaZigzagEncoding.Decoder(0);
 
             int ip = inPos.get();
             int op = outPos.get();
             int vbcNum = 0, vbcShift = 24; // Varialbe Byte Context.
-            /* final */
+
             int inPosLast = ip + inLen;
             while (ip < inPosLast)
             {

@@ -10,25 +10,25 @@
  */
 namespace CSharpFastPFOR
 {
-    public /* final */ class DeltaZigzagEncoding
+    public class DeltaZigzagEncoding
     {
         public class Context
         {
             protected int ContextValue;
 
-            public Context(int contextValue)
+            protected Context(int contextValue)
             {
-                this.ContextValue = contextValue;
+                ContextValue = contextValue;
             }
 
             public void setContextValue(int contextValue)
             {
-                this.ContextValue = contextValue;
+                ContextValue = contextValue;
             }
 
             public int getContextValue()
             {
-                return this.ContextValue;
+                return ContextValue;
             }
         }
 
@@ -40,13 +40,12 @@ namespace CSharpFastPFOR
 
             public int encodeInt(int value)
             {
-                int n = value - this.ContextValue;
-                this.ContextValue = value;
+                int n = value - ContextValue;
+                ContextValue = value;
                 return (n << 1) ^ (n >> 31);
             }
 
-            public int[] encodeArray(int[] src, int srcoff, int length,
-                int[] dst, int dstoff)
+            public int[] encodeArray(int[] src, int srcoff, int length, int[] dst, int dstoff)
             {
                 for (int i = 0; i < length; ++i)
                 {
@@ -55,22 +54,19 @@ namespace CSharpFastPFOR
                 return dst;
             }
 
-            public int[] encodeArray(int[] src, int srcoff, int length,
-                int[] dst)
+            public int[] encodeArray(int[] src, int srcoff, int length, int[] dst)
             {
                 return encodeArray(src, srcoff, length, dst, 0);
             }
 
             public int[] encodeArray(int[] src, int offset, int length)
             {
-                return encodeArray(src, offset, length,
-                    new int[length], 0);
+                return encodeArray(src, offset, length, new int[length], 0);
             }
 
             public int[] encodeArray(int[] src)
             {
-                return encodeArray(src, 0, src.Length,
-                    new int[src.Length], 0);
+                return encodeArray(src, 0, src.Length, new int[src.Length], 0);
             }
         }
 
@@ -83,8 +79,8 @@ namespace CSharpFastPFOR
             public int decodeInt(int value)
             {
                 int n = (int)((uint)value >> 1) ^ ((value << 31) >> 31);
-                n += this.ContextValue;
-                this.ContextValue = n;
+                n += ContextValue;
+                ContextValue = n;
                 return n;
             }
 
@@ -100,8 +96,7 @@ namespace CSharpFastPFOR
 
             public int[] decodeArray(int[] src, int offset, int length)
             {
-                return decodeArray(src, offset, length,
-                    new int[length], 0);
+                return decodeArray(src, offset, length, new int[length], 0);
             }
 
             public int[] decodeArray(int[] src)

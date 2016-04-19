@@ -5,8 +5,6 @@
  * (c) Daniel Lemire, http://lemire.me/en/
  */
 
-
-
 /**
  * Generic class to compute differential coding.
  * 
@@ -15,16 +13,18 @@
  */
 namespace CSharpFastPFOR.Differential
 {
-    public  class Delta {
-
+    public class Delta
+    {
         /**
          * Apply differential coding (in-place).
          * 
          * @param data
          *                data to be modified
          */
-        public static void delta(int[] data) {
-            for (int i = data.Length - 1; i > 0; --i) {
+        public static void delta(int[] data)
+        {
+            for (int i = data.Length - 1; i > 0; --i)
+            {
                 data[i] -= data[i - 1];
             }
         }
@@ -42,9 +42,11 @@ namespace CSharpFastPFOR.Differential
          *                initial value
          * @return next initial vale
          */
-        public static int delta(int[] data, int start, int length, int init) {
-            /*final */int nextinit = data[start + length - 1];
-            for (int i = length - 1; i > 0; --i) {
+        public static int delta(int[] data, int start, int length, int init)
+        {
+            int nextinit = data[start + length - 1];
+            for (int i = length - 1; i > 0; --i)
+            {
                 data[start + i] -= data[start + i - 1];
             }
             data[start] -= init;
@@ -67,14 +69,15 @@ namespace CSharpFastPFOR.Differential
          *                output array
          * @return next initial vale
          */
-        public static int delta(int[] data, int start, int length, int init,
-            int[] @out) {
-            for (int i = length - 1; i > 0; --i) {
+        public static int delta(int[] data, int start, int length, int init, int[] @out)
+        {
+            for (int i = length - 1; i > 0; --i)
+            {
                 @out[i] = data[start + i] - data[start + i - 1];
             }
             @out[0] = data[start] - init;
             return data[start + length - 1];
-            }
+        }
 
         /**
          * Undo differential coding (in-place). Effectively computes a prefix
@@ -83,8 +86,10 @@ namespace CSharpFastPFOR.Differential
          * @param data
          *                to be modified.
          */
-        public static void inverseDelta(int[] data) {
-            for (int i = 1; i < data.Length; ++i) {
+        public static void inverseDelta(int[] data)
+        {
+            for (int i = 1; i < data.Length; ++i)
+            {
                 data[i] += data[i - 1];
             }
         }
@@ -96,12 +101,15 @@ namespace CSharpFastPFOR.Differential
          * @param data
          *                to be modified
          */
-        public static void fastinverseDelta(int[] data) {
+        public static void fastinverseDelta(int[] data)
+        {
             int sz0 = data.Length / 4 * 4;
             int i = 1;
-            if (sz0 >= 4) {
+            if (sz0 >= 4)
+            {
                 int a = data[0];
-                for (; i < sz0 - 4; i += 4) {
+                for (; i < sz0 - 4; i += 4)
+                {
                     a = data[i] += a;
                     a = data[i + 1] += a;
                     a = data[i + 2] += a;
@@ -109,7 +117,8 @@ namespace CSharpFastPFOR.Differential
                 }
             }
 
-            for (; i != data.Length; ++i) {
+            for (; i != data.Length; ++i)
+            {
                 data[i] += data[i - 1];
             }
         }
@@ -128,14 +137,16 @@ namespace CSharpFastPFOR.Differential
          *                initial value
          * @return next initial value
          */
-        public static int fastinverseDelta(int[] data, int start, int length,
-            int init) {
+        public static int fastinverseDelta(int[] data, int start, int length, int init)
+        {
             data[start] += init;
             int sz0 = length / 4 * 4;
             int i = 1;
-            if (sz0 >= 4) {
+            if (sz0 >= 4)
+            {
                 int a = data[start];
-                for (; i < sz0 - 4; i += 4) {
+                for (; i < sz0 - 4; i += 4)
+                {
                     a = data[start + i] += a;
                     a = data[start + i + 1] += a;
                     a = data[start + i + 2] += a;
@@ -143,11 +154,11 @@ namespace CSharpFastPFOR.Differential
                 }
             }
 
-            for (; i != length; ++i) {
+            for (; i != length; ++i)
+            {
                 data[start + i] += data[start + i - 1];
             }
             return data[start + length - 1];
-            }
-
+        }
     }
 }

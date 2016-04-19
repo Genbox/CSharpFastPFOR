@@ -18,27 +18,30 @@ using CSharpFastPFOR.Port;
 
 namespace CSharpFastPFOR
 {
-    public /* final */ class Util {
+    public class Util
+    {
         /**
-     * Compute the maximum of the integer logarithms (ceil(log(x+1)) of a range
-     * of value
-     * 
-     * @param i
-     *            source array
-     * @param pos
-     *            starting position
-     * @param length
-     *            number of integers to consider
-     * @return integer logarithm
-     */
-        public static int maxbits(int[] i, int pos, int length) {
+         * Compute the maximum of the integer logarithms (ceil(log(x+1)) of a range
+         * of value
+         * 
+         * @param i
+         *            source array
+         * @param pos
+         *            starting position
+         * @param length
+         *            number of integers to consider
+         * @return integer logarithm
+         */
+        public static int maxbits(int[] i, int pos, int length)
+        {
             int mask = 0;
             for (int k = pos; k < pos + length; ++k)
                 mask |= i[k];
             return bits(mask);
         }
 
-        public static int maxbits32(int[] i, int pos) {
+        public static int maxbits32(int[] i, int pos)
+        {
             int mask = i[pos];
             mask |= i[pos + 1];
             mask |= i[pos + 2];
@@ -75,134 +78,148 @@ namespace CSharpFastPFOR
         }
 
         /**
-     * Compute the maximum of the integer logarithms (ceil(log(x+1)) of a the
-     * successive differences (deltas) of a range of value
-     * 
-     * @param initoffset
-     *            initial vallue for the computation of the deltas
-     * @param i
-     *            source array
-     * @param pos
-     *            starting position
-     * @param length
-     *            number of integers to consider
-     * @return integer logarithm
-     */
-        public static int maxdiffbits(int initoffset, int[] i, int pos, int length) {
+         * Compute the maximum of the integer logarithms (ceil(log(x+1)) of a the
+         * successive differences (deltas) of a range of value
+         * 
+         * @param initoffset
+         *            initial vallue for the computation of the deltas
+         * @param i
+         *            source array
+         * @param pos
+         *            starting position
+         * @param length
+         *            number of integers to consider
+         * @return integer logarithm
+         */
+        public static int maxdiffbits(int initoffset, int[] i, int pos, int length)
+        {
             int mask = 0;
             mask |= (i[pos] - initoffset);
-            for (int k = pos + 1; k < pos + length; ++k) {
+            for (int k = pos + 1; k < pos + length; ++k)
+            {
                 mask |= i[k] - i[k - 1];
             }
             return bits(mask);
         }
 
         /**
-     * Compute the integer logarithms (ceil(log(x+1)) of a value
-     * 
-     * @param i
-     *            source value
-     * @return integer logarithm
-     */
-        public static int bits(int i) {
+         * Compute the integer logarithms (ceil(log(x+1)) of a value
+         * 
+         * @param i
+         *            source value
+         * @return integer logarithm
+         */
+        public static int bits(int i)
+        {
             return 32 - Integer.numberOfLeadingZeros(i);
         }
 
-        public static int packsize(int num, int b) {
+        public static int packsize(int num, int b)
+        {
             if (b > 16)
                 return num;
             int howmanyfit = 32 / b;
             return (num + howmanyfit - 1) / howmanyfit;
         }
 
-        public static int pack(int[] outputarray, int arraypos, int[] data, int datapos,
-            int num, int b) {
+        public static int pack(int[] outputarray, int arraypos, int[] data, int datapos, int num, int b)
+        {
             if (num == 0)
                 return arraypos;
-            if (b > 16) {
+            if (b > 16)
+            {
                 Array.Copy(data, datapos, outputarray, arraypos, num);
                 return num + arraypos;
             }
             for (int k = 0; k < packsize(num, b); ++k)
                 outputarray[k + arraypos] = 0;
             int inwordpointer = 0;
-            for (int k = 0; k < num; ++k) {
+            for (int k = 0; k < num; ++k)
+            {
                 outputarray[arraypos] |= (data[k + datapos] << inwordpointer);
                 inwordpointer += b;
-                /* final */ int increment = ((inwordpointer + b - 1) >> 5);
+                int increment = ((inwordpointer + b - 1) >> 5);
                 arraypos += increment;
                 inwordpointer &= ~(-increment);
             }
             return arraypos + (inwordpointer > 0 ? 1 : 0);
-            }
+        }
 
-        public static int unpack(int[] sourcearray, int arraypos, int[] data, int datapos,
-            int num, int b) {
-            if (b > 16) {
+        public static int unpack(int[] sourcearray, int arraypos, int[] data, int datapos, int num, int b)
+        {
+            if (b > 16)
+            {
                 Array.Copy(sourcearray, arraypos, data, 0, num);
                 return num + arraypos;
             }
-            /* final */ int mask = (1 << b) - 1;
+            int mask = (1 << b) - 1;
             int inwordpointer = 0;
-            for (int k = 0; k < num; ++k) {
+            for (int k = 0; k < num; ++k)
+            {
                 data[k + datapos] = (int)(((uint)sourcearray[arraypos] >> inwordpointer) & mask);
                 inwordpointer += b;
-                /* final */ int increment = ((inwordpointer + b - 1) >> 5);
+                int increment = ((inwordpointer + b - 1) >> 5);
                 arraypos += increment;
                 inwordpointer &= ~(-increment);
             }
             return arraypos + (inwordpointer > 0 ? 1 : 0);
-            }
+        }
 
-        public static int packsizew(int num, int b) {
+        public static int packsizew(int num, int b)
+        {
             int howmanyfit = 32 / b;
             if (num <= howmanyfit)
                 return 1;
             return num;
         }
 
-        public static int packw(int[] outputarray, int arraypos, int[] data,
-            int num, int b) {
+        public static int packw(int[] outputarray, int arraypos, int[] data, int num, int b)
+        {
             int howmanyfit = 32 / b;
-            if (num > howmanyfit) {
+            if (num > howmanyfit)
+            {
                 Array.Copy(data, 0, outputarray, arraypos, num);
                 return num + arraypos;
             }
             outputarray[arraypos] = 0;
             int inwordpointer = 0;
-            for (int k = 0; k < num; ++k) {
+            for (int k = 0; k < num; ++k)
+            {
                 outputarray[arraypos] |= (data[k] << inwordpointer);
                 inwordpointer += b;
             }
             return arraypos + 1;
-            }
+        }
 
-        public static int unpackw(int[] sourcearray, int arraypos, int[] data,
-            int num, int b) {
+        public static int unpackw(int[] sourcearray, int arraypos, int[] data, int num, int b)
+        {
             int howmanyfit = 32 / b;
-            if (num > howmanyfit) {
+            if (num > howmanyfit)
+            {
                 Array.Copy(sourcearray, arraypos, data, 0, num);
                 return num + arraypos;
             }
-            /* final */ int mask = (1 << b) - 1;
+            int mask = (1 << b) - 1;
             int val = sourcearray[arraypos];
-            for (int k = 0; k < num; ++k) {
+            for (int k = 0; k < num; ++k)
+            {
                 data[k] = (val & mask);
                 val >>= b;
             }
             return arraypos + 1;
-            }
+        }
 
         /**
-     * return floor(value / factor) * factor
-     * 
-     * @param value
-     *            numerator
-     * @param factor
-     *            denominator
-     * @return greatest multiple of factor no larger than value
-     */
-        public static int greatestMultiple(int value, int factor) {
+         * return floor(value / factor) * factor
+         * 
+         * @param value
+         *            numerator
+         * @param factor
+         *            denominator
+         * @return greatest multiple of factor no larger than value
+         */
+        public static int greatestMultiple(int value, int factor)
+        {
             return value - value % factor;
         }
     }

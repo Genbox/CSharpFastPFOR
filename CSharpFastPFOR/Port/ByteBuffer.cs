@@ -65,8 +65,7 @@ namespace CSharpFastPFOR.Port
 
         internal void put(int[] src, int offset, int length)
         {
-            //TODO: what about order?
-
+            //TODO: port this
             //checkBounds(offset, length, src.Length);
             //if (length > remaining())
             //    throw new BufferOverflowException();

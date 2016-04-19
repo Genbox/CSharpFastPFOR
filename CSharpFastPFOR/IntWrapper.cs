@@ -4,24 +4,22 @@
  *
  */
 
-
-
 /**
  * Essentially a mutable wrapper around an integer.
  * 
  * @author dwu
  */
-
 namespace CSharpFastPFOR
 {
-    public /* final */ class IntWrapper  {
-        //private static /* final */ long serialVersionUID = 1L;
+    public class IntWrapper
+    {
         private int value;
 
         /**
          * Constructor: value set to 0.
          */
-        public IntWrapper() :this(0) {
+        public IntWrapper() : this(0)
+        {
         }
 
         /**
@@ -30,7 +28,8 @@ namespace CSharpFastPFOR
          * @param v
          *                value to wrap
          */
-        public IntWrapper(/* final */ int v) {
+        public IntWrapper(int v)
+        {
             this.value = v;
         }
 
@@ -38,41 +37,45 @@ namespace CSharpFastPFOR
          * add the provided value to the integer
          * @param v value to add
          */
-        public void add(int v) {
+        public void add(int v)
+        {
             this.value += v;
         }
 
-        /*@Override*/
-        public double doubleValue() {
+
+        public double doubleValue()
+        {
             return this.value;
         }
 
-        /*@Override*/
-        public float floatValue() {
+        public float floatValue()
+        {
             return this.value;
         }
 
         /**
          * @return the integer value
          */
-        public int get() {
+        public int get()
+        {
             return this.value;
         }
 
         /**
          * add 1 to the integer value
          */
-        public void increment() {
+        public void increment()
+        {
             this.value++;
         }
 
-        /*@Override*/
-        public int intValue() {
+        public int intValue()
+        {
             return this.value;
         }
 
-        /*@Override*/
-        public long longValue() {
+        public long longValue()
+        {
             return this.value;
         }
 
@@ -82,12 +85,13 @@ namespace CSharpFastPFOR
          * @param value
          *                specified integer value
          */
-        public void set(/* final */ int value) {
+        public void set(int value)
+        {
             this.value = value;
         }
 
-        /*@Override*/
-        public string toString() {
+        public override string ToString()
+        {
             return value.ToString();
         }
     }

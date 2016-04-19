@@ -5,9 +5,6 @@
  * (c) Daniel Lemire, http://lemire.me/en/
  */
 
-
-
-
 /**
  * This is just like IntegerCODEC, except that it indicates that delta coding is
  * "integrated", so that you don't need a separate step for delta coding.
@@ -16,7 +13,7 @@
  */
 namespace CSharpFastPFOR.Differential
 {
-    public interface IntegratedIntegerCODEC : IntegerCODEC {
-
+    public interface IntegratedIntegerCODEC : IntegerCODEC
+    {
     }
 }

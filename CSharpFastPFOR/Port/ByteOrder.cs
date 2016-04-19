@@ -6,4 +6,3 @@
         BIG_ENDIAN
     }
 }
-

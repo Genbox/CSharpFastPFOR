@@ -5,29 +5,29 @@
  * (c) Daniel Lemire, http://lemire.me/en/
  */
 
- /**
- * "Integrated" bit packing routines: they include both the bit packing and the
- * differential coding.
- * 
- * For details, please see
- * <p>
- * Daniel Lemire and Leonid Boytsov, Decoding billions of integers per second
- * through vectorization Software: Practice &amp; Experience
- * <a href="http://onlinelibrary.wiley.com/doi/10.1002/spe.2203/abstract">http://onlinelibrary.wiley.com/doi/10.1002/spe.2203/abstract</a>
- * <a href="http://arxiv.org/abs/1209.2137">http://arxiv.org/abs/1209.2137</a>
- *</p>
- * 
- * @author Daniel Lemire
- * 
- */
+/**
+* "Integrated" bit packing routines: they include both the bit packing and the
+* differential coding.
+* 
+* For details, please see
+* <p>
+* Daniel Lemire and Leonid Boytsov, Decoding billions of integers per second
+* through vectorization Software: Practice &amp; Experience
+* <a href="http://onlinelibrary.wiley.com/doi/10.1002/spe.2203/abstract">http://onlinelibrary.wiley.com/doi/10.1002/spe.2203/abstract</a>
+* <a href="http://arxiv.org/abs/1209.2137">http://arxiv.org/abs/1209.2137</a>
+*</p>
+* 
+* @author Daniel Lemire
+* 
+*/
 
 using System;
 using CSharpFastPFOR.Port;
 
 namespace CSharpFastPFOR.Differential
 {
-    public  class IntegratedBitPacking {
-
+    public class IntegratedBitPacking
+    {
         /**
          * Pack 32 integers as deltas with an initial value 
          * 
@@ -38,9 +38,10 @@ namespace CSharpFastPFOR.Differential
          * @param outpos initial position in output array
          * @param bit number of bits to use per integer
          */
-        public static void integratedpack(/*final */int initoffset, /*final */int[] @in,
-            /*final */int inpos, /*final */int[] @out, /*final */int outpos, /*final */int bit) {
-            switch (bit) {
+        public static void integratedpack(int initoffset, int[] @in, int inpos, int[] @out, int outpos, int bit)
+        {
+            switch (bit)
+            {
                 case 0:
                     integratedpack0(initoffset, @in, inpos, @out, outpos);
                     break;
@@ -144,15 +145,15 @@ namespace CSharpFastPFOR.Differential
                     throw new Exception(
                         "Unsupported bit width.");
             }
-            }
+        }
 
-        protected static void integratedpack0(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack0(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             // nothing
-            }
+        }
 
-        protected static void integratedpack1(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack1(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 1)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 2)
@@ -185,10 +186,10 @@ namespace CSharpFastPFOR.Differential
                                | ((@in[29 + inpos] - @in[29 + inpos - 1]) << 29)
                                | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 30)
                                | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 31);
-            }
+        }
 
-        protected static void integratedpack10(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack10(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 10)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 20)
@@ -229,10 +230,10 @@ namespace CSharpFastPFOR.Differential
                                | ((@in[29 + inpos] - @in[29 + inpos - 1]) << 2)
                                | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 12)
                                | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 22);
-            }
+        }
 
-        protected static void integratedpack11(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack11(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 11)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 22);
@@ -275,10 +276,10 @@ namespace CSharpFastPFOR.Differential
             @out[10 + outpos] = (int)((uint)@in[29 + inpos] - @in[29 + inpos - 1]) >> (11 - 10)
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 10)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 21);
-            }
+        }
 
-        protected static void integratedpack12(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack12(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 12)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 24);
@@ -319,10 +320,10 @@ namespace CSharpFastPFOR.Differential
             @out[11 + outpos] = (int)((uint)@in[29 + inpos] - @in[29 + inpos - 1]) >> (12 - 8)
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 8)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 20);
-            }
+        }
 
-        protected static void integratedpack13(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack13(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 13)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 26);
@@ -367,10 +368,10 @@ namespace CSharpFastPFOR.Differential
             @out[12 + outpos] = (int)((uint)@in[29 + inpos] - @in[29 + inpos - 1]) >> (13 - 6)
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 6)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 19);
-            }
+        }
 
-        protected static void integratedpack14(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack14(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 14)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 28);
@@ -415,10 +416,10 @@ namespace CSharpFastPFOR.Differential
             @out[13 + outpos] = (int)((uint)@in[29 + inpos] - @in[29 + inpos - 1]) >> (14 - 4)
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 4)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 18);
-            }
+        }
 
-        protected static void integratedpack15(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack15(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 15)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 30);
@@ -465,10 +466,10 @@ namespace CSharpFastPFOR.Differential
             @out[14 + outpos] = (int)((uint)@in[29 + inpos] - @in[29 + inpos - 1]) >> (15 - 2)
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 2)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 17);
-            }
+        }
 
-        protected static void integratedpack16(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack16(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 16);
             @out[1 + outpos] = (@in[2 + inpos] - @in[2 + inpos - 1])
@@ -501,10 +502,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[29 + inpos] - @in[29 + inpos - 1]) << 16);
             @out[15 + outpos] = (@in[30 + inpos] - @in[30 + inpos - 1])
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 16);
-            }
+        }
 
-        protected static void integratedpack17(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack17(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 17);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (17 - 2)
@@ -553,10 +554,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 30);
             @out[16 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (17 - 15)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 15);
-            }
+        }
 
-        protected static void integratedpack18(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack18(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 18);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (18 - 4)
@@ -605,10 +606,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 28);
             @out[17 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (18 - 14)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 14);
-            }
+        }
 
-        protected static void integratedpack19(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack19(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 19);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (19 - 6)
@@ -659,10 +660,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 26);
             @out[18 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (19 - 13)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 13);
-            }
+        }
 
-        protected static void integratedpack2(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack2(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 2)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 4)
@@ -695,10 +696,10 @@ namespace CSharpFastPFOR.Differential
                                | ((@in[29 + inpos] - @in[29 + inpos - 1]) << 26)
                                | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 28)
                                | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 30);
-            }
+        }
 
-        protected static void integratedpack20(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack20(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 20);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (20 - 8)
@@ -747,10 +748,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 24);
             @out[19 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (20 - 12)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 12);
-            }
+        }
 
-        protected static void integratedpack21(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack21(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 21);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (21 - 10)
@@ -803,10 +804,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 22);
             @out[20 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (21 - 11)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 11);
-            }
+        }
 
-        protected static void integratedpack22(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack22(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 22);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (22 - 12)
@@ -859,10 +860,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 20);
             @out[21 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (22 - 10)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 10);
-            }
+        }
 
-        protected static void integratedpack23(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack23(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 23);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (23 - 14)
@@ -917,10 +918,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 18);
             @out[22 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (23 - 9)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 9);
-            }
+        }
 
-        protected static void integratedpack24(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack24(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 24);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (24 - 16)
@@ -969,10 +970,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 16);
             @out[23 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (24 - 8)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 8);
-            }
+        }
 
-        protected static void integratedpack25(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack25(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 25);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (25 - 18)
@@ -1029,10 +1030,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 14);
             @out[24 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (25 - 7)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 7);
-            }
+        }
 
-        protected static void integratedpack26(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack26(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 26);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (26 - 20)
@@ -1089,10 +1090,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 12);
             @out[25 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (26 - 6)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 6);
-            }
+        }
 
-        protected static void integratedpack27(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack27(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 27);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (27 - 22)
@@ -1151,10 +1152,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 10);
             @out[26 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (27 - 5)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 5);
-            }
+        }
 
-        protected static void integratedpack28(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack28(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 28);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (28 - 24)
@@ -1211,10 +1212,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 8);
             @out[27 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (28 - 4)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 4);
-            }
+        }
 
-        protected static void integratedpack29(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack29(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 29);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (29 - 26)
@@ -1275,10 +1276,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 6);
             @out[28 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (29 - 3)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 3);
-            }
+        }
 
-        protected static void integratedpack3(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack3(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 3)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 6)
@@ -1313,10 +1314,10 @@ namespace CSharpFastPFOR.Differential
                                | ((@in[29 + inpos] - @in[29 + inpos - 1]) << 23)
                                | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 26)
                                | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 29);
-            }
+        }
 
-        protected static void integratedpack30(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack30(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 30);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (30 - 28)
@@ -1377,10 +1378,10 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 4);
             @out[29 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (30 - 2)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 2);
-            }
+        }
 
-        protected static void integratedpack31(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack31(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 31);
             @out[1 + outpos] = (int)((uint)@in[1 + inpos] - @in[1 + inpos - 1]) >> (31 - 30)
@@ -1443,17 +1444,17 @@ namespace CSharpFastPFOR.Differential
                                 | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 2);
             @out[30 + outpos] = (int)((uint)@in[30 + inpos] - @in[30 + inpos - 1]) >> (31 - 1)
                                 | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 1);
-            }
+        }
 
-        protected static void integratedpack32(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack32(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             Array.Copy(@in, inpos, @out, outpos, 32); // no sense in
-            // doing delta
-            // coding
-            }
+                                                      // doing delta
+                                                      // coding
+        }
 
-        protected static void integratedpack4(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack4(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 4)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 8)
@@ -1486,10 +1487,10 @@ namespace CSharpFastPFOR.Differential
                                | ((@in[29 + inpos] - @in[29 + inpos - 1]) << 20)
                                | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 24)
                                | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 28);
-            }
+        }
 
-        protected static void integratedpack5(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack5(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 5)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 10)
@@ -1526,10 +1527,10 @@ namespace CSharpFastPFOR.Differential
                                | ((@in[29 + inpos] - @in[29 + inpos - 1]) << 17)
                                | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 22)
                                | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 27);
-            }
+        }
 
-        protected static void integratedpack6(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack6(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 6)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 12)
@@ -1566,10 +1567,10 @@ namespace CSharpFastPFOR.Differential
                                | ((@in[29 + inpos] - @in[29 + inpos - 1]) << 14)
                                | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 20)
                                | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 26);
-            }
+        }
 
-        protected static void integratedpack7(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack7(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 7)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 14)
@@ -1608,10 +1609,10 @@ namespace CSharpFastPFOR.Differential
                                | ((@in[29 + inpos] - @in[29 + inpos - 1]) << 11)
                                | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 18)
                                | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 25);
-            }
+        }
 
-        protected static void integratedpack8(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack8(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 8)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 16)
@@ -1644,10 +1645,10 @@ namespace CSharpFastPFOR.Differential
                                | ((@in[29 + inpos] - @in[29 + inpos - 1]) << 8)
                                | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 16)
                                | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 24);
-            }
+        }
 
-        protected static void integratedpack9(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedpack9(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (@in[0 + inpos] - initoffset)
                                | ((@in[1 + inpos] - @in[1 + inpos - 1]) << 9)
                                | ((@in[2 + inpos] - @in[2 + inpos - 1]) << 18)
@@ -1688,7 +1689,7 @@ namespace CSharpFastPFOR.Differential
                                | ((@in[29 + inpos] - @in[29 + inpos - 1]) << 5)
                                | ((@in[30 + inpos] - @in[30 + inpos - 1]) << 14)
                                | ((@in[31 + inpos] - @in[31 + inpos - 1]) << 23);
-            }
+        }
 
         /**
          * Unpack 32 integers along with prefix sum computation
@@ -1700,10 +1701,10 @@ namespace CSharpFastPFOR.Differential
          * @param outpos initial position in output array
          * @param bit number of bits to use per integer
          */
-        public static void integratedunpack(/*final */int initoffset,
-            /*final */int[] @in, /*final */int inpos, /*final */int[] @out, /*final */int outpos,
-            /*final */int bit) {
-            switch (bit) {
+        public static void integratedunpack(int initoffset, int[] @in, int inpos, int[] @out, int outpos, int bit)
+        {
+            switch (bit)
+            {
                 case 0:
                     integratedunpack0(initoffset, @in, inpos, @out, outpos);
                     break;
@@ -1807,15 +1808,15 @@ namespace CSharpFastPFOR.Differential
                     throw new ArgumentException(
                         "Unsupported bit width.");
             }
-            }
+        }
 
-        protected static void integratedunpack0(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack0(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             Arrays.fill(@out, outpos, outpos + 32, initoffset);
-            }
+        }
 
-        protected static void integratedunpack1(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack1(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 1)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 1) & 1))
                                + @out[1 + outpos - 1];
@@ -1879,10 +1880,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[0 + inpos] >> 31))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack10(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack10(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 1023)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 10) & 1023))
                                + @out[1 + outpos - 1];
@@ -1946,10 +1947,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[9 + inpos] >> 22))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack11(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack11(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 2047)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 11) & 2047))
                                + @out[1 + outpos - 1];
@@ -2013,10 +2014,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[10 + inpos] >> 21))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack12(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack12(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 4095)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 12) & 4095))
                                + @out[1 + outpos - 1];
@@ -2080,10 +2081,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[11 + inpos] >> 20))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack13(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack13(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 8191)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 13) & 8191))
                                + @out[1 + outpos - 1];
@@ -2147,10 +2148,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[12 + inpos] >> 19))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack14(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack14(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 16383))
                                + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 14) & 16383))
@@ -2215,10 +2216,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[13 + inpos] >> 18))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack15(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack15(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 32767))
                                + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 15) & 32767))
@@ -2283,10 +2284,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[14 + inpos] >> 17))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack16(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack16(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 65535))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 16))
@@ -2351,10 +2352,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[15 + inpos] >> 16))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack17(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack17(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 131071))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 17) | ((@in[1 + inpos] & 3) << (17 - 2)))
@@ -2419,10 +2420,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[16 + inpos] >> 15))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack18(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack18(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 262143))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 18) | ((@in[1 + inpos] & 15) << (18 - 4)))
@@ -2487,10 +2488,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[17 + inpos] >> 14))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack19(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack19(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 524287))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 19) | ((@in[1 + inpos] & 63) << (19 - 6)))
@@ -2555,10 +2556,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[18 + inpos] >> 13))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack2(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack2(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 3)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 2) & 3))
                                + @out[1 + outpos - 1];
@@ -2622,10 +2623,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[1 + inpos] >> 30))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack20(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack20(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 1048575))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 20) | ((@in[1 + inpos] & 255) << (20 - 8)))
@@ -2690,10 +2691,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[19 + inpos] >> 12))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack21(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack21(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 2097151))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 21) | ((@in[1 + inpos] & 1023) << (21 - 10)))
@@ -2758,10 +2759,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[20 + inpos] >> 11))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack22(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack22(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 4194303))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 22) | ((@in[1 + inpos] & 4095) << (22 - 12)))
@@ -2826,10 +2827,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[21 + inpos] >> 10))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack23(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack23(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 8388607))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 23) | ((@in[1 + inpos] & 16383) << (23 - 14)))
@@ -2894,10 +2895,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[22 + inpos] >> 9))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack24(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack24(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 16777215))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 24) | ((@in[1 + inpos] & 65535) << (24 - 16)))
@@ -2960,10 +2961,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[23 + inpos] >> 8))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack25(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack25(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 33554431))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 25) | ((@in[1 + inpos] & 262143) << (25 - 18)))
@@ -3028,10 +3029,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[24 + inpos] >> 7))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack26(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack26(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 67108863))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 26) | ((@in[1 + inpos] & 1048575) << (26 - 20)))
@@ -3096,10 +3097,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[25 + inpos] >> 6))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack27(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack27(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 134217727))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 27) | ((@in[1 + inpos] & 4194303) << (27 - 22)))
@@ -3164,10 +3165,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[26 + inpos] >> 5))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack28(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack28(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 268435455))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 28) | ((@in[1 + inpos] & 16777215) << (28 - 24)))
@@ -3231,10 +3232,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[27 + inpos] >> 4))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack29(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack29(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 536870911))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 29) | ((@in[1 + inpos] & 67108863) << (29 - 26)))
@@ -3299,10 +3300,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[28 + inpos] >> 3))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack3(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack3(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 7)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 3) & 7))
                                + @out[1 + outpos - 1];
@@ -3366,10 +3367,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[2 + inpos] >> 29))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack30(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack30(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 1073741823))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 30) | ((@in[1 + inpos] & 268435455) << (30 - 28)))
@@ -3434,10 +3435,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[29 + inpos] >> 2))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack31(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack31(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 2147483647))
                                + initoffset;
             @out[1 + outpos] = ((int)((uint)@in[0 + inpos] >> 31) | ((@in[1 + inpos] & 1073741823) << (31 - 30)))
@@ -3502,17 +3503,17 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[30 + inpos] >> 1))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack32(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
-            Array.Copy(@in,inpos,@out,outpos,32);  // no sense in
-            // doing delta
-            // coding
-            }
+        protected static void integratedunpack32(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
+            Array.Copy(@in, inpos, @out, outpos, 32);  // no sense in
+                                                       // doing delta
+                                                       // coding
+        }
 
-        protected static void integratedunpack4(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack4(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 15)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 4) & 15))
                                + @out[1 + outpos - 1];
@@ -3576,10 +3577,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[3 + inpos] >> 28))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack5(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack5(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 31)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 5) & 31))
                                + @out[1 + outpos - 1];
@@ -3643,10 +3644,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[4 + inpos] >> 27))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack6(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack6(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 63)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 6) & 63))
                                + @out[1 + outpos - 1];
@@ -3710,10 +3711,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[5 + inpos] >> 26))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack7(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack7(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 127)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 7) & 127))
                                + @out[1 + outpos - 1];
@@ -3777,10 +3778,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[6 + inpos] >> 25))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack8(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack8(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 255)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 8) & 255))
                                + @out[1 + outpos - 1];
@@ -3844,10 +3845,10 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[7 + inpos] >> 24))
                                 + @out[31 + outpos - 1];
-            }
+        }
 
-        protected static void integratedunpack9(/*final */int initoffset,
-            /*final */int[] @in, int inpos, /*final */int[] @out, int outpos) {
+        protected static void integratedunpack9(int initoffset, int[] @in, int inpos, int[] @out, int outpos)
+        {
             @out[0 + outpos] = (((int)((uint)@in[0 + inpos] >> 0) & 511)) + initoffset;
             @out[1 + outpos] = (((int)((uint)@in[0 + inpos] >> 9) & 511))
                                + @out[1 + outpos - 1];
@@ -3911,7 +3912,6 @@ namespace CSharpFastPFOR.Differential
                                 + @out[30 + outpos - 1];
             @out[31 + outpos] = ((int)((uint)@in[8 + inpos] >> 23))
                                 + @out[31 + outpos - 1];
-            }
-
+        }
     }
 }
