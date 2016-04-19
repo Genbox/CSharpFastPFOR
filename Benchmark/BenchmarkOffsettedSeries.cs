@@ -23,16 +23,15 @@ namespace CSharpFastPFOR.Benchmarks
         private const int DEFAULT_WARMUP = 2;
 
         /**
-     * Run benchmark.
-     * 
-     * @param csvWriter
-     *                Write for results in CSV.
-     * @param count
-     *                Count of data chunks.
-     * @param length
-     *                Length of a data chunk.
-     */
-
+         * Run benchmark.
+         * 
+         * @param csvWriter
+         *                Write for results in CSV.
+         * @param count
+         *                Count of data chunks.
+         * @param length
+         *                Length of a data chunk.
+         */
         public static void run(StreamWriter csvWriter, int count, int length)
         {
             IntegerCODEC[] codecs =

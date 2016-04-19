@@ -25,19 +25,19 @@ namespace CSharpFastPFOR.Benchmarks
     public static class Benchmark
     {
         /**
-     * Standard benchmark
-     * 
-     * @param csvLog
-     *                Writer for CSV log.
-     * @param c
-     *                the codec
-     * @param data
-     *                arrays of input data
-     * @param repeat
-     *                How many times to repeat the test
-     * @param verbose
-     *                whether to output result on screen
-     */
+         * Standard benchmark
+         * 
+         * @param csvLog
+         *                Writer for CSV log.
+         * @param c
+         *                the codec
+         * @param data
+         *                arrays of input data
+         * @param repeat
+         *                How many times to repeat the test
+         * @param verbose
+         *                whether to output result on screen
+         */
         private static void testCodec(StreamWriter csvLog, int sparsity, IntegerCODEC c, int[][] data, int repeat, bool verbose)
         {
             if (verbose)
@@ -154,19 +154,19 @@ namespace CSharpFastPFOR.Benchmarks
         }
 
         /**
-     * Standard benchmark byte byte-aligned schemes
-     * 
-     * @param csvLog
-     *                Writer for CSV log.
-     * @param c
-     *                the codec
-     * @param data
-     *                arrays of input data
-     * @param repeat
-     *                How many times to repeat the test
-     * @param verbose
-     *                whether to output result on screen
-     */
+         * Standard benchmark byte byte-aligned schemes
+         * 
+         * @param csvLog
+         *                Writer for CSV log.
+         * @param c
+         *                the codec
+         * @param data
+         *                arrays of input data
+         * @param repeat
+         *                How many times to repeat the test
+         * @param verbose
+         *                whether to output result on screen
+         */
         private static void testByteCodec(StreamWriter csvLog, int sparsity, ByteIntegerCODEC c, int[][] data, int repeat, bool verbose)
         {
             if (verbose)
@@ -283,15 +283,15 @@ namespace CSharpFastPFOR.Benchmarks
         }
 
         /**
-     * Standard test for the Kamikaze library
-     * 
-     * @param data
-     *                input data
-     * @param repeat
-     *                how many times to repeat
-     * @param verbose
-     *                whether to output data on screen
-     */
+         * Standard test for the Kamikaze library
+         * 
+         * @param data
+         *                input data
+         * @param repeat
+         *                how many times to repeat
+         * @param verbose
+         *                whether to output data on screen
+         */
         //TODO port
         //public static void testKamikaze(int[][] data, int repeat, bool verbose)
         //{
@@ -402,15 +402,15 @@ namespace CSharpFastPFOR.Benchmarks
         //}
 
         /**
-     * Generate test data.
-     * 
-     * @param N
-     *                How many input arrays to generate
-     * @param nbr
-     *                How big (in log2) should the arrays be
-     * @param sparsity
-     *                How sparse test data generated
-     */
+         * Generate test data.
+         * 
+         * @param N
+         *                How many input arrays to generate
+         * @param nbr
+         *                How big (in log2) should the arrays be
+         * @param sparsity
+         *                How sparse test data generated
+         */
         private static int[][] generateTestData(ClusteredDataGenerator dataGen, int N, int nbr, int sparsity)
         {
             int[][] data = new int[N][];
@@ -425,17 +425,17 @@ namespace CSharpFastPFOR.Benchmarks
         }
 
         /**
-     * Generates data and calls other tests.
-     * 
-     * @param csvLog
-     *                Writer for CSV log.
-     * @param N
-     *                How many input arrays to generate
-     * @param nbr
-     *                how big (in log2) should the arrays be
-     * @param repeat
-     *                How many times should we repeat tests.
-     */
+         * Generates data and calls other tests.
+         * 
+         * @param csvLog
+         *                Writer for CSV log.
+         * @param N
+         *                How many input arrays to generate
+         * @param nbr
+         *                how big (in log2) should the arrays be
+         * @param repeat
+         *                How many times should we repeat tests.
+         */
         public static void test(StreamWriter csvLog, int N, int nbr, int repeat)
         {
             csvLog.WriteLine("\"Algorithm\",\"Sparsity\",\"Bits per int\",\"Compress speed (MiS)\",\"Decompress speed (MiS)\"\n");

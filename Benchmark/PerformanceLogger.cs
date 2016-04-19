@@ -36,11 +36,10 @@ namespace CSharpFastPFOR.Benchmarks
             }
         }
 
-        public Timer compressionTimer = new Timer();
-        public Timer decompressionTimer = new Timer();
+        public readonly Timer compressionTimer = new Timer();
+        public readonly Timer decompressionTimer = new Timer();
 
         private long originalSize = 0;
-
         private long compressedSize = 0;
 
         public long addOriginalSize(long value)

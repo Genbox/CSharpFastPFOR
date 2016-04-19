@@ -9,10 +9,10 @@ namespace CSharpFastPFOR.Benchmarks
     {
         private static void Main(string[] args)
         {
-            //BenchmarkMethod();
-            //BenchmarkBitPackingMethod();
-            //BenchmarkCSVMethod(args);
-            //BenchmarkOffsettedSeriesMethod();
+            BenchmarkMethod();
+            BenchmarkBitPackingMethod();
+            BenchmarkCSVMethod(args);
+            BenchmarkOffsettedSeriesMethod();
             BenchmarkSkippableMethod();
         }
 

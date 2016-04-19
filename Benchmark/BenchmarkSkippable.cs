@@ -102,21 +102,20 @@ namespace CSharpFastPFOR.Benchmarks
         }
 
         /**
-     * Standard benchmark
-     * 
-     * @param csvLog
-     *            Writer for CSV log.
-     * @param c
-     *            the codec
-     * @param data
-     *            arrays of input data
-     * @param repeat
-     *            How many times to repeat the test
-     * @param verbose
-     *            whether to output result on screen
-     */
-        private static void testCodec(StreamWriter csvLog, int sparsity, object c,
-            int[][] data, int repeat, bool verbose)
+         * Standard benchmark
+         * 
+         * @param csvLog
+         *            Writer for CSV log.
+         * @param c
+         *            the codec
+         * @param data
+         *            arrays of input data
+         * @param repeat
+         *            How many times to repeat the test
+         * @param verbose
+         *            whether to output result on screen
+         */
+        private static void testCodec(StreamWriter csvLog, int sparsity, object c,int[][] data, int repeat, bool verbose)
         {
             if (verbose)
             {
@@ -237,15 +236,15 @@ namespace CSharpFastPFOR.Benchmarks
         }
 
         /**
-     * Generate test data.
-     * 
-     * @param N
-     *            How many input arrays to generate
-     * @param nbr
-     *            How big (in log2) should the arrays be
-     * @param sparsity
-     *            How sparse test data generated
-     */
+         * Generate test data.
+         * 
+         * @param N
+         *            How many input arrays to generate
+         * @param nbr
+         *            How big (in log2) should the arrays be
+         * @param sparsity
+         *            How sparse test data generated
+         */
         private static int[][] generateTestData(ClusteredDataGenerator dataGen, int N, int nbr, int sparsity)
         {
             int[][] data = new int[N][];
@@ -259,7 +258,6 @@ namespace CSharpFastPFOR.Benchmarks
         }
 
         private static object[] codecs = {
-
             new SkippableIntegratedComposition(new IntegratedBinaryPacking(),
                 new IntegratedVariableByte()), new JustCopy(), new VariableByte(),
 
@@ -275,18 +273,17 @@ namespace CSharpFastPFOR.Benchmarks
             new Simple9(), new Simple16() };
 
         /**
-     * Generates data and calls other tests.
-     * 
-     * @param csvLog
-     *            Writer for CSV log.
-     * @param N
-     *            How many input arrays to generate
-     * @param nbr
-     *            how big (in log2) should the arrays be
-     * @param repeat
-     *            How many times should we repeat tests.
-     */
-
+         * Generates data and calls other tests.
+         * 
+         * @param csvLog
+         *            Writer for CSV log.
+         * @param N
+         *            How many input arrays to generate
+         * @param nbr
+         *            how big (in log2) should the arrays be
+         * @param repeat
+         *            How many times should we repeat tests.
+         */
         public static void test(StreamWriter csvLog, int N, int nbr, int repeat)
         {
             csvLog.WriteLine("\"Algorithm\",\"Sparsity\",\"Bits per int\",\"Compress speed (MiS)\",\"Decompress speed (MiS)\"\n");

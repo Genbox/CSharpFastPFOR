@@ -66,7 +66,8 @@ namespace CSharpFastPFOR.Benchmarks
 
                 return answer;
             }
-            else if (f == Format.ONEARRAYPERFILE)
+
+            if (f == Format.ONEARRAYPERFILE)
             {
                 List<int> answer = new List<int>();
                 foreach (string s in File.ReadLines(filename))
@@ -123,9 +124,7 @@ namespace CSharpFastPFOR.Benchmarks
             }
         }
 
-
-        public static void bench(List<int[]> postings, CompressionMode cm,
-            bool verbose)
+        public static void bench(List<int[]> postings, CompressionMode cm, bool verbose)
         {
             int maxlength = 0;
             foreach (int[] x in postings)
@@ -186,15 +185,13 @@ namespace CSharpFastPFOR.Benchmarks
                 aft = sw.ElapsedMilliseconds;
                 decomptime += (aft - bef);
                 double bitsPerInt = volumeout * 32.0 / volumein;
-                double decompressSpeed = volumein * 1000.0
-                                         / (decomptime);
+                double decompressSpeed = volumein * 1000.0 / (decomptime);
                 if (verbose)
                     Console.WriteLine(c + "\t" + string.Format("\t{0:0.00}\t{1:0.00}", bitsPerInt, decompressSpeed));
             }
         }
 
-        public static void bytebench(List<int[]> postings,
-            CompressionMode cm, bool verbose)
+        public static void bytebench(List<int[]> postings, CompressionMode cm, bool verbose)
         {
             int maxlength = 0;
             foreach (int[] x in postings)
@@ -208,8 +205,7 @@ namespace CSharpFastPFOR.Benchmarks
                 Console.WriteLine("Scheme -- bits/int -- speed (mis)");
 
             Stopwatch sw = new Stopwatch();
-            foreach (ByteIntegerCODEC c in (cm == CompressionMode.DELTA ? bcodecs
-                : regbcodecs))
+            foreach (ByteIntegerCODEC c in (cm == CompressionMode.DELTA ? bcodecs : regbcodecs))
             {
                 long bef = 0;
                 long aft = 0;
@@ -255,14 +251,9 @@ namespace CSharpFastPFOR.Benchmarks
                 aft = sw.ElapsedMilliseconds;
                 decomptime += (aft - bef);
                 double bitsPerInt = volumeout * 8.0 / volumein;
-                double decompressSpeed = volumein * 1000.0
-                                         / (decomptime);
+                double decompressSpeed = volumein * 1000.0 / (decomptime);
                 if (verbose)
-                    Console.WriteLine(c
-                                      + "\t"
-                                      + string.Format("\t{0:0.00}\t{1:0.00}",
-                                          bitsPerInt, decompressSpeed));
-
+                    Console.WriteLine(c + "\t" + string.Format("\t{0:0.00}\t{1:0.00}", bitsPerInt, decompressSpeed));
             }
         }
     }
