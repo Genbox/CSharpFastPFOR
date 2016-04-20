@@ -126,12 +126,7 @@ namespace CSharpFastPFOR.Benchmarks
 
             if (csvWriter != null)
             {
-                string line = string.Format(
-                    "\"{0}\",\"{1}\",{2:0.00},{3},{4}",
-                    dataName, codecName, logger.getBitPerInt(),
-                    logger.getCompressSpeed(),
-                    logger.getDecompressSpeed());
-                csvWriter.WriteLine(line);
+                csvWriter.WriteLine("\"{0}\",\"{1}\",{2:0.00},{3:0},{4:0}", dataName, codecName, logger.getBitPerInt(), logger.getCompressSpeed(), logger.getDecompressSpeed());
             }
         }
 
