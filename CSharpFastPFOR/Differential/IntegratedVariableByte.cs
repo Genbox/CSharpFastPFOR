@@ -287,5 +287,10 @@ namespace CSharpFastPFOR.Differential
 
             inpos.set(p + (s != 0 ? 1 : 0));
         }
+
+        public override string ToString()
+        {
+            return nameof(IntegratedVariableByte);
+        }
     }
 }

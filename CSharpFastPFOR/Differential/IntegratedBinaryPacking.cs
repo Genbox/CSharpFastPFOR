@@ -160,5 +160,10 @@ namespace CSharpFastPFOR.Differential
             initvalue.set(initoffset);
             inpos.set(tmpinpos);
         }
+
+        public override string ToString()
+        {
+            return nameof(IntegratedBinaryPacking);
+        }
     }
 }

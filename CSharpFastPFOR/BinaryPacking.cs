@@ -145,5 +145,10 @@ namespace CSharpFastPFOR
             outpos.add(outlength);
             inpos.set(tmpinpos);
         }
+
+        public override string ToString()
+        {
+            return nameof(BinaryPacking);
+        }
     }
 }

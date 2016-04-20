@@ -185,5 +185,10 @@ namespace CSharpFastPFOR
             inpos.increment();
             headlessUncompress(@in, inpos, inlength, @out, outpos, outlength);
         }
+
+        public override string ToString()
+        {
+            return nameof(NewPFDS16);
+        }
     }
 }

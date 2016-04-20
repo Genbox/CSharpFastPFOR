@@ -132,5 +132,10 @@ namespace CSharpFastPFOR.Differential
             }
             return validBits;
         }
+
+        public override string ToString()
+        {
+            return nameof(XorBinaryPacking);
+        }
     }
 }

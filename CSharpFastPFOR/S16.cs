@@ -219,5 +219,10 @@ namespace CSharpFastPFOR
             new[]{ 4, 4, 5, 5, 5, 5 }, new[]{ 6, 6, 6, 5, 5 }, new[]{ 5, 5, 6, 6, 6 },
             new[]{ 7, 7, 7, 7 }, new[]{ 10, 9, 9, }, new[]{ 14, 14 }, new[]{ 28 } };
         private static int[][] SHIFTED_S16_BITS = shiftme(S16_BITS);
+
+        public override string ToString()
+        {
+            return nameof(S16);
+        }
     }
 }

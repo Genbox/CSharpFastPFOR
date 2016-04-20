@@ -39,5 +39,10 @@ namespace CSharpFastPFOR
         {
             headlessCompress(@in, inpos, inlength, @out, outpos);
         }
+
+        public override string ToString()
+        {
+            return nameof(JustCopy);
+        }
     }
 }

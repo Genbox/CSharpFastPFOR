@@ -19,19 +19,19 @@ namespace CSharpFastPFOR.Differential
         private IntegratedIntegerCODEC F2;
 
         /**
-     * Compose a scheme from a first one (f1) and a second one (f2). The
-     * first one is called first and then the second one tries to compress
-     * whatever remains from the first run.
-     * 
-     * By convention, the first scheme should be such that if, during
-     * decoding, a 32-bit zero is first encountered, then there is no
-     * output.
-     * 
-     * @param f1
-     *                first codec
-     * @param f2
-     *                second codec
-     */
+         * Compose a scheme from a first one (f1) and a second one (f2). The
+         * first one is called first and then the second one tries to compress
+         * whatever remains from the first run.
+         * 
+         * By convention, the first scheme should be such that if, during
+         * decoding, a 32-bit zero is first encountered, then there is no
+         * output.
+         * 
+         * @param f1
+         *                first codec
+         * @param f2
+         *                second codec
+         */
         public IntegratedComposition(IntegratedIntegerCODEC f1, IntegratedIntegerCODEC f2)
         {
             F1 = f1;

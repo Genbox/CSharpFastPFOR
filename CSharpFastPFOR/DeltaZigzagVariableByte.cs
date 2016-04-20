@@ -117,5 +117,10 @@ namespace CSharpFastPFOR
             outPos.set(op);
             inPos.set(inPosLast);
         }
+
+        public override string ToString()
+        {
+            return nameof(DeltaZigzagVariableByte);
+        }
     }
 }

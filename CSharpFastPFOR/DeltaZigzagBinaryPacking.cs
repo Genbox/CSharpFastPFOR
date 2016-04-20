@@ -99,5 +99,10 @@ namespace CSharpFastPFOR
             BitPacking.fastunpack(inBuf, inOff, outBuf, outOff, validBits);
             return validBits;
         }
+
+        public override string ToString()
+        {
+            return nameof(DeltaZigzagBinaryPacking);
+        }
     }
 }
