@@ -14,7 +14,6 @@
  */
 
 using System;
-using System.Diagnostics;
 using System.IO;
 using CSharpFastPFOR.Differential;
 using CSharpFastPFOR.Port;
