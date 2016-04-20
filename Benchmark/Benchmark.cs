@@ -271,8 +271,7 @@ namespace CSharpFastPFOR.Benchmarks
                 long decompressSpeed = totalSize * repeat / (decompressTime);
 
                 Console.WriteLine("\t{0:0.00}\t{1}\t{2}", bitsPerInt, compressSpeed, decompressSpeed);
-                csvLog.WriteLine("\"{0}\",{1},{2:0.00},{3},{4}\n", c, sparsity, bitsPerInt, compressSpeed, decompressSpeed);
-                csvLog.WriteLine();
+                csvLog.WriteLine("\"{0}\",{1},{2:0.00},{3},{4}", c, sparsity, bitsPerInt, compressSpeed, decompressSpeed);
             }
         }
 
@@ -431,7 +430,7 @@ namespace CSharpFastPFOR.Benchmarks
          */
         public static void test(StreamWriter csvLog, int N, int nbr, int repeat)
         {
-            csvLog.WriteLine("\"Algorithm\",\"Sparsity\",\"Bits per int\",\"Compress speed (MiS)\",\"Decompress speed (MiS)\"\n");
+            csvLog.WriteLine("\"Algorithm\",\"Sparsity\",\"Bits per int\",\"Compress speed (MiS)\",\"Decompress speed (MiS)\"");
             ClusteredDataGenerator cdg = new ClusteredDataGenerator();
 
             int max_sparsity = 31 - nbr;

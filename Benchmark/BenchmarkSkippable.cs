@@ -284,7 +284,7 @@ namespace CSharpFastPFOR.Benchmarks
          */
         public static void test(StreamWriter csvLog, int N, int nbr, int repeat)
         {
-            csvLog.WriteLine("\"Algorithm\",\"Sparsity\",\"Bits per int\",\"Compress speed (MiS)\",\"Decompress speed (MiS)\"\n");
+            csvLog.WriteLine("\"Algorithm\",\"Sparsity\",\"Bits per int\",\"Compress speed (MiS)\",\"Decompress speed (MiS)\"");
             ClusteredDataGenerator cdg = new ClusteredDataGenerator();
 
             int max_sparsity = 31 - nbr;

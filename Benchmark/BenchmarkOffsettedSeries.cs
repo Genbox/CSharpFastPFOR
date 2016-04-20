@@ -43,7 +43,7 @@ namespace CSharpFastPFOR.Benchmarks
                 new FastPFOR128(), new FastPFOR()
             };
 
-            csvWriter.WriteLine("\"Dataset\",\"CODEC\",\"Bits per int\"," + "\"Compress speed (MiS)\",\"Decompress speed (MiS)\"\n");
+            csvWriter.WriteLine("\"Dataset\",\"CODEC\",\"Bits per int\"," + "\"Compress speed (MiS)\",\"Decompress speed (MiS)\"");
 
             benchmark(csvWriter, codecs, count, length, DEFAULT_MEAN, DEFAULT_RANGE);
             benchmark(csvWriter, codecs, count, length, DEFAULT_MEAN >> 5, DEFAULT_RANGE);
