@@ -72,7 +72,6 @@ namespace CSharpFastPFOR.Benchmarks
             IntWrapper inpos = new IntWrapper();
             IntWrapper outpos = new IntWrapper();
 
-            Stopwatch sw = new Stopwatch();
             for (int r = 0; r < repeat; ++r)
             {
                 size = 0;
@@ -81,9 +80,8 @@ namespace CSharpFastPFOR.Benchmarks
                     int[] backupdata = Arrays.copyOf(data[k],
                         data[k].Length);
 
-                    sw.Restart();
                     // compress data.
-                    long beforeCompress = sw.ElapsedMilliseconds * 1000;
+                    long beforeCompress = Port.System.nanoTime() / 1000;
                     inpos.set(1);
                     outpos.set(0);
                     if (!(c is IntegratedIntegerCODEC))
@@ -92,7 +90,7 @@ namespace CSharpFastPFOR.Benchmarks
                     }
                     c.compress(backupdata, inpos, backupdata.Length
                                                   - inpos.get(), compressBuffer, outpos);
-                    long afterCompress = sw.ElapsedMilliseconds * 1000;
+                    long afterCompress = Port.System.nanoTime() / 1000;
 
                     // measure time of compression.
                     compressTime += afterCompress - beforeCompress;
@@ -101,7 +99,7 @@ namespace CSharpFastPFOR.Benchmarks
                     size += thiscompsize;
 
                     // extract (uncompress) data
-                    long beforeDecompress = sw.ElapsedMilliseconds * 1000;
+                    long beforeDecompress = Port.System.nanoTime() / 1000;
                     inpos.set(0);
                     outpos.set(1);
                     decompressBuffer[0] = backupdata[0];
@@ -110,7 +108,7 @@ namespace CSharpFastPFOR.Benchmarks
                         outpos);
                     if (!(c is IntegratedIntegerCODEC))
                         Delta.fastinverseDelta(decompressBuffer);
-                    long afterDecompress = sw.ElapsedMilliseconds * 1000;
+                    long afterDecompress = Port.System.nanoTime() / 1000;
 
                     // measure time of extraction (uncompression).
                     decompressTime += afterDecompress
@@ -199,8 +197,6 @@ namespace CSharpFastPFOR.Benchmarks
             IntWrapper inpos = new IntWrapper();
             IntWrapper outpos = new IntWrapper();
 
-            Stopwatch sw = new Stopwatch();
-
             for (int r = 0; r < repeat; ++r)
             {
                 size = 0;
@@ -209,10 +205,8 @@ namespace CSharpFastPFOR.Benchmarks
                     int[] backupdata = Arrays.copyOf(data[k],
                         data[k].Length);
 
-                    sw.Restart();
-
                     // compress data.
-                    long beforeCompress = sw.ElapsedMilliseconds * 1000;
+                    long beforeCompress = Port.System.nanoTime() / 1000;
                     inpos.set(1);
                     outpos.set(0);
                     if (!(c is IntegratedByteIntegerCODEC))
@@ -221,7 +215,7 @@ namespace CSharpFastPFOR.Benchmarks
                     }
                     c.compress(backupdata, inpos, backupdata.Length
                                                   - inpos.get(), compressBuffer, outpos);
-                    long afterCompress = sw.ElapsedMilliseconds * 1000;
+                    long afterCompress = Port.System.nanoTime() / 1000;
 
                     // measure time of compression.
                     compressTime += afterCompress - beforeCompress;
@@ -230,7 +224,7 @@ namespace CSharpFastPFOR.Benchmarks
                     size += thiscompsize;
 
                     // extract (uncompress) data
-                    long beforeDecompress = sw.ElapsedMilliseconds * 1000;
+                    long beforeDecompress = Port.System.nanoTime() / 1000;
                     inpos.set(0);
                     outpos.set(1);
                     decompressBuffer[0] = backupdata[0];
@@ -239,7 +233,7 @@ namespace CSharpFastPFOR.Benchmarks
                         outpos);
                     if (!(c is IntegratedByteIntegerCODEC))
                         Delta.fastinverseDelta(decompressBuffer);
-                    long afterDecompress = sw.ElapsedMilliseconds * 1000;
+                    long afterDecompress = Port.System.nanoTime() / 1000;
 
                     // measure time of extraction (uncompression).
                     decompressTime += afterDecompress
@@ -319,7 +313,6 @@ namespace CSharpFastPFOR.Benchmarks
         //    long comptime = 0;
         //    long decomptime = 0;
 
-        //    Stopwatch sw = new Stopwatch();
         //    for (int r = 0; r < repeat; ++r)
         //    {
         //        size = 0;

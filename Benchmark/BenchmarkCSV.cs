@@ -137,7 +137,6 @@ namespace CSharpFastPFOR.Benchmarks
             if (verbose)
                 Console.WriteLine("Scheme -- bits/int -- speed (mis)");
 
-            Stopwatch sw = new Stopwatch();
             foreach (IntegerCODEC c in (cm == CompressionMode.DELTA ? codecs : regcodecs))
             {
                 long bef = 0;
@@ -171,8 +170,7 @@ namespace CSharpFastPFOR.Benchmarks
                         .copyOf(compbuffer, clength);
                 }
 
-                sw.Restart();
-                bef = sw.ElapsedMilliseconds;
+                bef = Port.System.nanoTime();
                 foreach (int[] cin in compdata)
                 {
                     IntWrapper inpos = new IntWrapper(0);
@@ -182,7 +180,7 @@ namespace CSharpFastPFOR.Benchmarks
                     if (inpos.get() != cin.Length)
                         throw new Exception("bug");
                 }
-                aft = sw.ElapsedMilliseconds;
+                aft = Port.System.nanoTime();
                 decomptime += (aft - bef);
                 double bitsPerInt = volumeout * 32.0 / volumein;
                 double decompressSpeed = volumein * 1000.0 / (decomptime);
@@ -204,7 +202,6 @@ namespace CSharpFastPFOR.Benchmarks
             if (verbose)
                 Console.WriteLine("Scheme -- bits/int -- speed (mis)");
 
-            Stopwatch sw = new Stopwatch();
             foreach (ByteIntegerCODEC c in (cm == CompressionMode.DELTA ? bcodecs : regbcodecs))
             {
                 long bef = 0;
@@ -237,8 +234,7 @@ namespace CSharpFastPFOR.Benchmarks
                     compdata[k] = Arrays
                         .copyOf(compbuffer, clength);
                 }
-                sw.Restart();
-                bef = sw.ElapsedMilliseconds;
+                bef = Port.System.nanoTime();
                 foreach (sbyte[] cin in compdata)
                 {
                     IntWrapper inpos = new IntWrapper(0);
@@ -248,7 +244,7 @@ namespace CSharpFastPFOR.Benchmarks
                     if (inpos.get() != cin.Length)
                         throw new Exception("bug");
                 }
-                aft = sw.ElapsedMilliseconds;
+                aft = Port.System.nanoTime();
                 decomptime += (aft - bef);
                 double bitsPerInt = volumeout * 8.0 / volumein;
                 double decompressSpeed = volumein * 1000.0 / (decomptime);

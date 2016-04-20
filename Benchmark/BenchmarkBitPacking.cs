@@ -30,8 +30,6 @@ namespace CSharpFastPFOR.Benchmarks
             int[] compressed = new int[N];
             int[] uncompressed = new int[N];
 
-            Stopwatch sw = Stopwatch.StartNew();
-
             for (int bit = 0; bit < 31; ++bit)
             {
                 long comp = 0;
@@ -44,16 +42,16 @@ namespace CSharpFastPFOR.Benchmarks
                         data[k] = r.Next(1 << bit);
                     }
 
-                    long time1 = sw.ElapsedMilliseconds * 1000 * 1000;
+                    long time1 = Port.System.nanoTime();
                     BitPacking
                         .fastpack(data, 0, compressed, 0, bit);
-                    long time2 = sw.ElapsedMilliseconds * 1000 * 1000;
+                    long time2 = Port.System.nanoTime();
                     BitPacking.fastpackwithoutmask(data, 0,
                         compressed, 0, bit);
-                    long time3 = sw.ElapsedMilliseconds * 1000 * 1000;
+                    long time3 = Port.System.nanoTime();
                     BitPacking.fastunpack(compressed, 0,
                         uncompressed, 0, bit);
-                    long time4 = sw.ElapsedMilliseconds * 1000 * 1000;
+                    long time4 = Port.System.nanoTime();
                     comp += time2 - time1;
                     compwm += time3 - time2;
                     decomp += time4 - time3;
@@ -81,8 +79,6 @@ namespace CSharpFastPFOR.Benchmarks
             int[] icompressed = new int[N];
             int[] uncompressed = new int[N];
 
-            Stopwatch sw = Stopwatch.StartNew();
-
             for (int bit = 1; bit < 31; ++bit)
             {
                 long comp = 0;
@@ -101,27 +97,27 @@ namespace CSharpFastPFOR.Benchmarks
 
                     int[] tmpdata = Arrays.copyOf(data, data.Length);
 
-                    long time1 = sw.ElapsedMilliseconds * 1000 * 1000;
+                    long time1 = Port.System.nanoTime();
                     Delta.delta(tmpdata);
                     BitPacking.fastpackwithoutmask(tmpdata, 0,
                         compressed, 0, bit);
-                    long time2 = sw.ElapsedMilliseconds * 1000 * 1000;
+                    long time2 = Port.System.nanoTime();
                     BitPacking.fastunpack(compressed, 0,
                         uncompressed, 0, bit);
                     Delta.fastinverseDelta(uncompressed);
-                    long time3 = sw.ElapsedMilliseconds * 1000 * 1000;
+                    long time3 = Port.System.nanoTime();
                     if (!Arrays.equals(data, uncompressed))
                         throw new Exception("bug");
                     comp += time2 - time1;
                     decomp += time3 - time2;
                     tmpdata = Arrays.copyOf(data, data.Length);
-                    time1 = sw.ElapsedMilliseconds * 1000 * 1000;
+                    time1 = Port.System.nanoTime();
                     IntegratedBitPacking.integratedpack(0, tmpdata,
                         0, icompressed, 0, bit);
-                    time2 = sw.ElapsedMilliseconds * 1000 * 1000;
+                    time2 = Port.System.nanoTime();
                     IntegratedBitPacking.integratedunpack(0,
                         icompressed, 0, uncompressed, 0, bit);
-                    time3 = sw.ElapsedMilliseconds * 1000 * 1000;
+                    time3 = Port.System.nanoTime();
                     if (!Arrays.equals(icompressed, compressed))
                         throw new Exception("ibug " + bit);
 

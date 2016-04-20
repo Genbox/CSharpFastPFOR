@@ -8,31 +8,28 @@
  * 
  * @author MURAOKA Taro http://github.com/koron
  */
-
-using System.Diagnostics;
-
 namespace CSharpFastPFOR.Benchmarks
 {
     public class PerformanceLogger
     {
         public class Timer
         {
-            private Stopwatch sw = new Stopwatch();
+            private long startNano;
+            private long duration = 0;
 
             public void start()
             {
-                sw.Start();
+                this.startNano = Port.System.nanoTime();
             }
 
             public long end()
             {
-                sw.Stop();
-                return sw.ElapsedMilliseconds * 1000 * 1000;
+                return this.duration += Port.System.nanoTime()- this.startNano;
             }
 
             public long getDuration()
             {
-                return sw.ElapsedMilliseconds * 1000 * 1000;
+                return this.duration;
             }
         }
 

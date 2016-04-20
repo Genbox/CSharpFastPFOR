@@ -152,8 +152,6 @@ namespace CSharpFastPFOR.Benchmarks
 
             int size = 0;
 
-            Stopwatch sw = Stopwatch.StartNew();
-
             for (int r = 0; r < repeat; ++r)
             {
                 size = 0;
@@ -162,11 +160,11 @@ namespace CSharpFastPFOR.Benchmarks
                     int[] backupdata = Arrays.copyOf(data[k], data[k].Length);
 
                     // compress data.
-                    long beforeCompress = sw.ElapsedMilliseconds * 1000;
+                    long beforeCompress = Port.System.nanoTime() / 1000;
                     IntWrapper outpos = new IntWrapper();
                     compressWithSkipTable(c, backupdata, compressBuffer, outpos,
                         metadataBuffer, blocksize);
-                    long afterCompress = sw.ElapsedMilliseconds * 1000;
+                    long afterCompress = Port.System.nanoTime() / 1000;
 
                     // measure time of compression.
                     compressTime += afterCompress - beforeCompress;
@@ -192,7 +190,7 @@ namespace CSharpFastPFOR.Benchmarks
                         }
                     }
                     // extract (uncompress) data
-                    long beforeDecompress = sw.ElapsedMilliseconds * 1000;
+                    long beforeDecompress = Port.System.nanoTime() / 1000;
                     for (int t = 0; t < times; ++t)
                     {
                         IntWrapper compressedpos = new IntWrapper(0);
@@ -200,7 +198,7 @@ namespace CSharpFastPFOR.Benchmarks
                             compressedpos, metadataBuffer, blocksize,
                             decompressBuffer);
                     }
-                    long afterDecompress = sw.ElapsedMilliseconds * 1000;
+                    long afterDecompress = Port.System.nanoTime() / 1000;
 
                     // measure time of extraction (uncompression).
                     decompressTime += (afterDecompress - beforeDecompress) / (double)times;
