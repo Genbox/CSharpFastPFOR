@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace CSharpFastPFOR.Tests.Port
 {
@@ -7,17 +7,17 @@ namespace CSharpFastPFOR.Tests.Port
     {
         public static void assertArrayEquals(int[] ints, int[] ints1)
         {
-            Assert.IsTrue(ints.SequenceEqual(ints1));
+            Assert.True(ints.SequenceEqual(ints1));
         }
 
         public static void assertEquals(int first, int second)
         {
-            Assert.AreEqual(first,second);
+            Assert.Equal(first,second);
         }
 
         public static void assertTrue(bool b)
         {
-            Assert.IsTrue(b);
+            Assert.True(b);
         }
     }
 }

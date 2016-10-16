@@ -7,11 +7,10 @@
 using System;
 using CSharpFastPFOR.Port;
 using CSharpFastPFOR.Tests.Utils;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace CSharpFastPFOR.Tests
 {
-    [TestClass]
     public class SkippableBasicTest
     {
         private readonly SkippableIntegerCODEC[] codecs = {
@@ -29,7 +28,7 @@ namespace CSharpFastPFOR.Tests
             new Simple9(),
             new Simple16() };
 
-        [TestMethod]
+        [Fact]
         public void consistentTest()
         {
             const int N = 4096;
@@ -68,7 +67,7 @@ namespace CSharpFastPFOR.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void varyingLengthTest()
         {
             const int N = 4096;
@@ -98,7 +97,7 @@ namespace CSharpFastPFOR.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void varyingLengthTest2()
         {
             const int N = 128;

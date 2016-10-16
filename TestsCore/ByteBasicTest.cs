@@ -10,11 +10,10 @@ using CSharpFastPFOR.Differential;
 using CSharpFastPFOR.Port;
 using CSharpFastPFOR.Tests.Port;
 using CSharpFastPFOR.Tests.Utils;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace CSharpFastPFOR.Tests
 {
-    [TestClass]
     public class ByteBasicTest
     {
         private readonly ByteIntegerCODEC[] codecs = {
@@ -22,7 +21,7 @@ namespace CSharpFastPFOR.Tests
             new IntegratedVariableByte(),
         };
 
-        [TestMethod]
+        [Fact]
         public void saulTest()
         {
             foreach (ByteIntegerCODEC C in codecs)
@@ -50,7 +49,7 @@ namespace CSharpFastPFOR.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void varyingLengthTest()
         {
             const int N = 4096;
@@ -78,7 +77,7 @@ namespace CSharpFastPFOR.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void varyingLengthTest2()
         {
             const int N = 128;

@@ -1,13 +1,12 @@
 ﻿using System;
 using CSharpFastPFOR.Port;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace CSharpFastPFOR.Tests
 {
-    [TestClass]
     public class UtilsTest
     {
-        [TestMethod]
+        [Fact]
         public void testPacking()
         {
             int[] outputarray = new int[32];
@@ -37,7 +36,7 @@ namespace CSharpFastPFOR.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void testPackingw()
         {
             int[] outputarray = new int[32];

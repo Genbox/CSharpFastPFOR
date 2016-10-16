@@ -1,14 +1,13 @@
 using System;
 using CSharpFastPFOR.Differential;
 using CSharpFastPFOR.Port;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace CSharpFastPFOR.Tests
 {
-    [TestClass]
     public class ExampleTest
     {
-        [TestMethod]
+        [Fact]
         public void superSimpleExample()
         {
             IntegratedIntCompressor iic = new IntegratedIntCompressor();
@@ -23,7 +22,7 @@ namespace CSharpFastPFOR.Tests
                 throw new Exception("bug");
         }
 
-        [TestMethod]
+        [Fact]
         public void basicExample()
         {
             int[] data = new int[2342351];
@@ -83,7 +82,7 @@ namespace CSharpFastPFOR.Tests
         /**
 	     * Like the basicExample, but we store the input array size manually.
 	     */
-        [TestMethod]
+        [Fact]
         public void basicExampleHeadless()
         {
             int[] data = new int[2342351];
@@ -145,7 +144,7 @@ namespace CSharpFastPFOR.Tests
 	     * This is an example to show you can compress unsorted integers as long as
 	     * most are small.
 	     */
-        [TestMethod]
+        [Fact]
         public void unsortedExample()
         {
             const int N = 1333333;
@@ -186,7 +185,7 @@ namespace CSharpFastPFOR.Tests
 	     *
 	     * Some of this code was written by Pavel Klinov.
 	     */
-        [TestMethod]
+        [Fact]
         public void advancedExample()
         {
             const int TotalSize = 2342351; // some arbitrary number
@@ -263,7 +262,7 @@ namespace CSharpFastPFOR.Tests
         /**
 	     * Demo of the headless approach where we must supply the array length
 	     */
-        [TestMethod]
+        [Fact]
         public void headlessDemo()
         {
             Console.WriteLine("Compressing arrays with minimal header...");

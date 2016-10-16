@@ -4,11 +4,10 @@
  */
 
 using CSharpFastPFOR.Tests.Port;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace CSharpFastPFOR.Tests
 {
-    [TestClass]
     public class DeltaZigzagEncodingTest
     {
         private static int zigzagEncode(DeltaZigzagEncoding.Encoder e, int value)
@@ -42,7 +41,7 @@ namespace CSharpFastPFOR.Tests
             Assert2.assertEquals(r[r.Length - 1], d.getContextValue());
         }
 
-        [TestMethod]
+        [Fact]
         public void checkZigzagEncode()
         {
             DeltaZigzagEncoding.Encoder e = new DeltaZigzagEncoding.Encoder(0);
@@ -55,7 +54,7 @@ namespace CSharpFastPFOR.Tests
             Assert2.assertEquals(5, zigzagEncode(e, -3));
         }
 
-        [TestMethod]
+        [Fact]
         public void checkZigzagDecoder()
         {
             DeltaZigzagEncoding.Decoder d = new DeltaZigzagEncoding.Decoder(0);
@@ -67,7 +66,7 @@ namespace CSharpFastPFOR.Tests
             Assert2.assertEquals(-3, zigzagDecode(d, 5));
         }
 
-        [TestMethod]
+        [Fact]
         public void checkEncodeSimple()
         {
             DeltaZigzagEncoding.Encoder e = new DeltaZigzagEncoding.Encoder(0);
@@ -76,7 +75,7 @@ namespace CSharpFastPFOR.Tests
                 new int[] { 0, 2, 2, 2, 2, 2, 2, 2, 2, 2 });
         }
 
-        [TestMethod]
+        [Fact]
         public void checkDecodeSimple()
         {
             DeltaZigzagEncoding.Decoder d = new DeltaZigzagEncoding.Decoder(0);
@@ -100,7 +99,7 @@ namespace CSharpFastPFOR.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void checkSpots()
         {
             SpotChecker c = new SpotChecker();

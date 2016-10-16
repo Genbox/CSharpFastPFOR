@@ -10,11 +10,10 @@ using CSharpFastPFOR.Port;
 using CSharpFastPFOR.Synth;
 using CSharpFastPFOR.Tests.Port;
 using CSharpFastPFOR.Tests.Utils;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace CSharpFastPFOR.Tests
 {
-    [TestClass]
     public class BasicTest
     {
         private readonly IntegerCODEC[] codecs = {
@@ -35,7 +34,7 @@ namespace CSharpFastPFOR.Tests
             new Composition(new DeltaZigzagBinaryPacking(), new DeltaZigzagVariableByte())
         };
 
-        [TestMethod]
+        [Fact]
         public void saulTest()
         {
             foreach (IntegerCODEC C in codecs)
@@ -63,7 +62,7 @@ namespace CSharpFastPFOR.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void varyingLengthTest()
         {
             const int N = 4096;
@@ -96,7 +95,7 @@ namespace CSharpFastPFOR.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void varyingLengthTest2()
         {
             const int N = 128;
@@ -131,7 +130,7 @@ namespace CSharpFastPFOR.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void checkDeltaZigzagVB()
         {
             DeltaZigzagVariableByte codec = new DeltaZigzagVariableByte();
@@ -143,7 +142,7 @@ namespace CSharpFastPFOR.Tests
             test(codec, codeco, 2, 18);
         }
 
-        [TestMethod]
+        [Fact]
         public void checkDeltaZigzagPacking()
         {
             DeltaZigzagBinaryPacking codec = new DeltaZigzagBinaryPacking();
@@ -160,14 +159,14 @@ namespace CSharpFastPFOR.Tests
             test(compo, compo2, 2, 18);
         }
 
-        [TestMethod]
+        [Fact]
         public void checkXorBinaryPacking()
         {
             testZeroInZeroOut(new XorBinaryPacking());
             testSpurious(new XorBinaryPacking());
         }
 
-        [TestMethod]
+        [Fact]
         public void checkXorBinaryPacking1()
         {
             IntegerCODEC c = new IntegratedComposition(new XorBinaryPacking(),
@@ -175,7 +174,7 @@ namespace CSharpFastPFOR.Tests
             testZeroInZeroOut(c);
         }
 
-        [TestMethod]
+        [Fact]
         public void checkXorBinaryPacking2()
         {
             IntegerCODEC c = new IntegratedComposition(new XorBinaryPacking(),
@@ -183,7 +182,7 @@ namespace CSharpFastPFOR.Tests
             testUnsorted(c);
         }
 
-        [TestMethod]
+        [Fact]
         public void checkXorBinaryPacking3()
         {
             IntegerCODEC c = new IntegratedComposition(new XorBinaryPacking(), new IntegratedVariableByte());
@@ -193,7 +192,7 @@ namespace CSharpFastPFOR.Tests
             test(c, co, 2, 18);
         }
 
-        [TestMethod]
+        [Fact]
         public void verifyBitPacking()
         {
             const int N = 32;
@@ -217,7 +216,7 @@ namespace CSharpFastPFOR.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void verifyWithoutMask()
         {
             const int N = 32;
@@ -259,7 +258,7 @@ namespace CSharpFastPFOR.Tests
         /**
          * Verify bitpacking with exception.
          */
-        [TestMethod]
+        [Fact]
         public void verifyWithExceptions()
         {
             const int N = 32;
@@ -289,7 +288,7 @@ namespace CSharpFastPFOR.Tests
         /**
          * check that the codecs can be inverted.
          */
-        [TestMethod]
+        [Fact]
         public void basictest()
         {
             test(5, 10);
@@ -300,7 +299,7 @@ namespace CSharpFastPFOR.Tests
         /**
          * check that there is no spurious output.
          */
-        [TestMethod]
+        [Fact]
         public void spuriousouttest()
         {
             testSpurious(new IntegratedBinaryPacking());
@@ -318,7 +317,7 @@ namespace CSharpFastPFOR.Tests
         /**
          * check that an empty array generates an empty array after compression.
          */
-        [TestMethod]
+        [Fact]
         public void zeroinzerouttest()
         {
             testZeroInZeroOut(new IntegratedBinaryPacking());
@@ -467,7 +466,7 @@ namespace CSharpFastPFOR.Tests
         /**
          * Test for unsorted array.
          */
-        [TestMethod]
+        [Fact]
         public void testUnsortedExample()
         {
             testUnsorted(new VariableByte());
@@ -584,7 +583,7 @@ namespace CSharpFastPFOR.Tests
             Assert2.assertArrayEquals(data, recovered);
         }
 
-        [TestMethod]
+        [Fact]
         public void fastPforTest()
         {
             // proposed by Stefan Ackermann (https://github.com/Stivo)
@@ -603,7 +602,7 @@ namespace CSharpFastPFOR.Tests
                                         + " != " + data[k]);
         }
 
-        [TestMethod]
+        [Fact]
         public void fastPfor128Test()
         {
             // proposed by Stefan Ackermann (https://github.com/Stivo)

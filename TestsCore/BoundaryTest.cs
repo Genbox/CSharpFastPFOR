@@ -7,11 +7,10 @@ using System;
 using CSharpFastPFOR.Differential;
 using CSharpFastPFOR.Port;
 using CSharpFastPFOR.Tests.Port;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace CSharpFastPFOR.Tests
 {
-    [TestClass]
     public class BoundaryTest
     {
         private static void compressAndUncompress(int length, IntegerCODEC c)
@@ -76,14 +75,14 @@ namespace CSharpFastPFOR.Tests
             around256(c);
         }
 
-        [TestMethod]
+        [Fact]
         public void testIntegratedComposition()
         {
             IntegratedComposition c = new IntegratedComposition(new IntegratedBinaryPacking(), new IntegratedVariableByte());
             testBoundary(c);
         }
 
-        [TestMethod]
+        [Fact]
         public void testComposition()
         {
             Composition c = new Composition(new BinaryPacking(), new VariableByte());

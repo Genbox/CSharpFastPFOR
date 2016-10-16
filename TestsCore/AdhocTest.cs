@@ -3,14 +3,13 @@
  */
 
 using CSharpFastPFOR.Tests.Utils;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace CSharpFastPFOR.Tests
 {
-    [TestClass]
     public class AdhocTest
     {
-        [TestMethod]
+        [Fact]
         public void biggerCompressedArray0()
         {
             // No problem: for comparison.
@@ -20,7 +19,7 @@ namespace CSharpFastPFOR.Tests
             TestUtils.assertSymmetry(c, 0, 16384);
         }
 
-        [TestMethod]
+        [Fact]
         public void biggerCompressedArray1()
         {
             // Compressed array is bigger than original, because of VariableByte.
@@ -28,7 +27,7 @@ namespace CSharpFastPFOR.Tests
             TestUtils.assertSymmetry(c, -1);
         }
 
-        [TestMethod]
+        [Fact]
         public void biggerCompressedArray2()
         {
             // Compressed array is bigger than original, because of Composition.

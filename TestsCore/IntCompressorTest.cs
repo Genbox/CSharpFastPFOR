@@ -7,11 +7,10 @@ using System;
 using CSharpFastPFOR.Differential;
 using CSharpFastPFOR.Port;
 using CSharpFastPFOR.Tests.Port;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace CSharpFastPFOR.Tests
 {
-    [TestClass]
     public class IntCompressorTest
     {
         private readonly IntegratedIntCompressor[] iic = {
@@ -22,7 +21,7 @@ namespace CSharpFastPFOR.Tests
             new IntCompressor(new VariableByte()),
             new IntCompressor(new SkippableComposition(new BinaryPacking(), new VariableByte())) };
 
-        [TestMethod]
+        [Fact]
         public void basicTest()
         {
             for (int N = 1; N <= 10000; N *= 10)
@@ -39,7 +38,7 @@ namespace CSharpFastPFOR.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void superSimpleExample()
         {
             IntegratedIntCompressor iic2 = new IntegratedIntCompressor();
@@ -53,7 +52,7 @@ namespace CSharpFastPFOR.Tests
             if (!Arrays.equals(recov, data)) throw new Exception("bug");
         }
 
-        [TestMethod]
+        [Fact]
         public void basicIntegratedTest()
         {
             for (int N = 1; N <= 10000; N *= 10)

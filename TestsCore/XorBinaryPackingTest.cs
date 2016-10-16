@@ -12,11 +12,10 @@ using CSharpFastPFOR.Differential;
 using CSharpFastPFOR.Port;
 using CSharpFastPFOR.Tests.Port;
 using CSharpFastPFOR.Tests.Utils;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace CSharpFastPFOR.Tests
 {
-    [TestClass]
     public class XorBinaryPackingTest
     {
         private static void checkCompressAndUncompress(string label, int[] data)
@@ -27,7 +26,7 @@ namespace CSharpFastPFOR.Tests
             Assert2.assertArrayEquals(data, decompBuf);
         }
 
-        [TestMethod]
+        [Fact]
         public void compressAndUncompress0()
         {
             int[] data = new int[128];
@@ -38,7 +37,7 @@ namespace CSharpFastPFOR.Tests
             checkCompressAndUncompress("compressAndUncompress0", data);
         }
 
-        [TestMethod]
+        [Fact]
         public void compressAndUncompress1()
         {
             int[] data = new int[128];
@@ -49,7 +48,7 @@ namespace CSharpFastPFOR.Tests
             checkCompressAndUncompress("compressAndUncompress1", data);
         }
 
-        [TestMethod]
+        [Fact]
         public void compressAndUncompress2()
         {
             int[] data = new int[128];
@@ -60,7 +59,7 @@ namespace CSharpFastPFOR.Tests
             checkCompressAndUncompress("compressAndUncompress2", data);
         }
 
-        [TestMethod]
+        [Fact]
         public void compressAndUncompress3()
         {
             int[] data = new int[256];
@@ -69,7 +68,7 @@ namespace CSharpFastPFOR.Tests
             checkCompressAndUncompress("compressAndUncompress3", data);
         }
 
-        [TestMethod]
+        [Fact]
         public void compressAndUncompress4()
         {
             int[] data = new int[256];
@@ -78,7 +77,7 @@ namespace CSharpFastPFOR.Tests
             checkCompressAndUncompress("compressAndUncompress4", data);
         }
 
-        [TestMethod]
+        [Fact]
         public void compressAndUncompress5()
         {
             int[] data = new int[256];
