@@ -4,10 +4,11 @@ CSharpFastPFOR: A C# port of the simple integer compression library JavaFastPFOR
 Why?
 ----
 While building a in-memory compressed datastructure, I needed a library for efficient integer compression. JavaFastPFOR was what I needed, so I ported it to C#.
+See the original project by Daniel Lemire here: https://github.com/lemire/JavaFastPFOR
 
 Requirements
 ------------
-* .NET 4.6.1
+* .NET Core 1.6 SDK
 * Visual Studio 2015
 
 API
