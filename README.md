@@ -8,8 +8,8 @@ See the original project by Daniel Lemire here: https://github.com/lemire/JavaFa
 
 Requirements
 ------------
-* .NET Core 1.6 SDK
-* Visual Studio 2015
+* .NET Core 2.0 SDK
+* Visual Studio 2019
 
 API
 -----------------
