@@ -1,4 +1,4 @@
-﻿namespace CSharpFastPFOR.Port
+﻿namespace Genbox.CSharpFastPFOR.Port
 {
     public enum ByteOrder
     {

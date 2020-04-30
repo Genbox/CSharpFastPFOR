@@ -2,10 +2,10 @@
  * Collection of adhoc tests.
  */
 
-using CSharpFastPFOR.Tests.Utils;
+using Genbox.CSharpFastPFOR.Tests.Utils;
 using Xunit;
 
-namespace CSharpFastPFOR.Tests
+namespace Genbox.CSharpFastPFOR.Tests
 {
     public class AdhocTest
     {

@@ -13,9 +13,9 @@
 
 using System;
 using System.Collections.Generic;
-using CSharpFastPFOR.Port;
+using Genbox.CSharpFastPFOR.Port;
 
-namespace CSharpFastPFOR.Synth
+namespace Genbox.CSharpFastPFOR.Synth
 {
     public class UniformDataGenerator
     {

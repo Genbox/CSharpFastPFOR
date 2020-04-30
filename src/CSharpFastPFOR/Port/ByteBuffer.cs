@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace CSharpFastPFOR.Port
+namespace Genbox.CSharpFastPFOR.Port
 {
     public class ByteBuffer
     {

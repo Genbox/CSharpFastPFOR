@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpFastPFOR.Benchmarks",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpFastPFOR.Tests", "CSharpFastPFOR.Tests\CSharpFastPFOR.Tests.csproj", "{1BBE6772-7D66-42F3-867D-DFE6AACFE2DF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Imports", "Imports", "{EDAA6B5E-A9FB-4AD2-8FDA-3A0FD7AD5F62}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{EDAA6B5E-A9FB-4AD2-8FDA-3A0FD7AD5F62}"
 	ProjectSection(SolutionItems) = preProject
-		..\Properties.targets = ..\Properties.targets
+		..\.gitignore = ..\.gitignore
+		..\Directory.Build.targets = ..\Directory.Build.targets
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Global

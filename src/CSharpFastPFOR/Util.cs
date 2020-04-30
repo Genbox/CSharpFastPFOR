@@ -14,9 +14,9 @@
  */
 
 using System;
-using CSharpFastPFOR.Port;
+using Genbox.CSharpFastPFOR.Port;
 
-namespace CSharpFastPFOR
+namespace Genbox.CSharpFastPFOR
 {
     public class Util
     {

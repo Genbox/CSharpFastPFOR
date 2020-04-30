@@ -5,14 +5,14 @@
  */
 
 using System;
-using CSharpFastPFOR.Differential;
-using CSharpFastPFOR.Port;
-using CSharpFastPFOR.Synth;
-using CSharpFastPFOR.Tests.Port;
-using CSharpFastPFOR.Tests.Utils;
+using Genbox.CSharpFastPFOR.Differential;
+using Genbox.CSharpFastPFOR.Port;
+using Genbox.CSharpFastPFOR.Synth;
+using Genbox.CSharpFastPFOR.Tests.Port;
+using Genbox.CSharpFastPFOR.Tests.Utils;
 using Xunit;
 
-namespace CSharpFastPFOR.Tests
+namespace Genbox.CSharpFastPFOR.Tests
 {
     public class BasicTest
     {

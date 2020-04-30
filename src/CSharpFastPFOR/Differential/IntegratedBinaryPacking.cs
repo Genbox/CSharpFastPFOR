@@ -41,7 +41,7 @@
  * 
  */
 
-namespace CSharpFastPFOR.Differential
+namespace Genbox.CSharpFastPFOR.Differential
 {
     public class IntegratedBinaryPacking : IntegratedIntegerCODEC, SkippableIntegratedIntegerCODEC
     {

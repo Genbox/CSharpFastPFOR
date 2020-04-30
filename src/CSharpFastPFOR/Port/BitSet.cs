@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace CSharpFastPFOR.Port
+namespace Genbox.CSharpFastPFOR.Port
 {
     public class BitSet
     {

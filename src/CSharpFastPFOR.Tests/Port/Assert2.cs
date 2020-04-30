@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Xunit;
 
-namespace CSharpFastPFOR.Tests.Port
+namespace Genbox.CSharpFastPFOR.Tests.Port
 {
     public static class Assert2
     {

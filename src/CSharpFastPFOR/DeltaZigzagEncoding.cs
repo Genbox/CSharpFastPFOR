@@ -8,7 +8,7 @@
  * 
  * @author MURAOKA Taro http://github.com/koron
  */
-namespace CSharpFastPFOR
+namespace Genbox.CSharpFastPFOR
 {
     public class DeltaZigzagEncoding
     {

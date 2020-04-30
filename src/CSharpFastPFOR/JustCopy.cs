@@ -12,7 +12,7 @@
 
 using System;
 
-namespace CSharpFastPFOR
+namespace Genbox.CSharpFastPFOR
 {
     public class JustCopy : IntegerCODEC, SkippableIntegerCODEC
     {

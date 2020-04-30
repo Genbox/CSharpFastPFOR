@@ -17,7 +17,7 @@
 
 using System;
 
-namespace CSharpFastPFOR
+namespace Genbox.CSharpFastPFOR
 {
     public class Simple16 : IntegerCODEC, SkippableIntegerCODEC
     {

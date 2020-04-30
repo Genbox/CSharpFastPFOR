@@ -12,9 +12,9 @@
  * @author MURAOKA Taro http://github.com/koron
  */
 
-using CSharpFastPFOR.Port;
+using Genbox.CSharpFastPFOR.Port;
 
-namespace CSharpFastPFOR.Differential
+namespace Genbox.CSharpFastPFOR.Differential
 {
     public class XorBinaryPacking : IntegratedIntegerCODEC
     {

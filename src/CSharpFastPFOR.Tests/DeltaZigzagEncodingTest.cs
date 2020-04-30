@@ -3,10 +3,10 @@
  * Apache License Version 2.0 http://www.apache.org/licenses/.
  */
 
-using CSharpFastPFOR.Tests.Port;
+using Genbox.CSharpFastPFOR.Tests.Port;
 using Xunit;
 
-namespace CSharpFastPFOR.Tests
+namespace Genbox.CSharpFastPFOR.Tests
 {
     public class DeltaZigzagEncodingTest
     {

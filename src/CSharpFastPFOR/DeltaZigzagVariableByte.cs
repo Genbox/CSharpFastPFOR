@@ -9,9 +9,9 @@
  * @author MURAOKA Taro http://github.com/koron
  */
 
-using CSharpFastPFOR.Port;
+using Genbox.CSharpFastPFOR.Port;
 
-namespace CSharpFastPFOR
+namespace Genbox.CSharpFastPFOR
 {
     public class DeltaZigzagVariableByte : IntegerCODEC
     {

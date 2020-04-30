@@ -13,10 +13,10 @@
  */
 
 using System;
-using CSharpFastPFOR.Differential;
-using CSharpFastPFOR.Port;
+using Genbox.CSharpFastPFOR.Differential;
+using Genbox.CSharpFastPFOR.Port;
 
-namespace CSharpFastPFOR.Benchmarks
+namespace Genbox.CSharpFastPFOR.Benchmarks
 {
     public static class BenchmarkBitPacking
     {

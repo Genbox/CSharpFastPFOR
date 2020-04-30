@@ -14,7 +14,7 @@
 
 using System;
 
-namespace CSharpFastPFOR
+namespace Genbox.CSharpFastPFOR
 {
     public class S16
     {

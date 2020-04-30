@@ -11,7 +11,7 @@
  * @author Daniel Lemire
  * 
  */
-namespace CSharpFastPFOR
+namespace Genbox.CSharpFastPFOR
 {
     public interface ByteIntegerCODEC
     {

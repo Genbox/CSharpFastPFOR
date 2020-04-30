@@ -15,7 +15,7 @@
  * @author Daniel Lemire
  */
 
-namespace CSharpFastPFOR.Synth
+namespace Genbox.CSharpFastPFOR.Synth
 {
     public class ClusteredDataGenerator
     {

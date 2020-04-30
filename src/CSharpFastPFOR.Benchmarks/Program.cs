@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using CSharpFastPFOR.Port;
+using Genbox.CSharpFastPFOR.Port;
 
-namespace CSharpFastPFOR.Benchmarks
+namespace Genbox.CSharpFastPFOR.Benchmarks
 {
     internal class Program
     {

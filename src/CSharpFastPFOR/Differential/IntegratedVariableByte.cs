@@ -15,9 +15,9 @@
  * @author Daniel Lemire
  */
 
-using CSharpFastPFOR.Port;
+using Genbox.CSharpFastPFOR.Port;
 
-namespace CSharpFastPFOR.Differential
+namespace Genbox.CSharpFastPFOR.Differential
 {
     public class IntegratedVariableByte : IntegratedIntegerCODEC, IntegratedByteIntegerCODEC, SkippableIntegratedIntegerCODEC
     {

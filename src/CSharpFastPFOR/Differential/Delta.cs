@@ -11,7 +11,7 @@
  * @author Daniel Lemire
  * 
  */
-namespace CSharpFastPFOR.Differential
+namespace Genbox.CSharpFastPFOR.Differential
 {
     public class Delta
     {

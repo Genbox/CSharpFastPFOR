@@ -5,11 +5,11 @@
  */
 
 using System;
-using CSharpFastPFOR.Port;
-using CSharpFastPFOR.Tests.Utils;
+using Genbox.CSharpFastPFOR.Port;
+using Genbox.CSharpFastPFOR.Tests.Utils;
 using Xunit;
 
-namespace CSharpFastPFOR.Tests
+namespace Genbox.CSharpFastPFOR.Tests
 {
     public class SkippableBasicTest
     {

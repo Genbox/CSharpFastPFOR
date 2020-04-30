@@ -9,7 +9,7 @@
  * 
  * @author dwu
  */
-namespace CSharpFastPFOR
+namespace Genbox.CSharpFastPFOR
 {
     public class IntWrapper
     {

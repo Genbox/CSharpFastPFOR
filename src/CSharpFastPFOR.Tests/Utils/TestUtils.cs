@@ -3,10 +3,10 @@
  */
 
 using System;
-using CSharpFastPFOR.Port;
-using CSharpFastPFOR.Tests.Port;
+using Genbox.CSharpFastPFOR.Port;
+using Genbox.CSharpFastPFOR.Tests.Port;
 
-namespace CSharpFastPFOR.Tests.Utils
+namespace Genbox.CSharpFastPFOR.Tests.Utils
 {
     public class TestUtils
     {

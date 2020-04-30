@@ -1,8 +1,8 @@
 ﻿using System;
-using CSharpFastPFOR.Port;
+using Genbox.CSharpFastPFOR.Port;
 using Xunit;
 
-namespace CSharpFastPFOR.Tests
+namespace Genbox.CSharpFastPFOR.Tests
 {
     public class UtilsTest
     {

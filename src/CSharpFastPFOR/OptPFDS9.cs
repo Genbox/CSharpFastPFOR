@@ -29,7 +29,7 @@
  * 
  * @author Daniel Lemire
  */
-namespace CSharpFastPFOR
+namespace Genbox.CSharpFastPFOR
 {
     public class OptPFDS9 : IntegerCODEC, SkippableIntegerCODEC
     {

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace CSharpFastPFOR.Benchmarks.Port
+namespace Genbox.CSharpFastPFOR.Benchmarks.Port
 {
     public static class System
     {

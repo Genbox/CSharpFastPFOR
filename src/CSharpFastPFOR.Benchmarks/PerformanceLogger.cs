@@ -8,7 +8,7 @@
  * 
  * @author MURAOKA Taro http://github.com/koron
  */
-namespace CSharpFastPFOR.Benchmarks
+namespace Genbox.CSharpFastPFOR.Benchmarks
 {
     public class PerformanceLogger
     {

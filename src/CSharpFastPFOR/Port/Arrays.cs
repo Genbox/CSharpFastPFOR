@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace CSharpFastPFOR.Port
+namespace Genbox.CSharpFastPFOR.Port
 {
     public class Arrays
     {
