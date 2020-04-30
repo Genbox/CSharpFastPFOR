@@ -11,16 +11,16 @@ namespace Genbox.CSharpFastPFOR.Port
                 throw new ArgumentOutOfRangeException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
 
             if (fromIndex < 0)
-                throw new ArgumentOutOfRangeException("fromIndex");
+                throw new ArgumentOutOfRangeException(nameof(fromIndex));
 
             if (toIndex > arrayLen)
-                throw new ArgumentOutOfRangeException("toIndex");
+                throw new ArgumentOutOfRangeException(nameof(toIndex));
         }
 
         public static void fill<T>(T[] array, int start, int end, T value)
         {
             if (array == null)
-                throw new ArgumentNullException("array");
+                throw new ArgumentNullException(nameof(array));
 
             rangeCheck(array.Length, start, end);
 

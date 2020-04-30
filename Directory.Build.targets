@@ -1,9 +1,14 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
   <PropertyGroup>
     <Authors>Ian Qvist</Authors>
     <Copyright>Copyright 2020, by Ian Qvist. All rights reserved.</Copyright>
     <Description>A C# port of the simple integer compression library JavaFastPFOR by Daniel Lemire</Description>
     <Version>1.0.0</Version>
+
+    <!-- Set copying files etc. to timeout faster -->
+    <CopyRetryCount>2</CopyRetryCount>
+    <CopyRetryDelayMilliseconds>500</CopyRetryDelayMilliseconds>
 
     <LangVersion>8.0</LangVersion>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
@@ -21,7 +26,6 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,5 +36,15 @@
     <PackageReference Include="ToStringWithoutOverrideAnalyzer" Version="0.6.0" PrivateAssets="all" />
     <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0" PrivateAssets="all" />
   </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+  </PropertyGroup>
 
 </Project>

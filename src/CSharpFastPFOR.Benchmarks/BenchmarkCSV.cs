@@ -15,12 +15,15 @@ namespace Genbox.CSharpFastPFOR.Benchmarks
 {
     public enum Format
     {
-        ONEARRAYPERLINE, ONEARRAYPERFILE, ONEINTPERLINE
+        ONEARRAYPERLINE,
+        ONEARRAYPERFILE,
+        ONEINTPERLINE
     }
 
     public enum CompressionMode
     {
-        AS_IS, DELTA
+        AS_IS,
+        DELTA
     }
 
     public static class BenchmarkCSV
