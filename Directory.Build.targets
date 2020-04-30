@@ -17,7 +17,7 @@
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\Global.ruleset</CodeAnalysisRuleSet>
     <RepositoryType>Git</RepositoryType>
     <RootNamespace>Genbox.$(MSBuildProjectName)</RootNamespace>
-    <AssemblyName>Genbox.$(MSBuildProjectName)</AssemblyName>
+    <!--<AssemblyName>Genbox.$(MSBuildProjectName)</AssemblyName>-->
     <PackageProjectUrl>https://github.com/Genbox/$(MSBuildProjectName)</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 
@@ -39,12 +39,10 @@
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
 
 </Project>
