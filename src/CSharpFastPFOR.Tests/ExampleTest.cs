@@ -2,11 +2,19 @@ using System;
 using Genbox.CSharpFastPFOR.Differential;
 using Genbox.CSharpFastPFOR.Port;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Genbox.CSharpFastPFOR.Tests
 {
     public class ExampleTest
     {
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public ExampleTest(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+
         [Fact]
         public void superSimpleExample()
         {
@@ -14,10 +22,10 @@ namespace Genbox.CSharpFastPFOR.Tests
             int[] data = new int[2342351];
             for (int k = 0; k < data.Length; ++k)
                 data[k] = k;
-            Console.WriteLine("Compressing " + data.Length + " integers using friendly interface");
+            _testOutputHelper.WriteLine("Compressing " + data.Length + " integers using friendly interface");
             int[] compressed = iic.compress(data);
             int[] recov = iic.uncompress(compressed);
-            Console.WriteLine("compressed from " + data.Length * 4 / 1024 + "KB to " + compressed.Length * 4 / 1024 + "KB");
+            _testOutputHelper.WriteLine("compressed from " + data.Length * 4 / 1024 + "KB to " + compressed.Length * 4 / 1024 + "KB");
             if (!Arrays.equals(recov, data))
                 throw new Exception("bug");
         }
@@ -26,7 +34,7 @@ namespace Genbox.CSharpFastPFOR.Tests
         public void basicExample()
         {
             int[] data = new int[2342351];
-            Console.WriteLine("Compressing " + data.Length + " integers in one go");
+            _testOutputHelper.WriteLine("Compressing " + data.Length + " integers in one go");
             // data should be sorted for best
             // results
             for (int k = 0; k < data.Length; ++k)
@@ -57,7 +65,7 @@ namespace Genbox.CSharpFastPFOR.Tests
             // got it!
             // inputoffset should be at data.Length but outputoffset tells
             // us where we are...
-            Console.WriteLine(
+            _testOutputHelper.WriteLine(
                 "compressed from " + data.Length * 4 / 1024 + "KB to " + outputoffset.intValue() * 4 / 1024 + "KB");
             // we can repack the data: (optional)
             compressed = Arrays.copyOf(compressed, outputoffset.intValue());
@@ -73,10 +81,9 @@ namespace Genbox.CSharpFastPFOR.Tests
             IntWrapper recoffset = new IntWrapper(0);
             codec.uncompress(compressed, new IntWrapper(0), compressed.Length, recovered, recoffset);
             if (Arrays.equals(data, recovered))
-                Console.WriteLine("data is recovered without loss");
+                _testOutputHelper.WriteLine("data is recovered without loss");
             else
                 throw new Exception("bug"); // could use assert
-            Console.WriteLine();
         }
 
         /**
@@ -86,7 +93,7 @@ namespace Genbox.CSharpFastPFOR.Tests
         public void basicExampleHeadless()
         {
             int[] data = new int[2342351];
-            Console.WriteLine("Compressing " + data.Length + " integers in one go using the headless approach");
+            _testOutputHelper.WriteLine("Compressing " + data.Length + " integers in one go using the headless approach");
             // data should be sorted for best
             // results
             for (int k = 0; k < data.Length; ++k)
@@ -118,7 +125,7 @@ namespace Genbox.CSharpFastPFOR.Tests
             // got it!
             // inputoffset should be at data.Length but outputoffset tells
             // us where we are...
-            Console.WriteLine(
+            _testOutputHelper.WriteLine(
                 "compressed from " + data.Length * 4 / 1024 + "KB to " + outputoffset.intValue() * 4 / 1024 + "KB");
             // we can repack the data: (optional)
             compressed = Arrays.copyOf(compressed, outputoffset.intValue());
@@ -134,10 +141,9 @@ namespace Genbox.CSharpFastPFOR.Tests
             IntWrapper recoffset = new IntWrapper(0);
             codec.headlessUncompress(compressed, new IntWrapper(1), compressed.Length, recovered, recoffset, howmany, new IntWrapper(0));
             if (Arrays.equals(data, recovered))
-                Console.WriteLine("data is recovered without loss");
+                _testOutputHelper.WriteLine("data is recovered without loss");
             else
                 throw new Exception("bug"); // could use assert
-            Console.WriteLine();
         }
 
         /**
@@ -163,8 +169,7 @@ namespace Genbox.CSharpFastPFOR.Tests
             IntWrapper inputoffset = new IntWrapper(0);
             IntWrapper outputoffset = new IntWrapper(0);
             codec.compress(data, inputoffset, data.Length, compressed, outputoffset);
-            Console.WriteLine("compressed unsorted integers from " + data.Length * 4 / 1024 + "KB to "
-                              + outputoffset.intValue() * 4 / 1024 + "KB");
+            _testOutputHelper.WriteLine("compressed unsorted integers from " + data.Length * 4 / 1024 + "KB to " + outputoffset.intValue() * 4 / 1024 + "KB");
             // we can repack the data: (optional)
             compressed = Arrays.copyOf(compressed, outputoffset.intValue());
 
@@ -172,11 +177,9 @@ namespace Genbox.CSharpFastPFOR.Tests
             IntWrapper recoffset = new IntWrapper(0);
             codec.uncompress(compressed, new IntWrapper(0), compressed.Length, recovered, recoffset);
             if (Arrays.equals(data, recovered))
-                Console.WriteLine("data is recovered without loss");
+                _testOutputHelper.WriteLine("data is recovered without loss");
             else
                 throw new Exception("bug"); // could use assert
-            Console.WriteLine();
-
         }
 
         /**
@@ -190,9 +193,9 @@ namespace Genbox.CSharpFastPFOR.Tests
         {
             const int TotalSize = 2342351; // some arbitrary number
             const int ChunkSize = 16384; // size of each chunk, choose a multiple of 128
-            Console.WriteLine("Compressing " + TotalSize + " integers using chunks of " + ChunkSize + " integers ("
+            _testOutputHelper.WriteLine("Compressing " + TotalSize + " integers using chunks of " + ChunkSize + " integers ("
                               + ChunkSize * 4 / 1024 + "KB)");
-            Console.WriteLine("(It is often better for applications to work in chunks fitting in CPU cache.)");
+            _testOutputHelper.WriteLine("(It is often better for applications to work in chunks fitting in CPU cache.)");
             int[] data = new int[TotalSize];
             // data should be sorted for best
             // results
@@ -221,8 +224,8 @@ namespace Genbox.CSharpFastPFOR.Tests
             // got it!
             // inputoffset should be at data.Length but outputoffset tells
             // us where we are...
-            Console.WriteLine(
-                "compressed from " + data.Length * 4 / 1024 + "KB to " + outputoffset.intValue() * 4 / 1024 + "KB");
+            _testOutputHelper.WriteLine("compressed from " + data.Length * 4 / 1024 + "KB to " + outputoffset.intValue() * 4 / 1024 + "KB");
+
             // we can repack the data:
             compressed = Arrays.copyOf(compressed, outputoffset.intValue());
 
@@ -255,8 +258,7 @@ namespace Genbox.CSharpFastPFOR.Tests
                 }
                 currentpos += recoffset.get();
             }
-            Console.WriteLine("data is recovered without loss");
-            Console.WriteLine();
+            _testOutputHelper.WriteLine("data is recovered without loss");
         }
 
         /**
@@ -265,7 +267,7 @@ namespace Genbox.CSharpFastPFOR.Tests
         [Fact]
         public void headlessDemo()
         {
-            Console.WriteLine("Compressing arrays with minimal header...");
+            _testOutputHelper.WriteLine("Compressing arrays with minimal header...");
             int[] uncompressed1 = { 1, 2, 1, 3, 1 };
             int[] uncompressed2 = { 3, 2, 4, 6, 1 };
 
@@ -285,24 +287,25 @@ namespace Genbox.CSharpFastPFOR.Tests
             int length2 = outPos.get() - previous.get();
 
             compressed = Arrays.copyOf(compressed, length1 + length2);
-            Console.WriteLine("compressed unsorted integers from " + uncompressed1.Length * 4 + "B to " + length1 * 4 + "B");
-            Console.WriteLine("compressed unsorted integers from " + uncompressed2.Length * 4 + "B to " + length2 * 4 + "B");
-            Console.WriteLine("Total compressed output " + compressed.Length);
+            _testOutputHelper.WriteLine("compressed unsorted integers from " + uncompressed1.Length * 4 + "B to " + length1 * 4 + "B");
+            _testOutputHelper.WriteLine("compressed unsorted integers from " + uncompressed2.Length * 4 + "B to " + length2 * 4 + "B");
+            _testOutputHelper.WriteLine("Total compressed output " + compressed.Length);
 
             int[] recovered1 = new int[uncompressed1.Length];
             int[] recovered2 = new int[uncompressed1.Length];
+
             IntWrapper inPos = new IntWrapper();
-            Console.WriteLine("Decoding first array starting at pos = " + inPos);
-            codec.headlessUncompress(compressed, inPos, compressed.Length, recovered1, new IntWrapper(0),
-                uncompressed1.Length);
-            Console.WriteLine("Decoding second array starting at pos = " + inPos);
-            codec.headlessUncompress(compressed, inPos, compressed.Length, recovered2, new IntWrapper(0),
-                uncompressed2.Length);
+            _testOutputHelper.WriteLine("Decoding first array starting at pos = " + inPos);
+            codec.headlessUncompress(compressed, inPos, compressed.Length, recovered1, new IntWrapper(0), uncompressed1.Length);
+
+            _testOutputHelper.WriteLine("Decoding second array starting at pos = " + inPos);
+            codec.headlessUncompress(compressed, inPos, compressed.Length, recovered2, new IntWrapper(0), uncompressed2.Length);
             if (!Arrays.equals(uncompressed1, recovered1))
                 throw new Exception("First array does not match.");
             if (!Arrays.equals(uncompressed2, recovered2))
                 throw new Exception("Second array does not match.");
-            Console.WriteLine("The arrays match, your code is probably ok.");
+
+            _testOutputHelper.WriteLine("The arrays match, your code is probably ok.");
         }
     }
 }

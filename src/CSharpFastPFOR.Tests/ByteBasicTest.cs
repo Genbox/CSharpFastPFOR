@@ -11,6 +11,7 @@ using Genbox.CSharpFastPFOR.Port;
 using Genbox.CSharpFastPFOR.Tests.Port;
 using Genbox.CSharpFastPFOR.Tests.Utils;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Genbox.CSharpFastPFOR.Tests
 {
@@ -20,6 +21,13 @@ namespace Genbox.CSharpFastPFOR.Tests
             new VariableByte(),
             new IntegratedVariableByte(),
         };
+
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public ByteBasicTest(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
 
         [Fact]
         public void saulTest()
@@ -42,7 +50,7 @@ namespace Genbox.CSharpFastPFOR.Tests
                     C.uncompress(b, bOffset, len, c, cOffset);
                     if (!Arrays.equals(a, c))
                     {
-                        Console.WriteLine("Problem with " + C);
+                        _testOutputHelper.WriteLine("Problem with " + C);
                     }
                     Assert2.assertArrayEquals(a, c);
                 }

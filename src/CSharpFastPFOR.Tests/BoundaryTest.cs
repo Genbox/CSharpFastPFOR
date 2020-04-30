@@ -3,17 +3,24 @@
  *
  */
 
-using System;
 using Genbox.CSharpFastPFOR.Differential;
 using Genbox.CSharpFastPFOR.Port;
 using Genbox.CSharpFastPFOR.Tests.Port;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Genbox.CSharpFastPFOR.Tests
 {
     public class BoundaryTest
     {
-        private static void compressAndUncompress(int length, IntegerCODEC c)
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public BoundaryTest(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+
+        private void compressAndUncompress(int length, IntegerCODEC c)
         {
             // Initialize array.
             int[] source = new int[length];
@@ -40,35 +47,35 @@ namespace Genbox.CSharpFastPFOR.Tests
             int[] target = Arrays.copyOf(uncompressed, u_outpos.get());
             if (!Arrays.equals(source, target))
             {
-                Console.WriteLine("problem with length = " + length + " and " + c);
-                Console.WriteLine(Arrays.toString(source));
-                Console.WriteLine(Arrays.toString(target));
+                _testOutputHelper.WriteLine("problem with length = " + length + " and " + c);
+                _testOutputHelper.WriteLine(Arrays.toString(source));
+                _testOutputHelper.WriteLine(Arrays.toString(target));
             }
             Assert2.assertArrayEquals(source, target);
         }
 
-        private static void around32(IntegerCODEC c)
+        private void around32(IntegerCODEC c)
         {
             compressAndUncompress(31, c);
             compressAndUncompress(32, c);
             compressAndUncompress(33, c);
         }
 
-        private static void around128(IntegerCODEC c)
+        private void around128(IntegerCODEC c)
         {
             compressAndUncompress(127, c);
             compressAndUncompress(128, c);
             compressAndUncompress(129, c);
         }
 
-        private static void around256(IntegerCODEC c)
+        private void around256(IntegerCODEC c)
         {
             compressAndUncompress(255, c);
             compressAndUncompress(256, c);
             compressAndUncompress(257, c);
         }
 
-        private static void testBoundary(IntegerCODEC c)
+        private void testBoundary(IntegerCODEC c)
         {
             around32(c);
             around128(c);

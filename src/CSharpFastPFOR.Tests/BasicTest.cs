@@ -11,11 +11,19 @@ using Genbox.CSharpFastPFOR.Synth;
 using Genbox.CSharpFastPFOR.Tests.Port;
 using Genbox.CSharpFastPFOR.Tests.Utils;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Genbox.CSharpFastPFOR.Tests
 {
     public class BasicTest
     {
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public BasicTest(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+
         private readonly IntegerCODEC[] codecs = {
             new IntegratedComposition(new IntegratedBinaryPacking(), new IntegratedVariableByte()),
             new JustCopy(),
@@ -55,7 +63,7 @@ namespace Genbox.CSharpFastPFOR.Tests
                     C.uncompress(b, bOffset, len, c, cOffset);
                     if (!Arrays.equals(a, c))
                     {
-                        Console.WriteLine("Problem with " + C);
+                        _testOutputHelper.WriteLine("Problem with " + C);
                     }
                     Assert2.assertArrayEquals(a, c);
                 }
@@ -71,7 +79,7 @@ namespace Genbox.CSharpFastPFOR.Tests
                 data[k] = k;
             foreach (IntegerCODEC c in codecs)
             {
-                Console.WriteLine("[BasicTest.varyingLengthTest] codec = " + c);
+                _testOutputHelper.WriteLine("[BasicTest.varyingLengthTest] codec = " + c);
                 for (int L = 1; L <= 128; L++)
                 {
                     int[] comp = TestUtils.compress(c, Arrays.copyOf(data, L));
@@ -87,8 +95,8 @@ namespace Genbox.CSharpFastPFOR.Tests
                     for (int k = 0; k < L; ++k)
                         if (answer[k] != data[k])
                         {
-                            Console.WriteLine(Arrays.toString(Arrays.copyOf(answer, L)));
-                            Console.WriteLine(Arrays.toString(Arrays.copyOf(data, L)));
+                            _testOutputHelper.WriteLine(Arrays.toString(Arrays.copyOf(answer, L)));
+                            _testOutputHelper.WriteLine(Arrays.toString(Arrays.copyOf(data, L)));
                             throw new Exception("bug");
                         }
                 }
@@ -103,7 +111,7 @@ namespace Genbox.CSharpFastPFOR.Tests
             data[127] = -1;
             foreach (IntegerCODEC c in codecs)
             {
-                Console.WriteLine("[BasicTest.varyingLengthTest2] codec = " + c);
+                _testOutputHelper.WriteLine("[BasicTest.varyingLengthTest2] codec = " + c);
 
                 if (c is Simple9)
                     continue;
@@ -349,7 +357,7 @@ namespace Genbox.CSharpFastPFOR.Tests
         private static void testSpurious(IntegerCODEC c)
         {
             int[] x = new int[1024];
-            int[] y = new int[0];
+            int[] y = Array.Empty<int>();
             IntWrapper i0 = new IntWrapper(0);
             IntWrapper i1 = new IntWrapper(0);
             for (int inlength = 0; inlength < 32; ++inlength)
@@ -361,14 +369,14 @@ namespace Genbox.CSharpFastPFOR.Tests
 
         private static void testZeroInZeroOut(IntegerCODEC c)
         {
-            int[] x = new int[0];
-            int[] y = new int[0];
+            int[] x = Array.Empty<int>();
+            int[] y = Array.Empty<int>();
             IntWrapper i0 = new IntWrapper(0);
             IntWrapper i1 = new IntWrapper(0);
             c.compress(x, i0, 0, y, i1);
             Assert2.assertEquals(0, i1.intValue());
 
-            int[] @out = new int[0];
+            int[] @out = Array.Empty<int>();
             IntWrapper outpos = new IntWrapper(0);
             c.uncompress(y, i1, 0, @out, outpos);
             Assert2.assertEquals(0, outpos.intValue());
@@ -390,10 +398,10 @@ namespace Genbox.CSharpFastPFOR.Tests
             }
         }
 
-        private static void test(int N, int nbr)
+        private void test(int N, int nbr)
         {
             ClusteredDataGenerator cdg = new ClusteredDataGenerator();
-            Console.WriteLine("[BasicTest.test] N = " + N + " " + nbr);
+            _testOutputHelper.WriteLine("[BasicTest.test] N = " + N + " " + nbr);
             for (int sparsity = 1; sparsity < 31 - nbr; sparsity += 4)
             {
                 int[][] data = new int[N][];

@@ -1,11 +1,19 @@
 ﻿using System;
 using Genbox.CSharpFastPFOR.Port;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Genbox.CSharpFastPFOR.Tests
 {
     public class UtilsTest
     {
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public UtilsTest(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+
         [Fact]
         public void testPacking()
         {
@@ -28,8 +36,8 @@ namespace Genbox.CSharpFastPFOR.Tests
                     for (int i = 0; i < n; ++i)
                         if (newdata[i] != data[i])
                         {
-                            Console.WriteLine(Arrays.toString(Arrays.copyOf(data, n)));
-                            Console.WriteLine(Arrays.toString(Arrays.copyOf(newdata, n)));
+                            _testOutputHelper.WriteLine(Arrays.toString(Arrays.copyOf(data, n)));
+                            _testOutputHelper.WriteLine(Arrays.toString(Arrays.copyOf(newdata, n)));
                             throw new Exception("bug " + b + " " + n);
                         }
                 }
@@ -58,8 +66,8 @@ namespace Genbox.CSharpFastPFOR.Tests
                     for (int i = 0; i < n; ++i)
                         if (newdata[i] != data[i])
                         {
-                            Console.WriteLine(Arrays.toString(Arrays.copyOf(data, n)));
-                            Console.WriteLine(Arrays.toString(Arrays.copyOf(newdata, n)));
+                            _testOutputHelper.WriteLine(Arrays.toString(Arrays.copyOf(data, n)));
+                            _testOutputHelper.WriteLine(Arrays.toString(Arrays.copyOf(newdata, n)));
                             throw new Exception("bug " + b + " " + n);
                         }
                 }

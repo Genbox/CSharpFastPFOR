@@ -10,41 +10,12 @@ namespace Genbox.CSharpFastPFOR.Tests.Utils
 {
     public class TestUtils
     {
-
-        public static void dumpIntArray(int[] data, string label)
-        {
-            Console.Write(label);
-            for (int i = 0; i < data.Length; ++i)
-            {
-                if (i % 6 == 0)
-                {
-                    Console.WriteLine();
-                }
-                Console.WriteLine(" %1$11d", data[i]);
-            }
-            Console.WriteLine();
-        }
-
-        public static void dumpIntArrayAsHex(int[] data, string label)
-        {
-            Console.Write(label);
-            for (int i = 0; i < data.Length; ++i)
-            {
-                if (i % 8 == 0)
-                {
-                    Console.WriteLine();
-                }
-                Console.WriteLine(" %1$08X", data[i]);
-            }
-            Console.WriteLine();
-        }
-
         /**
-     * Check that compress and uncompress keep original array.
-     *
-     * @param codec CODEC to test.
-     * @param orig  original integers
-     */
+        * Check that compress and uncompress keep original array.
+        *
+        * @param codec CODEC to test.
+        * @param orig  original integers
+        */
         public static void assertSymmetry(IntegerCODEC codec, params int[] orig)
         {
             // There are some cases that compressed array is bigger than original
@@ -53,7 +24,7 @@ namespace Genbox.CSharpFastPFOR.Tests.Utils
             // Example:
             //  - VariableByte compresses an array like [ -1 ].
             //  - Composition compresses a short array.
-        
+
             const int EXTEND = 1;
 
             int[] compressed = new int[orig.Length + EXTEND];
@@ -93,8 +64,6 @@ namespace Genbox.CSharpFastPFOR.Tests.Utils
             codec.uncompress(data, inPos, data.Length, outBuf, outPos);
             return Arrays.copyOf(outBuf, outPos.get());
         }
-
-
 
         public static sbyte[] compress(ByteIntegerCODEC codec, int[] data)
         {

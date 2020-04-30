@@ -8,11 +8,19 @@ using System;
 using Genbox.CSharpFastPFOR.Port;
 using Genbox.CSharpFastPFOR.Tests.Utils;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Genbox.CSharpFastPFOR.Tests
 {
     public class SkippableBasicTest
     {
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public SkippableBasicTest(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+
         private readonly SkippableIntegerCODEC[] codecs = {
             new JustCopy(),
             new VariableByte(),
@@ -38,7 +46,7 @@ namespace Genbox.CSharpFastPFOR.Tests
                 data[k] = k % 128;
             foreach (SkippableIntegerCODEC c in codecs)
             {
-                Console.WriteLine("[SkippeableBasicTest.consistentTest] codec = " + c);
+                _testOutputHelper.WriteLine("[SkippeableBasicTest.consistentTest] codec = " + c);
                 int[] outBuf = new int[N + 1024];
                 for (int n = 0; n <= N; ++n)
                 {
@@ -76,7 +84,7 @@ namespace Genbox.CSharpFastPFOR.Tests
                 data[k] = k;
             foreach (SkippableIntegerCODEC c in codecs)
             {
-                Console.WriteLine("[SkippeableBasicTest.varyingLengthTest] codec = " + c);
+                _testOutputHelper.WriteLine("[SkippeableBasicTest.varyingLengthTest] codec = " + c);
                 for (int L = 1; L <= 128; L++)
                 {
                     int[] comp = TestUtils.compressHeadless(c, Arrays.copyOf(data, L));
@@ -105,7 +113,7 @@ namespace Genbox.CSharpFastPFOR.Tests
             data[127] = -1;
             foreach (SkippableIntegerCODEC c in codecs)
             {
-                Console.WriteLine("[SkippeableBasicTest.varyingLengthTest2] codec = " + c);
+                _testOutputHelper.WriteLine("[SkippeableBasicTest.varyingLengthTest2] codec = " + c);
 
                 if (c is Simple9)
                     continue;
