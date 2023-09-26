@@ -37,7 +37,7 @@ public class NewPFD : IntegerCODEC, SkippableIntegerCODEC
 {
     private const int BLOCK_SIZE = 128;
 
-    private int[] exceptbuffer = new int[2 * BLOCK_SIZE];
+    private readonly int[] exceptbuffer = new int[2 * BLOCK_SIZE];
 
     /**
      * Constructor for the NewPFD CODEC.

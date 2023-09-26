@@ -36,7 +36,7 @@ public class NewPFDS16 : IntegerCODEC, SkippableIntegerCODEC
 {
     private const int BLOCK_SIZE = 128;
 
-    private int[] exceptbuffer = new int[2 * BLOCK_SIZE];
+    private readonly int[] exceptbuffer = new int[2 * BLOCK_SIZE];
 
     /**
      * Constructor for the NewPFDS16 CODEC.
@@ -53,11 +53,11 @@ public class NewPFDS16 : IntegerCODEC, SkippableIntegerCODEC
         encodePage(@in, inpos, inlength, @out, outpos);
     }
 
-    private static int[] bits = { 0, 1, 2, 3, 4, 5,
+    private static readonly int[] bits = { 0, 1, 2, 3, 4, 5,
                                   6, 7, 8, 9, 10, 11,
                                  12, 13, 16, 20, 32 };
 
-    private static int[] invbits = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+    private static readonly int[] invbits = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
         10, 11, 12, 13, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 16,
         16, 16, 16, 16, 16, 16, 16 };
 

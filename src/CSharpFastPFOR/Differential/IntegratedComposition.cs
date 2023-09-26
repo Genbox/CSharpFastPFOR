@@ -15,8 +15,8 @@ namespace Genbox.CSharpFastPFOR.Differential;
 
 public class IntegratedComposition : IntegratedIntegerCODEC
 {
-    private IntegratedIntegerCODEC F1;
-    private IntegratedIntegerCODEC F2;
+    private readonly IntegratedIntegerCODEC F1;
+    private readonly IntegratedIntegerCODEC F2;
 
     /**
      * Compose a scheme from a first one (f1) and a second one (f2). The

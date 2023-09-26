@@ -46,14 +46,14 @@ namespace Genbox.CSharpFastPFOR
         public const int BLOCK_SIZE = 256;
 
 
-        private int pageSize;
-        private int[][] dataTobePacked = new int[33][];
-        private ByteBuffer byteContainer;
+        private readonly int pageSize;
+        private readonly int[][] dataTobePacked = new int[33][];
+        private readonly ByteBuffer byteContainer;
 
         // Working area for compress and uncompress.
-        private int[] dataPointers = new int[33];
-        private int[] freqs = new int[33];
-        private int[] bestbbestcexceptmaxb = new int[3];
+        private readonly int[] dataPointers = new int[33];
+        private readonly int[] freqs = new int[33];
+        private readonly int[] bestbbestcexceptmaxb = new int[3];
 
         /**
          * Construct the FastPFOR CODEC.

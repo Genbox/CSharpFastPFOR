@@ -14,8 +14,8 @@ namespace Genbox.CSharpFastPFOR.Differential;
 
 public class SkippableIntegratedComposition : SkippableIntegratedIntegerCODEC
 {
-    private SkippableIntegratedIntegerCODEC F1;
-    private SkippableIntegratedIntegerCODEC F2;
+    private readonly SkippableIntegratedIntegerCODEC F1;
+    private readonly SkippableIntegratedIntegerCODEC F2;
 
     /**
      * Compose a scheme from a first one (f1) and a second one (f2). The first

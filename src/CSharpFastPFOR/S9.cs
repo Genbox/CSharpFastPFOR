@@ -231,9 +231,9 @@ public class S9
         }
     }
 
-    private static int[] bitLength = { 1, 2, 3, 4, 5, 7, 9, 14, 28 };
+    private static readonly int[] bitLength = { 1, 2, 3, 4, 5, 7, 9, 14, 28 };
 
-    private static int[] codeNum = { 28, 14, 9, 7, 5, 4, 3, 2, 1 };
+    private static readonly int[] codeNum = { 28, 14, 9, 7, 5, 4, 3, 2, 1 };
 
     public override string ToString()
     {

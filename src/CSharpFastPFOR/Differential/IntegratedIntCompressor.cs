@@ -16,7 +16,7 @@ namespace Genbox.CSharpFastPFOR.Differential;
 
 public class IntegratedIntCompressor
 {
-    private SkippableIntegratedIntegerCODEC codec;
+    private readonly SkippableIntegratedIntegerCODEC codec;
 
     /**
      * Constructor wrapping a codec.

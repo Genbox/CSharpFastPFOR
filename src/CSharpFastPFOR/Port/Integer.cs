@@ -2,7 +2,7 @@
 
 public class Integer
 {
-    private int v;
+    private readonly int v;
 
     public Integer(int v)
     {

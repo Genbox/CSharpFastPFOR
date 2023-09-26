@@ -4,7 +4,7 @@ namespace Genbox.CSharpFastPFOR.Port;
 
 public class BitSet
 {
-    private BitArray _bitArray;
+    private readonly BitArray _bitArray;
 
     public BitSet(int max)
     {

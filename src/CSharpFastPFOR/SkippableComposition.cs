@@ -15,8 +15,8 @@ namespace Genbox.CSharpFastPFOR;
 
 public class SkippableComposition : SkippableIntegerCODEC
 {
-    private SkippableIntegerCODEC F1;
-    private SkippableIntegerCODEC F2;
+    private readonly SkippableIntegerCODEC F1;
+    private readonly SkippableIntegerCODEC F2;
 
     /**
      * Compose a scheme from a first one (f1) and a second one (f2). The first
