@@ -44,7 +44,7 @@ public class IntCompressor
     {
         int[] compressed = new int[input.Length + 1024];
         compressed[0] = input.Length;
-        IntWrapper outpos = new IntWrapper(1);
+        var outpos = new IntWrapper(1);
         codec.headlessCompress(input, new IntWrapper(0), input.Length, compressed, outpos);
         compressed = Arrays.copyOf(compressed, outpos.intValue());
         return compressed;

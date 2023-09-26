@@ -45,8 +45,8 @@ public class UniformDataGenerator
         if (N > Max)
             throw new Exception("not possible");
 
-        int[] ans = new int[N];
-        HashSet<int> s = new HashSet<int>();
+        var ans = new int[N];
+        var s = new HashSet<int>();
         while (s.Count < N)
             s.Add(rand.Next(Max));
 
@@ -111,7 +111,7 @@ public class UniformDataGenerator
         if (N > Max)
             throw new Exception("not possible");
         int[] ans = new int[N];
-        BitSet bs = new BitSet(Max);
+        var bs = new BitSet(Max);
         int cardinality = 0;
         while (cardinality < N)
         {
@@ -130,5 +130,5 @@ public class UniformDataGenerator
         return ans;
     }
 
-    public readonly Random rand = new Random();
+    public readonly Random rand = new();
 }

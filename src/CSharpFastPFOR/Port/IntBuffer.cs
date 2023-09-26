@@ -18,7 +18,7 @@ public class IntBuffer
     {
         int end = offset + length;
 
-        BinaryReader br = new BinaryReader(_ms);
+        var br = new BinaryReader(_ms);
 
         for (int i = offset; i < end; i++)
         {

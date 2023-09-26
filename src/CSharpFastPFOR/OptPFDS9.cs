@@ -53,6 +53,7 @@ public class OptPFDS9 : IntegerCODEC, SkippableIntegerCODEC
 
     private static readonly int[] bits = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
         11, 12, 13, 16, 20, 32 };
+
     private static readonly int[] invbits = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
         10, 11, 12, 13, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 16,
         16, 16, 16, 16, 16, 16, 16 };
@@ -102,8 +103,8 @@ public class OptPFDS9 : IntegerCODEC, SkippableIntegerCODEC
     {
         int tmpoutpos = outpos.get();
         int tmpinpos = inpos.get();
-        IntWrapper bestb = new IntWrapper();
-        IntWrapper bestexcept = new IntWrapper();
+        var bestb = new IntWrapper();
+        var bestexcept = new IntWrapper();
         for (int finalinpos = tmpinpos + thissize; tmpinpos + BLOCK_SIZE <= finalinpos; tmpinpos += BLOCK_SIZE)
         {
             getBestBFromData(@in, tmpinpos, bestb, bestexcept);

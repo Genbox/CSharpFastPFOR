@@ -23,7 +23,7 @@ public class DeltaZigzagVariableByte : IntegerCODEC
         }
 
         ByteBuffer byteBuf = ByteBuffer.allocateDirect(inLen * 5 + 3);
-        DeltaZigzagEncoding.Encoder ctx = new DeltaZigzagEncoding.Encoder(0);
+        var ctx = new DeltaZigzagEncoding.Encoder(0);
 
         // Delta+Zigzag+VariableByte encoding.
         int ip = inPos.get();
@@ -85,7 +85,7 @@ public class DeltaZigzagVariableByte : IntegerCODEC
 
     public void uncompress(int[] inBuf, IntWrapper inPos, int inLen, int[] outBuf, IntWrapper outPos)
     {
-        DeltaZigzagEncoding.Decoder ctx = new DeltaZigzagEncoding.Decoder(0);
+        var ctx = new DeltaZigzagEncoding.Decoder(0);
 
         int ip = inPos.get();
         int op = outPos.get();

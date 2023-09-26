@@ -19,7 +19,7 @@ namespace Genbox.CSharpFastPFOR.Synth;
 
 public class ClusteredDataGenerator
 {
-    private readonly UniformDataGenerator unidg = new UniformDataGenerator();
+    private readonly UniformDataGenerator unidg = new();
 
     /**
      * Creating random array generator.

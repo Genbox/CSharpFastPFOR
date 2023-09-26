@@ -93,8 +93,8 @@ public class NewPFD : IntegerCODEC, SkippableIntegerCODEC
     {
         int tmpoutpos = outpos.get();
         int tmpinpos = inpos.get();
-        IntWrapper bestb = new IntWrapper();
-        IntWrapper bestexcept = new IntWrapper();
+        var bestb = new IntWrapper();
+        var bestexcept = new IntWrapper();
         for (int finalinpos = tmpinpos + thissize; tmpinpos
                                                                + BLOCK_SIZE <= finalinpos; tmpinpos += BLOCK_SIZE)
         {

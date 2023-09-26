@@ -187,8 +187,10 @@ public class Simple16 : IntegerCODEC, SkippableIntegerCODEC
 
     private const int S16_NUMSIZE = 16;
     private const int S16_BITSSIZE = 28;
+
     // the possible number of bits used to represent one integer
     private static readonly int[] S16_NUM = { 28, 21, 21, 21, 14, 9, 8, 7, 6, 6, 5, 5, 4, 3, 2, 1 };
+
     // the corresponding number of elements for each value of the number of bits
     private static readonly int[][] S16_BITS = {
         new[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1 },
@@ -199,7 +201,8 @@ public class Simple16 : IntegerCODEC, SkippableIntegerCODEC
         new[]{ 4, 3, 3, 3, 3, 3, 3, 3, 3 }, new[] { 3, 4, 4, 4, 4, 3, 3, 3 },
         new[]{ 4, 4, 4, 4, 4, 4, 4 },  new[]{ 5, 5, 5, 5, 4, 4 },
         new[]{ 4, 4, 5, 5, 5, 5 }, new[] { 6, 6, 6, 5, 5 }, new[] { 5, 5, 6, 6, 6 },
-        new[]{ 7, 7, 7, 7 }, new[] { 10, 9, 9, },  new[]{ 14, 14 },  new[]{ 28 } };
+        new[]{ 7, 7, 7, 7 }, new[] { 10, 9, 9, },  new[]{ 14, 14 }, new[]{ 28 } };
+
     private static readonly int[][] SHIFTED_S16_BITS = shiftme(S16_BITS);
 
     public override string ToString()

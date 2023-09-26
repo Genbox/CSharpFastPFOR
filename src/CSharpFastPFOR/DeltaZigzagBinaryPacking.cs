@@ -33,7 +33,7 @@ public class DeltaZigzagBinaryPacking : IntegerCODEC
         outBuf[outPos.get()] = inLen;
         outPos.increment();
 
-        DeltaZigzagEncoding.Encoder ctx = new DeltaZigzagEncoding.Encoder(0);
+        var ctx = new DeltaZigzagEncoding.Encoder(0);
         int[] work = new int[BLOCK_LENGTH];
 
         int op = outPos.get();
@@ -68,7 +68,7 @@ public class DeltaZigzagBinaryPacking : IntegerCODEC
         int outLen = inBuf[inPos.get()];
         inPos.increment();
 
-        DeltaZigzagEncoding.Decoder ctx = new DeltaZigzagEncoding.Decoder(0);
+        var ctx = new DeltaZigzagEncoding.Decoder(0);
         int[] work = new int[BLOCK_LENGTH];
 
         int ip = inPos.get();
