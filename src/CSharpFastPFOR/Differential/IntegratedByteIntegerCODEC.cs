@@ -13,9 +13,8 @@
  * @author Daniel Lemire
  * 
  */
-namespace Genbox.CSharpFastPFOR.Differential
+namespace Genbox.CSharpFastPFOR.Differential;
+
+public interface IntegratedByteIntegerCODEC : ByteIntegerCODEC
 {
-    public interface IntegratedByteIntegerCODEC : ByteIntegerCODEC
-    {
-    }
 }

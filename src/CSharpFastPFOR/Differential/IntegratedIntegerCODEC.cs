@@ -11,9 +11,8 @@
  * 
  * @author Daniel Lemire
  */
-namespace Genbox.CSharpFastPFOR.Differential
+namespace Genbox.CSharpFastPFOR.Differential;
+
+public interface IntegratedIntegerCODEC : IntegerCODEC
 {
-    public interface IntegratedIntegerCODEC : IntegerCODEC
-    {
-    }
 }
