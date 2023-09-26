@@ -16,7 +16,7 @@ using Genbox.CSharpFastPFOR.Port;
 
 namespace Genbox.CSharpFastPFOR.Differential;
 
-public class XorBinaryPacking : IntegratedIntegerCODEC
+public sealed class XorBinaryPacking : IntegratedIntegerCODEC
 {
     private const int BLOCK_LENGTH = 128;
 

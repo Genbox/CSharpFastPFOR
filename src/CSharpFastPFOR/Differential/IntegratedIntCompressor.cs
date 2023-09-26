@@ -46,8 +46,8 @@ public class IntegratedIntCompressor
     {
         int[] compressed = new int[input.Length + 1024];
         compressed[0] = input.Length;
-        IntWrapper outpos = new IntWrapper(1);
-        IntWrapper initvalue = new IntWrapper(0);
+        var outpos = new IntWrapper(1);
+        var initvalue = new IntWrapper(0);
         codec.headlessCompress(input, new IntWrapper(0),
             input.Length, compressed, outpos, initvalue);
         compressed = Arrays.copyOf(compressed, outpos.intValue());
@@ -63,7 +63,7 @@ public class IntegratedIntCompressor
     public int[] uncompress(int[] compressed)
     {
         int[] decompressed = new int[compressed[0]];
-        IntWrapper inpos = new IntWrapper(1);
+        var inpos = new IntWrapper(1);
         codec.headlessUncompress(compressed, inpos,
             compressed.Length - inpos.intValue(),
             decompressed, new IntWrapper(0),

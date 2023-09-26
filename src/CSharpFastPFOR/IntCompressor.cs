@@ -59,7 +59,7 @@ public class IntCompressor
     public int[] uncompress(int[] compressed)
     {
         int[] decompressed = new int[compressed[0]];
-        IntWrapper inpos = new IntWrapper(1);
+        var inpos = new IntWrapper(1);
         codec.headlessUncompress(compressed, inpos, compressed.Length - inpos.intValue(), decompressed, new IntWrapper(0), decompressed.Length);
         return decompressed;
     }

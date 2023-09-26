@@ -37,7 +37,7 @@
 
 namespace Genbox.CSharpFastPFOR;
 
-public class BinaryPacking : IntegerCODEC, SkippableIntegerCODEC
+public sealed class BinaryPacking : IntegerCODEC, SkippableIntegerCODEC
 {
     private const int BLOCK_SIZE = 32;
 

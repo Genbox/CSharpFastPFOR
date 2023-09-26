@@ -31,7 +31,7 @@
  */
 namespace Genbox.CSharpFastPFOR;
 
-public class OptPFDS16 : IntegerCODEC, SkippableIntegerCODEC
+public sealed class OptPFDS16 : IntegerCODEC, SkippableIntegerCODEC
 {
     private const int BLOCK_SIZE = 128;
     private readonly int[] exceptbuffer = new int[2 * BLOCK_SIZE];

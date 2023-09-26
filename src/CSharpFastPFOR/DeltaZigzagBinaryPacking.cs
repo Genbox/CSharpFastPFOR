@@ -18,7 +18,7 @@
 
 namespace Genbox.CSharpFastPFOR;
 
-public class DeltaZigzagBinaryPacking : IntegerCODEC
+public sealed class DeltaZigzagBinaryPacking : IntegerCODEC
 {
     private const int BLOCK_LENGTH = 128;
 

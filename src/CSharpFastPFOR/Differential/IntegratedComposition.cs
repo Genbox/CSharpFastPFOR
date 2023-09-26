@@ -13,7 +13,7 @@
 
 namespace Genbox.CSharpFastPFOR.Differential;
 
-public class IntegratedComposition : IntegratedIntegerCODEC
+public sealed class IntegratedComposition : IntegratedIntegerCODEC
 {
     private readonly IntegratedIntegerCODEC F1;
     private readonly IntegratedIntegerCODEC F2;

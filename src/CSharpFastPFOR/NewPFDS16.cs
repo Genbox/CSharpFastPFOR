@@ -32,7 +32,7 @@
  */
 namespace Genbox.CSharpFastPFOR;
 
-public class NewPFDS16 : IntegerCODEC, SkippableIntegerCODEC
+public sealed class NewPFDS16 : IntegerCODEC, SkippableIntegerCODEC
 {
     private const int BLOCK_SIZE = 128;
 

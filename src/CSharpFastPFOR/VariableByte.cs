@@ -19,7 +19,7 @@ using Genbox.CSharpFastPFOR.Port;
 
 namespace Genbox.CSharpFastPFOR;
 
-public class VariableByte : IntegerCODEC, ByteIntegerCODEC, SkippableIntegerCODEC
+public sealed class VariableByte : IntegerCODEC, ByteIntegerCODEC, SkippableIntegerCODEC
 {
     private static sbyte extract7bits(int i, long val)
     {

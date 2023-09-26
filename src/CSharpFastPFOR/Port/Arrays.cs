@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace Genbox.CSharpFastPFOR.Port;
 
-public class Arrays
+public static class Arrays
 {
     private static void rangeCheck(int arrayLen, int fromIndex, int toIndex)
     {
         if (fromIndex > toIndex)
-            throw new ArgumentOutOfRangeException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
+            throw new ArgumentOutOfRangeException($"fromIndex({fromIndex}) > toIndex({toIndex})");
 
         if (fromIndex < 0)
             throw new ArgumentOutOfRangeException(nameof(fromIndex));

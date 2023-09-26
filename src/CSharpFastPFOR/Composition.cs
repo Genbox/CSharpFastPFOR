@@ -12,10 +12,10 @@
  */
 namespace Genbox.CSharpFastPFOR;
 
-public class Composition : IntegerCODEC
+public sealed class Composition : IntegerCODEC
 {
-    private IntegerCODEC F1;
-    private IntegerCODEC F2;
+    private readonly IntegerCODEC F1;
+    private readonly IntegerCODEC F2;
 
     /**
  * Compose a scheme from a first one (f1) and a second one (f2). The
