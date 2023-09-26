@@ -1,6 +1,6 @@
 ﻿namespace Genbox.CSharpFastPFOR.Port;
 
-public class Integer
+public readonly struct Integer
 {
     private readonly int v;
 
